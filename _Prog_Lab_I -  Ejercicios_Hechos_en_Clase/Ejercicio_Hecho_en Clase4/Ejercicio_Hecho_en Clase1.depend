@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1490832230 source:e:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\ejercicio_hecho_en clase1\biblfunciones.c
+
+1490832810 source:e:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\ejercicio_hecho_en clase1\main.c
+	<stdio.h>
+	<stdlib.h>
+	"BiblFunciones.h"
+
+1490828878 e:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\ejercicio_hecho_en clase1\biblfunciones.h
+

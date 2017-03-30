@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1490314168 source:f:\aob\tp\tp\biblioteca.aob.c
+
+1490316650 source:f:\aob\tp\tp\main.c
+	<stdio.h>
+	<stdlib.h>
+	"biblioteca.AOB.h"
+
+1490314020 f:\aob\tp\tp\biblioteca.aob.h
+
+1490316650 source:f:\aob\tp\tp\pediredad.c
+	"biblioteca.AOB.h"
+

@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1490830589 source:d:\clase4\func.c
+	<stdio.h>
+	<stdlib.h>
+
+1490830777 source:d:\clase4\main.c
+	<stdio.h>
+	<stdlib.h>
+	"func.h"
+
+1490828703 d:\clase4\func.c
+	<stdio.h>
+	<stdlib.h>
+
+1490829657 d:\clase4\func.h
+
+1490834972 source:e:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\clase4\func.c
+
