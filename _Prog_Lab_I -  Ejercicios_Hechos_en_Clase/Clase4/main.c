@@ -1,32 +1,44 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "func.h"
-#define MAX 100
 
-float promedio(int numero[], int cont);
+#define LIMVECTOR 100
 
 int main()
 {
-    int numero[MAX];
-    int cont=1;
-    char respuesta;
-    float promedioR;
+    int vEdad[LIMVECTOR];
+    int i=0;
+    int edad;
+    char salir;
+    //float promedio;
 
-    do
+    for (i=0;i<LIMVECTOR;i++)
     {
-    printf("Ingrese un numero: ");
-    scanf("%d",&numero);
-    promedioR=promedio(numero,cont);
-    cont++;
-    fflush(stdin);
-    printf("Si desea continuar precione 'S': ");
-    scanf("%c",&respuesta);
-    fflush(stdin);
-    }while(respuesta=='s'||respuesta=='S');
+        printf("\n Ingrese la edad de la persona %d: \n",i+1);
+        scanf("%d",&edad);
+        while (edad < 0 || edad > 120 )
+        {
+            printf("\n El dato ingresado es incorrecto! ");
+            printf("\n Ingrese la edad de la persona %d: ",i+1);
+            scanf("%d",&edad);
+        }
+        vEdad[i]=edad;
+        i++;
+        if(i==LIMVECTOR)
+            { break; }
+    }while(salir != 's' && salir != 'S')
 
-    printf("%f",promedioR);
 
 
 
+
+        scanf("%c",&preg);
+
+        if
+
+    }
+
+    printf("La mayor edad es: %d", fMaxMin(vEdad,i,1);
+    printf("La menor edad es: %d", fMaxMin(vEdad,i,-1);
     return 0;
 }

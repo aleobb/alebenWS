@@ -12,23 +12,20 @@ float promedio(int numero[], int cont)
 
 }
 
-int fMaxMin(int num[], int cantIngresos, char esMax )
+int fMaxMin(int num[], int cantIng, char calcMax )  // para calcular el maximo hay que ingresar 1 en char calcMax y para el min -1
 {
     int i;
-    int max, min;
-    max = num[0];
-    min = num[0];
+    int extremo = num[0]; // extremo lo uso para encontrar el extremo,(maximo o minimo)
 
-    for( i=1 ; i < cantIngresos ; i++ )
+    for( i=1 ; i < cantIng ; i++ )
     {
-        max = num[i] ;
+        if ( (num[i]*calcMax) > (lim*calcMax) ) // con calcMax invierto el signo y por tanto el comparador ">"3
+        {
+            extremo = num[i] ;
+        }
     }
-    promedioR = suma/cont ;
 
-    if (esMax=1)
-        { return max; }
-    else
-        { return min; }
+    return extremo;
 
 }
 
