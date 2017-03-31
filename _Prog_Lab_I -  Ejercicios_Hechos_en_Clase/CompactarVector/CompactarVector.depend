@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1490920338 source:e:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\compactarvector\func.c
+
+1490920576 source:e:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\compactarvector\main.c
+	<stdio.h>
+	<stdlib.h>
+	"func.h"
+
+1490919564 e:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\compactarvector\func.h
+

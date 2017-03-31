@@ -2,17 +2,17 @@
 #include <stdlib.h>
 #include "func.h"
 
-#define LIMVECTOR 100
+#define MAX 100
 
 int main()
 {
-    int vEdad[LIMVECTOR];
+    int vEdad[MAX];
     int i=0;
     int edad;
     char salir;
     //float promedio;
 
-    for (i=0;i<LIMVECTOR;i++)
+    for (i=0;i<MAX;i++)
     {
         printf("\n Ingrese la edad de la persona %d: \n",i+1);
         scanf("%d",&edad);
@@ -24,7 +24,7 @@ int main()
         }
         vEdad[i]=edad;
         i++;
-        if(i==LIMVECTOR)
+        if(i==MAX)
             { break; }
     }while(salir != 's' && salir != 'S')
 
