@@ -1,13 +1,14 @@
 #ifndef FUNCIONES_H_INCLUDED
 #define FUNCIONES_H_INCLUDED
 
+int pedirIntVal(char mensaje[], char mensajeError[], int min, int max);
 void infDatosIng(int flagA, int flagB, int option);
 
-int suma(int A, int B);
-int resta(int A, int B);
+float suma(float A, float B);
+float resta(float A, float B);
 float division(float A, float B);
-long multiplicacion(int A, int B);
-double factorial(double A);
+double multiplicacion(float A, float B);
+double factorial(int A);
 
 
 

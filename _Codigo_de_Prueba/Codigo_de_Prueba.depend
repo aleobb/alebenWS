@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1491128428 source:c:\alebenws\codigo_de_prueba\func_de_prueba.c
+
+1491128451 source:c:\alebenws\codigo_de_prueba\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Func_de_Prueba.h"
+
+1491128428 c:\alebenws\codigo_de_prueba\func_de_prueba.h
+
+1491128428 source:c:\alebenws\_codigo_de_prueba\func_de_prueba.c
+
+1491139745 source:c:\alebenws\_codigo_de_prueba\main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdlib.h>
+
