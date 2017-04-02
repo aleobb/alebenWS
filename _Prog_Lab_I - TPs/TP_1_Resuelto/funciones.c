@@ -1,21 +1,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void infDatosIng(float flagA, float flagB, int option)
+void infDatosIng(int flagA, int flagB, int option)
 {
-    if( (flagA + flagB) == 0 && option > 2 )
-        { printf("\n\n Atencion!! No se puede realizar una operacion porque todavia no ha ingresado el valor de ningun operando \n\n"); }
-    else if ( (flagA + flagB) < 2 && option > 2 )
-            { printf("\n\n(Atencion!! No se podra realizar ninguna operacion todavia porque falta ingresar el valor del otro operando -salvo factorial-) \n\n"); }
+    if (option>2 && (flagA + flagB)<2  )
+    {
+        printf("\n Atencion!! No se puede realizar una niguna operacion ");
+        if (flagA == 1)
+            { printf("\n (salvo factorial) porque falta ingresar el valor del 2do operando. \n "); }
+        else if (flagB == 1)
+            { printf("\n porque falta ingresar el valor del 1er operando. \n"); }
+        else
+            { printf("\n porque todavia no ha ingresado el valor de ningun operando. \n"); }
+    }
 }
 
 
-float suma(float A, float B)
+int suma(int A, int B)
 {
     return (A+B);
 }
 
-float resta(float A, float B)
+int resta(int A, int B)
 {
     return (A-B);
 }
@@ -31,14 +37,16 @@ float division(float A, float B)
         { return (A/B); }
 }
 
-float multiplicacion(float A, float B)
+long multiplicacion(int A, int B)
 {
     return (A*B);
 }
-float factorial(float A, float B)
+
+double factorial(double A)
 {
-    if ( A==0 )
-        { return 1; }
-    else
-        { return !A; }
+    double factA=1;
+    double aux;
+    for (aux = A; aux > 1; aux--)
+        { factA = factA * aux; }
+    return factA;
 }

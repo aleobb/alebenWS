@@ -1,13 +1,13 @@
 #ifndef FUNCIONES_H_INCLUDED
 #define FUNCIONES_H_INCLUDED
 
-void infDatosIng(float flagA, float flagB, int option);
+void infDatosIng(int flagA, int flagB, int option);
 
-float suma(float A, float B);
-float resta(float A, float B);
+int suma(int A, int B);
+int resta(int A, int B);
 float division(float A, float B);
-float multiplicacion(float A, float B);
-float factorial(float A, float B);
+long multiplicacion(int A, int B);
+double factorial(double A);
 
 
 
