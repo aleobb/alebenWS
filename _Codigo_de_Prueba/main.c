@@ -18,12 +18,14 @@ int main()
     */
 
     int salir = 1;
-    double x;
+    float x;
     do
     {
 
     printf("Ingrese el valor del primer operando (con hasta 6 decimales): \n ");
     fflush(stdin);
+    fpurge(stdin);
+    setbuf( stdin, NULL );
     scanf("%f",&x);
     fflush(stdin);
     printf("\n %f",x);

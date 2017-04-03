@@ -1,0 +1,27 @@
+# depslib dependency file v1.0
+1490920454 source:d:\clase4\func.c
+	<stdio.h>
+	<stdlib.h>
+
+1490919704 source:d:\clase4\main.c
+	<stdio.h>
+	<stdlib.h>
+	"func.h"
+
+1490828703 d:\clase4\func.c
+	<stdio.h>
+	<stdlib.h>
+
+1490919685 d:\clase4\func.h
+
+1491171178 source:c:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\ejercicios vector (lucas)\clase5\func.c
+	<stdio.h>
+	<stdlib.h>
+
+1491171689 source:c:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\ejercicios vector (lucas)\clase5\main.c
+	<stdio.h>
+	<stdlib.h>
+	"func.h"
+
+1491171178 c:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\ejercicios vector (lucas)\clase5\func.h
+
