@@ -3,14 +3,14 @@
 
 #define MAX 100
 
-int calcIndiceMin(int vector[], int size);
-int compactar(int vector[], int tamVector, int indice);
+int calcIndice(int vector[], int size, int minMax); // calcula indice minimo y maximo
+int expandirCompactarV(int vector[], int tamVector, int indice, int compExp);
 void ordenar(int vectorOriginal[],int sizeVector, int vectOrdenado[]);
 
 int main()
 {
     int i;
-    int vector[MAX] = {5148,487,3,31,14555};
+    int vector[MAX] = {5148,3,487,31,14555};
     int tamVector = 5;
 
     int vectorOrdenado[MAX];
@@ -27,14 +27,14 @@ int main()
     return 0;
 }
 
-int calcIndiceMin(int vector[], int size)
+int calcIndice(int vector[], int size, int minMax) // El auxiliar minMax sirve para, segun el valor (-1 o 1), calcular el min o maximo
 {
     int i = 1; // i=indice
     int valorMinVector = vector[0];
     int indiceMin = 0;
     for ( ; i<size; i++)
     {
-        if ( vector[i] < valorMinVector)
+        if ( (vector[i]*minMax) > (valorMinVector*minMax) )
         {
             valorMinVector = vector[i];
             indiceMin = i;
@@ -44,11 +44,11 @@ int calcIndiceMin(int vector[], int size)
 }
 
 
-int compactar(int vector[], int tamVector, int indice)
+int expandirCompactarV(int vector[], int tamVector, int indice, int compExp) // El auxiliar compExp sirve para, segun el valor (-1 o 1), compactar o expandir el vector
 {
-    for (;indice<tamVector-1;indice++)
+    for (;indice<tamVector-1;indice++) //chequear el 1 y multiplicar por compExp ??
     {
-        vector[indice] = vector[indice+1];
+        vector[indice] = vector[indice+1]; //chequear el 1
     }
     return tamVector-1;
 }
@@ -56,12 +56,12 @@ int compactar(int vector[], int tamVector, int indice)
 void ordenar(int vectorOriginal[],int sizeVector, int vectOrdenado[])
 {
     int i;
-    int indMin;
+    int indMinMax;
     int sizeOriginal = sizeVector; //
     for ( i=0; i<sizeOriginal; i++)
     {
-        indMin = calcIndiceMin(vectorOriginal, sizeVector);
-        vectOrdenado[i] = vectorOriginal[indMin];
-        sizeVector = compactar(vectorOriginal, sizeVector, indMin);
+        indMinMax = calcIndice(vectorOriginal, sizeVector, 1);
+        vectOrdenado[i] = vectorOriginal[indMinMax];
+        sizeVector = expandirCompactarV(vectorOriginal, sizeVector, indMinMax, -1);
     }
 }
