@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1491237357 source:c:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\resol_propia_array_ordenado - 2do metodo\funcionesvector.c
+
+1491238933 source:c:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\resol_propia_array_ordenado - 2do metodo\main.c
+	<stdio.h>
+	<stdlib.h>
+	"funcionesVector.h"
+
+1491236003 c:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\resol_propia_array_ordenado - 2do metodo\funcionesvector.c
+
+1491236110 source:c:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\resol_propia_array_ordenado - 2do metodo\funciones.c
+
+1491238475 c:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\resol_propia_array_ordenado - 2do metodo\funcionesvector.h
+
