@@ -20,7 +20,7 @@ int main()
         printf(" %d \n",vector[i]);
 
 
-    ordenarMetodoAlternativo(vector, tamVector, vectorRdo, 1);
+    ordenarMetodoAlternativo(vector, tamVector, 1);
 ///    ordenarV(vector, tamVector, vectorOrdenado, -1);
 
 

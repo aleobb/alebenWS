@@ -2,4 +2,4 @@ int calcIndiceV(int vector[], int sizeVector, int minMax); // calcula indice min
 int expandirCompactarV(int vector[], int sizeVector, int indice, int compExp);
 void ordenarV(int vector[],int sizeVector, int vectorRdo[], int menorMayor);
 
-void ordenarMetodoAlternativo(int vector[],int sizeVector, int vectorRdo[], int menorMayor);
+void ordenarMetodoAlternativo(int vector[],int sizeVector, int menorMayor);
