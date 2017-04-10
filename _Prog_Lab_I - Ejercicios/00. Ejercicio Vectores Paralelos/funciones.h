@@ -5,3 +5,5 @@ int esCadenaSoloLetras (char vector[]);
 int esCadenaAlfanumerica (char vector[]);
 
 int getString (char pedirDato[], char vectorDato[], char tipoDato, char mensajeErrorTipoDato[]);
+
+void ordenarVector(int vector[], int sizeVector, int menorMayor);

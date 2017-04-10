@@ -103,3 +103,37 @@ int getString (char pedirDato[], char vectorDato[], char tipoDato, char mensajeE
     }while (seguir=='s');
     return 0;
 }
+
+
+/**
+ *\brief ordena un vector compuesto por enteros
+ */
+void ordenarVector(int vector[], int sizeVector, int menorMayor)
+{
+    int pivot, i, j;
+    int aux;
+
+    if (sizeVector<2)
+        return;
+
+    pivot=vector[sizeVector/2];
+
+    for( i=0, j=sizeVector-1; ; i++, j--)
+    {
+        while ( (vector[i]*menorMayor) < (pivot*menorMayor ) )
+            i++;
+
+        while ( (vector[j]*menorMayor) > (pivot*menorMayor) )
+            j--;
+
+        if(i>=j)
+            break;
+
+        aux = vector[i];
+        vector[i] = vector[j];
+        vector[j] = aux;
+    }
+
+    ordenarVector(vector,i,menorMayor);
+    ordenarVector(vector+i,sizeVector-i,menorMayor);
+}
