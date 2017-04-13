@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1492036376 source:d:\clase8\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"my_func.h"
+
+1492034343 source:d:\clase8\my_func.c
+
+1492034360 d:\clase8\my_func.h
+

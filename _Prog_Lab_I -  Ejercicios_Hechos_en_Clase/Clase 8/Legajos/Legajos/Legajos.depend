@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1492044200 source:e:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\clase 8\legajos\legajos\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
