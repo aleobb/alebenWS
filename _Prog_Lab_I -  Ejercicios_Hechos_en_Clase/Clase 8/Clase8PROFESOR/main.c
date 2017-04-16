@@ -119,14 +119,14 @@ int main()
     Empleado arrayEmpleados[QTY];
 
     strcpy(arrayEmpleados[0].nombre,"CC");
-    strcpy(arrayEmpleados[1].nombre,"AA");
-    strcpy(arrayEmpleados[2].nombre,"AA");
-    strcpy(arrayEmpleados[0].apellido,"AA");
-    strcpy(arrayEmpleados[1].apellido,"BB");
-    strcpy(arrayEmpleados[2].apellido,"CC");
-    strcpy(arrayEmpleados[0].legajo,"CC");
-    strcpy(arrayEmpleados[1].legajo,"BB");
-    strcpy(arrayEmpleados[2].legajo,"AA");
+    strcpy(arrayEmpleados[1].nombre,"CC");
+    strcpy(arrayEmpleados[2].nombre,"CC");
+    strcpy(arrayEmpleados[0].apellido,"ii");
+    strcpy(arrayEmpleados[1].apellido,"ee");
+    strcpy(arrayEmpleados[2].apellido,"cc");
+    strcpy(arrayEmpleados[0].legajo,"15");
+    strcpy(arrayEmpleados[1].legajo,"12");
+    strcpy(arrayEmpleados[2].legajo,"84");
     mostrar(arrayEmpleados,3);
     bubleSort(arrayEmpleados,3);
         mostrar(arrayEmpleados,3);
