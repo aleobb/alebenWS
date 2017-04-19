@@ -8,6 +8,8 @@ int getInt(int* numero, char mensajeIngreso[], char mensajeError[], int conLimIn
 
 int esCadenaSoloLetras (char vector[], char arrayCharsAdmitidos[]);
 
+void getStringg(char mensaje[],char input[]);
+
 int esCadenaSoloNumeros (char vector[], int admitePunto)
 {
     int i=0;
@@ -47,13 +49,19 @@ int main()
 
     */
 
+    /*
+    char arreglo[10];
+    getStringg("igrese",arreglo);
+    printf("%s",arreglo);
+*/
+
     char array[10]={};
     char arrayChars[10];
 
     printf("ingrese texto: ");
-    scanf("%s",array);
+    scanf("%[^\n]s",array);
 
-    strcpy(arrayChars,".-");
+    strcpy(arrayChars," ");
     printf("\n %c",arrayChars[0]);
     printf("\n %c",arrayChars[1]);
     printf("\n %d \n",strlen(arrayChars));
@@ -66,6 +74,15 @@ int main()
     else
         printf("\n NO LO ES");
     ///print(array);
+
+
+}
+
+void getStringg(char mensaje[],char input[])
+{
+    printf("%s",mensaje);
+    fflush(stdin);
+    scanf ("%[^\n]s", input);
 }
 
 int esCadenaSoloLetras (char vector[], char arrayCharsAdmitidos[])

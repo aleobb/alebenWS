@@ -11,18 +11,18 @@
  * \brief Solicitar al usuario una cadena de caracteres.
  * \param mensajeIngreso: es el mensaje a mostrar para pedir el ingreso.
  * \param input es el array donde se va a guardar la cadena.
- * \return Si obtuvo un ingreso no nulo devuelve [0] sino devuelve [-1].
+ * \return Si obtuvo un ingreso no nulo devuelve [1] sino devuelve [0].
  */
 int getString(char mensajeIngreso[], char input[])
 {
     char buffer[4084];
     printf("%s",mensajeIngreso);
     fflush(stdin);
-    scanf("%s",buffer);
-    if ( strlen(buffer)==0 || buffer[0]=='\n' || buffer[0]=='\0' )
-        return -1;
+    scanf("%[^\n]s",buffer);
+    if ( strlen(buffer)==0 || buffer[0]=='\0' )
+        return 0;
     strcpy(input,buffer);
-    return 0;
+    return 1;
 }
 
 
@@ -36,7 +36,7 @@ int getString(char mensajeIngreso[], char input[])
  * \param conLimSup: si se recibe 1 como parametro valida el limite superior, sino no.
  * \param maximo: valor maximo que el usuario puede ingresar como dato valido.
  * \param salir: variable donde se almacena el valor que la funcion que llamó a ésta pide devolver en caso de que se haya superado el limite maximo de ingresos.
- * \return Si obtuvo un numero valido devuelve [0] sino devuelve [-1].
+ * \return Si obtuvo un numero valido devuelve [1] sino devuelve [0].
  */
 int getInt(int* numero, char mensajeIngreso[], char mensajeError[], int conLimInf, int minimo, int conLimSup, int maximo, int cantIntentos)
 {
@@ -49,7 +49,7 @@ int getInt(int* numero, char mensajeIngreso[], char mensajeError[], int conLimIn
         if (intentosDisponibles==0)
         {
             printf("\n Se ha superado la cantidad de intentos de ingreso de un dato valido! \n El ingreso se detendra. \n");
-            return -1;
+            return 0;
         }
         else if (intentosDisponibles!=cantIntentos)
             printf("%s",mensajeError);
@@ -62,7 +62,7 @@ int getInt(int* numero, char mensajeIngreso[], char mensajeError[], int conLimIn
         intentosDisponibles--;
 
         getString(mensajeIngreso,input);
-        if ( esCadenaSoloNumeros(input,1) != 0 )
+        if ( esCadenaSoloNumeros(input,1) )
             continue;
         aux = atoi(input);
 
@@ -73,17 +73,18 @@ int getInt(int* numero, char mensajeIngreso[], char mensajeError[], int conLimIn
     } while ( aux < minimo || aux > maximo );
 
     *numero = aux;
-    return 0;
+    return 1;
 }
 
 
 /**
  * \brief Verifica que una array esté compuesto solo por numeros.
  * \param vector: es el array a evaluar
- * \param admitePunto: si se recibe 1 como parametro valida que la cadena pueda incluir hasta 1 punto ('.'), sino no.
+ * \param admitePunto: si se recibe 1 como parametro, valida que la cadena pueda incluir hasta 1 punto ('.'), sino no.
+  * \param admitePunto: si se recibe 1 como parametro, acepta como valido una cadena que empieza con el signo '-', sino no.
  * \return Si el array esta compuesto solo por numeros devuelve [1] sino devuelve [0].
  */
-int esCadenaSoloNumeros (char vector[], int cantPuntos)
+int esCadenaSoloNumeros (char vector[], int cantPuntos, int admiteNegativos)
 {
     int i=0;
     int contadorPuntos=cantPuntos;
@@ -91,9 +92,11 @@ int esCadenaSoloNumeros (char vector[], int cantPuntos)
     {
         if (vector[i]<'0' || vector[i]>'9')
         {
+            if (vector[0]=='-' && admiteNegativos!=1)
+                return 0;
             if (vector[i]=='.')
                 contadorPunto--;
-            if (cantPuntos==0 || contadorPuntos<0)
+            if ( cantPuntos==0 || contadorPuntos<0 || )
                 return 0;
         }
         i++;
@@ -103,25 +106,28 @@ int esCadenaSoloNumeros (char vector[], int cantPuntos)
 
 
 /**
- * \brief Verifica que una array esté compuesto solo por espacios y/o letras (mayusculas y/o minusculas).
+ * \brief Verifica que una array esté compuesto solo por letras (mayusculas y/o minusculas) y/o una serie de caracteres definidos.
  * \param vector es el array a evaluar
- * \return Si el array esta compuesto solo por espacios y/o letras devuelve [1] sino devuelve [0].
+ * \param arrayCharsAdmitidos es el array que contiene los caracteres que tambien van a resultar validos.
+ * \return Si el array esta compuesto solo por letras y/o los caracteres especificados devuelve [1] sino devuelve [0].
  */
 int esCadenaSoloLetras (char vector[], char arrayCharsAdmitidos[])
 {
     int size=strlen(arrayCharsAdmitidos);
     int i;
     int j;
+    int flag=0;
     for (i=0 ; vector[i]!='\0'; i++)
     {
         if ( (vector[i]<'a' || vector[i]>'z') && (vector[i]<'A' || vector[i]>'Z') )
         {
-            for(j=0 ; arrayCharsAdmitidos[j]!='\0' ; j++)
+            for(j=0 ; arrayCharsAdmitidos[j]!='\0' && flag==0 ; j++)
             {
                 if (vector[i]==arrayCharsAdmitidos[j])
-                    break;
-                return 0;
+                    flag=1;
             }
+            if (flag!=1)
+                return 0;
         }
     }
     return 1;
@@ -130,7 +136,7 @@ int esCadenaSoloLetras (char vector[], char arrayCharsAdmitidos[])
 /**
  * \brief Verifica que una array esté compuesto solo por numeros y/o espacios y/o letras (mayusculas y/o minusculas).
  * \param vector es el array a evaluar
- * \return Si el array esta compuesto solo por numeros y/o espacios y/o letras devuelve [0] sino devuelve [-1].
+ * \return Si el array esta compuesto solo por numeros y/o espacios y/o letras devuelve [1] sino devuelve [0].
  */
 int esCadenaAlfanumerica (char vector[])
 {
@@ -138,10 +144,10 @@ int esCadenaAlfanumerica (char vector[])
     while (vector[i]!='\0')
     {
         if ( vector[i]!=' ' && (vector[i]<'a' || vector[i]>'z') && (vector[i]<'A' || vector[i]>'Z') && (vector[i]<'0' || vector[i]>'9') )
-            return -1;
+            return 0;
         i++;
     }
-    return 0;
+    return 1;
 }
 
 
