@@ -81,42 +81,50 @@ int getInt(int* numero, char mensajeIngreso[], char mensajeError[], int conLimIn
  * \brief Verifica que una array esté compuesto solo por numeros.
  * \param vector: es el array a evaluar
  * \param admitePunto: si se recibe 1 como parametro valida que la cadena pueda incluir hasta 1 punto ('.'), sino no.
- * \return Si el array esta compuesto solo por numeros devuelve [0] sino devuelve [-1].
+ * \return Si el array esta compuesto solo por numeros devuelve [1] sino devuelve [0].
  */
-int esCadenaSoloNumeros (char vector[], int admitePunto)
+int esCadenaSoloNumeros (char vector[], int cantPuntos)
 {
     int i=0;
-    int contadorPunto=0;
+    int contadorPuntos=cantPuntos;
     while (vector[i]!='\0')
     {
         if (vector[i]<'0' || vector[i]>'9')
         {
             if (vector[i]=='.')
-                contadorPunto++;
-            if (admitePunto!=1 || contadorPunto>1)
-                return -1;
+                contadorPunto--;
+            if (cantPuntos==0 || contadorPuntos<0)
+                return 0;
         }
         i++;
     }
-    return 0;
+    return 1;
 }
 
 
 /**
  * \brief Verifica que una array esté compuesto solo por espacios y/o letras (mayusculas y/o minusculas).
  * \param vector es el array a evaluar
- * \return Si el array esta compuesto solo por espacios y/o letras devuelve [0] sino devuelve [-1].
+ * \return Si el array esta compuesto solo por espacios y/o letras devuelve [1] sino devuelve [0].
  */
-int esCadenaSoloLetras (char vector[])
+int esCadenaSoloLetras (char vector[], char arrayCharsAdmitidos[])
 {
-    int i=0;
-    while (vector[i]!='\0')
+    int size=strlen(arrayCharsAdmitidos);
+    int i;
+    int j;
+    for (i=0 ; vector[i]!='\0'; i++)
     {
-        if ( vector[i]!=' ' && (vector[i]<'a' || vector[i]>'z') && (vector[i]<'A' || vector[i]>'Z') )
-            return -1;
-        i++;
+        if ( (vector[i]<'a' || vector[i]>'z') && (vector[i]<'A' || vector[i]>'Z') )
+        {
+            for(j=0 ; arrayCharsAdmitidos[j]!='\0' ; j++)
+            {
+                if (vector[i]==arrayCharsAdmitidos[j])
+                    break;
+                return 0;
+            }
+        }
     }
-    return 0;
+    return 1;
 }
 
 /**

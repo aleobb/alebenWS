@@ -6,6 +6,8 @@
 int getString(char mensajeIngreso[], char input[]);
 int getInt(int* numero, char mensajeIngreso[], char mensajeError[], int conLimInf, int minimo, int conLimSup, int maximo, int cantIntentos);
 
+int esCadenaSoloLetras (char vector[], char arrayCharsAdmitidos[]);
+
 int esCadenaSoloNumeros (char vector[], int admitePunto)
 {
     int i=0;
@@ -34,6 +36,8 @@ int main()
     printf("%d",num);
 */
     //int cmin, min, cmax, max;
+
+    /*
     int dato;
 
     if (getInt(&dato, "\n Ingrese un entero: ", "\n El valor ingresado es invalido", 1, 0, 1, 200, 3)==0)
@@ -41,7 +45,72 @@ int main()
     else
         printf("\n El dato ingresado es invalido!");
 
+    */
+
+    char array[10]={};
+    char arrayChars[10];
+
+    printf("ingrese texto: ");
+    scanf("%s",array);
+
+    strcpy(arrayChars,".-");
+    printf("\n %c",arrayChars[0]);
+    printf("\n %c",arrayChars[1]);
+    printf("\n %d \n",strlen(arrayChars));
+
+    if ( array[0]==arrayChars[0] )
+        printf("es igual");
+
+    if ( esCadenaSoloLetras(array, arrayChars)  )
+        printf("\n es solo letras");
+    else
+        printf("\n NO LO ES");
+    ///print(array);
 }
+
+int esCadenaSoloLetras (char vector[], char arrayCharsAdmitidos[])
+{
+    int size=strlen(arrayCharsAdmitidos);
+    int i;
+    int j;
+    int flag=0;
+    for (i=0 ; vector[i]!='\0'; i++)
+    {
+        printf("\n entro 1");
+        if ( (vector[i]<'a' || vector[i]>'z') && (vector[i]<'A' || vector[i]>'Z') )
+        {
+            printf("\n entro 2");
+            for(j=0 ; arrayCharsAdmitidos[j]!='\0' && flag==0 ; j++)
+            {
+                printf("\n entro 3");
+                printf("\ni %c",vector[i]);
+                printf("\nj %c",arrayCharsAdmitidos[j]);
+                if (vector[i]==arrayCharsAdmitidos[j])
+                    flag=1;
+                printf("\n entro 4");
+            }
+            if (flag!=1)
+                return 0;
+        }
+    }
+    printf("\n devuelve");
+    return 1;
+}
+
+
+void print (char arrayCharsAdmitidos[])
+{
+
+   /// strcpy(array,"abcd");
+
+    printf("\n%d",strlen(arrayCharsAdmitidos));
+
+    printf("\n%s",arrayCharsAdmitidos);
+
+}
+
+
+
 int getDato (int* valor)
 {
     int auxiliar;
