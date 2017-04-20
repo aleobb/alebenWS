@@ -99,27 +99,34 @@ void listarTurnos(Tramites* turnos, int nroTurnoSigte)
  * \param posFin es la posicion del vector hasta la que se va a analizar (inclusive).
  * \param maxMin parametro que indica si se van a hallar el maximo (1) o el minimo (-1).
  * \param posValor si es 1 devuelve la posicion en el vector, de lo contrario devuelve el valor.
- * \return devuelve el valor maximo o minimo encontrado.
+ * \return devuelve -1 si no se encotró ningun valor.
  */
-int maxMinArrayInt (int array[], int posInicio, int posFin, int maxMin, int posValor)
+int maxMinArrayInt (Tramites array[], int posInicio, int posFin, int maxMin, int posValor, int valorCampo)
 {
-    int extremo;
+    int i;
+    int flag=0;
+    int extremo=array[posInicio].nroTurno;
     int posicion;
     if ( posInicio <= posFin )
     {
-        for ( int i = posInicio ; i <= posFin ; i++ )
+        for ( i = posInicio ; i <= posFin ; i++ )
         {
-            if( (array[i]*maxMin) > (extremo*maxMin) || i = posInicio )
+            if (array[i].tipoyEstadoTurno==valorCampo)
             {
-                extremo=array[i];
-                posicion = i;
+                if( (array[i].nroTurno*maxMin) > (extremo*maxMin) || i == posInicio  )
+                {
+                    extremo=array[i].nroTurno;
+                    posicion = i;
+                    flag=1;
+                }
             }
         }
+        if (flag==0)
+            return -1;
         if (posValor==1)
             return posicion;
         return extremo;
     }
-    return 0;
 }
 
 

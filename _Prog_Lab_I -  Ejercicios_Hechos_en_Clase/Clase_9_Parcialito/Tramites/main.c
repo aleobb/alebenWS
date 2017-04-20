@@ -22,11 +22,19 @@
 #define REGULAR 2
 #define BUFFER 4084
 
+valoresDePrueba()
+{
+    Tramites turnos[QTYTURNOS];
+}
+
 int main()
 {
     Tramites turnos[QTYTURNOS];
     int opcion=0;
     int nroTurnoSigte=0;
+    int proxTurnoUrgente;
+    int proxTurnoRegular;
+
 
     while(opcion!=6)
     {
@@ -52,7 +60,29 @@ int main()
                     nroTurnoSigte++;
                 break;
             case 3:
+                ///int maxMinArrayInt (int array[], int posInicio, int posFin, int maxMin, int posValor, int valorCampo)
 
+                proxTurnoUrgente=maxMinArrayInt(turnos,0,nroTurnoSigte-1,-1,1,URGENTE);
+                printf("\n ProxTurno urgente: %d",proxTurnoUrgente+1);
+
+                proxTurnoRegular=maxMinArrayInt(turnos,0,nroTurnoSigte-1,-1,1,REGULAR);
+                printf("\n ProxTurno urgente: %d",proxTurnoUrgente+1);
+
+                listarTurnos(turnos, nroTurnoSigte);
+
+                printf("\n\n Turno a atender: ");
+
+                if (proxTurnoUrgente+1>0)
+                {
+                    printf("%d - DNI %d",turnos[proxTurnoUrgente].nroTurno,turnos[proxTurnoUrgente].dni);
+                   /// printf("%d - DNI %d",turnos[proxTurnoUrgente].nroTurno,turnos[proxTurnoUrgente].dni);
+                    turnos[proxTurnoUrgente].tipoyEstadoTurno=-URGENTE;
+                }
+                else
+                {
+                    printf("%d - DNI %d",turnos[proxTurnoRegular].nroTurno,turnos[proxTurnoRegular].dni);
+                    turnos[proxTurnoRegular].tipoyEstadoTurno=-REGULAR;
+                }
                 break;
             case 4:
                 listarTurnos(turnos, nroTurnoSigte);
