@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1492649766 source:f:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\clase_9_parcialito\tramites\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
+1492649786 source:f:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\clase_9_parcialito\tramites\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funciones.h"
+
+1492649766 f:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\clase_9_parcialito\tramites\funciones.h
+
