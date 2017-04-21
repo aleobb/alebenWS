@@ -99,13 +99,14 @@ void listarTurnos(Tramites* turnos, int nroTurnoSigte)
  * \param posFin es la posicion del vector hasta la que se va a analizar (inclusive).
  * \param maxMin parametro que indica si se van a hallar el maximo (1) o el minimo (-1).
  * \param posValor si es 1 devuelve la posicion en el vector, de lo contrario devuelve el valor.
+ * \param valorCampo: se consideraran como maximo o minimo validos aquellos valores del array cuyo campo coincida con el valorCampo.
  * \return devuelve -1 si no se encotró ningun valor.
  */
-int maxMinArrayInt (Tramites array[], int posInicio, int posFin, int maxMin, int posValor, int valorCampo)
+int maxMinArrayInt(Tramites array[], int posInicio, int posFin, int maxMin, int posValor, int valorCampo)
 {
     int i;
     int flag=0;
-    int extremo=array[posInicio].nroTurno;
+    int extremo;
     int posicion;
     if ( posInicio <= posFin )
     {
@@ -113,7 +114,9 @@ int maxMinArrayInt (Tramites array[], int posInicio, int posFin, int maxMin, int
         {
             if (array[i].tipoyEstadoTurno==valorCampo)
             {
-                if( (array[i].nroTurno*maxMin) > (extremo*maxMin) || i == posInicio  )
+                printf("\n nro turno: %d", array[i].nroTurno);
+                printf("\n extremo: %d", extremo);
+                if( (array[i].nroTurno*maxMin) > (extremo*maxMin) || flag==0  )
                 {
                     extremo=array[i].nroTurno;
                     posicion = i;
@@ -130,6 +133,23 @@ int maxMinArrayInt (Tramites array[], int posInicio, int posFin, int maxMin, int
 }
 
 
-
-
-///proximoTurno()
+void bubleSort(Tramites array[], int size)
+{
+    int i;
+    int flagSwap = 1;
+    Tramites aux;
+    while(flagSwap)
+    {
+        flagSwap = 0;
+        for(i = 0; i<size-1 ; i++)
+        {
+            if( array[i].dni > array[i+1].dni )
+            {
+                aux = array[i];
+                array[i] = array[i+1];
+                array[i+1] = aux;
+                flagSwap = 1;
+            }
+        }
+    }
+}

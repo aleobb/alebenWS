@@ -39,14 +39,14 @@ int main()
     while(opcion!=6)
     {
         printf("\n");
-        printf("1- Tramite Urgente\n");
-        printf("2- Tramite Regular\n");
-        printf("3- Proximo Cliente\n");
-        printf("4- Listar Clientes Pendientes de Ser Atendidos\n");
-        printf("5- Listar Clientes ya Atendidos\n\n");
-        printf("6- Salir\n");
+        printf(" 1- Tramite Urgente\n");
+        printf(" 2- Tramite Regular\n");
+        printf(" 3- Proximo Cliente\n");
+        printf(" 4- Listar Clientes Pendientes de Ser Atendidos\n");
+        printf(" 5- Listar Clientes ya Atendidos\n\n");
+        printf(" 6- Salir \n\n");
 
-        printf("Ingrese una opcion: ");
+        printf(" Ingrese una opcion: ");
         scanf("%d",&opcion);
 
         switch(opcion)
@@ -60,8 +60,7 @@ int main()
                     nroTurnoSigte++;
                 break;
             case 3:
-                ///int maxMinArrayInt (int array[], int posInicio, int posFin, int maxMin, int posValor, int valorCampo)
-
+                /*
                 proxTurnoUrgente=maxMinArrayInt(turnos,0,nroTurnoSigte-1,-1,1,URGENTE);
                 printf("\n ProxTurno urgente: %d",proxTurnoUrgente+1);
 
@@ -69,26 +68,27 @@ int main()
                 printf("\n ProxTurno urgente: %d",proxTurnoUrgente+1);
 
                 listarTurnos(turnos, nroTurnoSigte);
+                */
 
-                printf("\n\n Turno a atender: ");
-
-                if (proxTurnoUrgente+1>0)
+                if (proxTurnoUrgente+1>0 && nroTurnoSigte>0)
                 {
-                    printf("%d - DNI %d",turnos[proxTurnoUrgente].nroTurno,turnos[proxTurnoUrgente].dni);
+                    printf("\n\n Turno a atender: %d - DNI %d \n",turnos[proxTurnoUrgente].nroTurno,turnos[proxTurnoUrgente].dni);
                    /// printf("%d - DNI %d",turnos[proxTurnoUrgente].nroTurno,turnos[proxTurnoUrgente].dni);
                     turnos[proxTurnoUrgente].tipoyEstadoTurno=-URGENTE;
                 }
-                else
+                else if (proxTurnoRegular+1>0 && nroTurnoSigte>0)
                 {
-                    printf("%d - DNI %d",turnos[proxTurnoRegular].nroTurno,turnos[proxTurnoRegular].dni);
+                    printf("\n Turno a atender: %d - DNI %d \n",turnos[proxTurnoRegular].nroTurno,turnos[proxTurnoRegular].dni);
                     turnos[proxTurnoRegular].tipoyEstadoTurno=-REGULAR;
                 }
+                else
+                    printf("\n NO HAY TURNOS PENDIENTES DE ATENDER \n");
                 break;
             case 4:
                 listarTurnos(turnos, nroTurnoSigte);
                 break;
             case 5:
-
+                bubleSort(turnos, nroTurnoSigte);
                 break;
             case 6:
                 break;

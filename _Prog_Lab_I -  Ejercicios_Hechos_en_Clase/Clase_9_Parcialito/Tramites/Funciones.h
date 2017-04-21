@@ -14,3 +14,5 @@ int otorgarTurno(Tramites turno[], int posicionArray, int tipoTramite, int nroTu
 
 void listarTurnos(Tramites* turnos, int nroTurnoSigte);
 
+int maxMinArrayInt(Tramites array[], int posInicio, int posFin, int maxMin, int posValor, int valorCampo);
+

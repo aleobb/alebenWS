@@ -1,0 +1,19 @@
+# depslib dependency file v1.0
+1492735772 source:e:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\clase_10\clase_10_parcial_i_2016_3\funcutn.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funciones.h"
+
+1492731832 e:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\clase_10\clase_10_parcial_i_2016_3\funciones.h
+
+1492734694 source:e:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\clase_10\clase_10_parcial_i_2016_3\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funcUTN.h"
+
+1492734672 e:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\clase_10\clase_10_parcial_i_2016_3\funcutn.h
+
