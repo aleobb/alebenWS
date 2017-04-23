@@ -14,6 +14,116 @@
 
 
 /**
+ * \brief Solicitar al usuario un numero y validarlo dentro de un rango de enteros.
+ * \param numero: donde se va a guardar el numero ya validado.
+ * \param mensajeIngreso: mensaje a mostrar para pedir el dato.
+ * \param mensajeError: mensaje a mostrar si el dato no esta dentro del rango valido.
+ * \param bucle: si el parametro es 1 el codigo se va a repetir hasta que se ingrese un tipo de dato valido.
+ * \param conLimInf: si se recibe 1 como parametro valida el limite inferior, sino no.
+ * \param minimo: valor minimo que el usuario puede ingresar como dato valido.
+ * \param conLimSup: si se recibe 1 como parametro valida el limite superior, sino no.
+ * \param maximo: valor maximo que el usuario puede ingresar como dato valido.
+ * \return Si obtuvo un numero valido devuelve [1] sino devuelve [0].
+ */
+int getInt(int* numero, char mensajeIngreso[], char mensajeError[], int bucle, int conLimInf, int minimo, int conLimSup, int maximo)
+{
+    char input[BUFFER];
+    int validacion;
+    int valor=0;
+
+    do
+    {
+        getString(mensajeIngreso,input);
+        validacion=esCadenaSoloNumeros(input,0,1);
+        if ( validacion )
+            valor = atoi(input);
+        if( validacion==EL_DATO_NO_ES_VALIDO || (conLimInf==1 && valor<minimo) || (conLimSup==1 && valor>maximo) )
+        {
+            validacion=EL_DATO_NO_ES_VALIDO;
+            printf("%s",mensajeError);
+        }
+        else
+            *numero = valor;
+    } while (  bucle==1 && validacion==EL_DATO_NO_ES_VALIDO );
+    return validacion;
+}
+
+
+
+/**
+ * \brief Solicitar al usuario un numero y validarlo dentro de un rango de numeros decimales.
+ * \param numero: donde se va a guardar el numero ya validado.
+ * \param mensajeIngreso: mensaje a mostrar para pedir el dato.
+ * \param mensajeError: mensaje a mostrar si el dato no esta dentro del rango valido.
+ * \param bucle: si el parametro es 1 el codigo se va a repetir hasta que se ingrese un tipo de dato valido.
+ * \param conLimInf: si se recibe 1 como parametro valida el limite inferior, sino no.
+ * \param minimo: valor minimo que el usuario puede ingresar como dato valido.
+ * \param conLimSup: si se recibe 1 como parametro valida el limite superior, sino no.
+ * \param maximo: valor maximo que el usuario puede ingresar como dato valido.
+ * \return Si obtuvo un numero valido devuelve [1] sino devuelve [0].
+ */
+int getFloat(float* numero, char mensajeIngreso[], char mensajeError[], int bucle, int conLimInf, float minimo, int conLimSup, float maximo)
+{
+    char input[BUFFER];
+    int validacion;
+    float valor=0;
+
+    do
+    {
+        getString(mensajeIngreso,input);
+        validacion=esCadenaSoloNumeros(input,0,1);
+        if ( validacion )
+            valor = atof(input);
+        if( validacion==EL_DATO_NO_ES_VALIDO || (conLimInf==1 && valor<minimo) || (conLimSup==1 && valor>maximo) )
+        {
+            validacion=EL_DATO_NO_ES_VALIDO;
+            printf("%s",mensajeError);
+        }
+        else
+            *numero = valor;
+    } while (  bucle==1 && validacion==EL_DATO_NO_ES_VALIDO );
+    return validacion;
+}
+
+
+/**
+ * \brief Solicitar al usuario un numero y validarlo dentro de un rango de enteros largos.
+ * \param numero: donde se va a guardar el numero ya validado.
+ * \param mensajeIngreso: mensaje a mostrar para pedir el dato.
+ * \param mensajeError: mensaje a mostrar si el dato no esta dentro del rango valido.
+ * \param bucle: si el parametro es 1 el codigo se va a repetir hasta que se ingrese un tipo de dato valido.
+ * \param conLimInf: si se recibe 1 como parametro valida el limite inferior, sino no.
+ * \param minimo: valor minimo que el usuario puede ingresar como dato valido.
+ * \param conLimSup: si se recibe 1 como parametro valida el limite superior, sino no.
+ * \param maximo: valor maximo que el usuario puede ingresar como dato valido.
+ * \return Si obtuvo un numero valido devuelve [1] sino devuelve [0].
+ */
+int getLongInt(long int* numero, char mensajeIngreso[], char mensajeError[], int bucle, int conLimInf, long int minimo, int conLimSup, long int maximo)
+{
+    char input[BUFFER];
+    int validacion;
+    long int valor=0;
+
+    do
+    {
+        getString(mensajeIngreso,input);
+        validacion=esCadenaSoloNumeros(input,0,1);
+        if ( validacion )
+            valor = atoi(input);
+        if( validacion==EL_DATO_NO_ES_VALIDO || (conLimInf==1 && valor<minimo) || (conLimSup==1 && valor>maximo) )
+        {
+            validacion=EL_DATO_NO_ES_VALIDO;
+            printf("%s",mensajeError);
+        }
+        else
+            *numero = valor;
+    } while (  bucle==1 && validacion==EL_DATO_NO_ES_VALIDO );
+    return validacion;
+}
+
+
+
+/**
  * \brief Solicitar al usuario una cadena de caracteres.
  * \param mensajeIngreso: es el mensaje a mostrar para pedir el ingreso.
  * \param mensajeError: mensaje a mostrar si el dato no esta dentro del rango valido.
@@ -26,7 +136,7 @@
  */
 int getType(char mensajeIngreso[], char mensajeError[], int bucle, int type, char arrayCharsAdmitidos[], int maxExtensionArray, char* input)
 {
-    int validacion;
+    int validacion=EL_DATO_NO_ES_VALIDO;
     char buffer[BUFFER];
     do
     {
@@ -44,10 +154,7 @@ int getType(char mensajeIngreso[], char mensajeError[], int bucle, int type, cha
                 break;
         }
         if(validacion==EL_DATO_NO_ES_VALIDO || strlen(buffer)>maxExtensionArray)
-        {
             printf(mensajeError);
-            validacion=EL_DATO_NO_ES_VALIDO;
-        }
         else
             strcpy(input,buffer);
     }while( bucle==1 && validacion==EL_DATO_NO_ES_VALIDO );
@@ -73,107 +180,6 @@ int getString(char mensajeIngreso[], char* input)
     return EL_DATO_ES_VALIDO;
 }
 
-
-/**
- * \brief Solicitar al usuario un numero y validarlo dentro de un rango de enteros.
- * \param numero: donde se va a guardar el numero ya validado.
- * \param mensajeIngreso: mensaje a mostrar para pedir el dato.
- * \param mensajeError: mensaje a mostrar si el dato no esta dentro del rango valido.
- * \param conLimInf: si se recibe 1 como parametro valida el limite inferior, sino no.
- * \param minimo: valor minimo que el usuario puede ingresar como dato valido.
- * \param conLimSup: si se recibe 1 como parametro valida el limite superior, sino no.
- * \param maximo: valor maximo que el usuario puede ingresar como dato valido.
- * \param salir: variable donde se almacena el valor que la funcion que llamó a ésta pide devolver en caso de que se haya superado el limite maximo de ingresos.
- * \return Si obtuvo un numero valido devuelve [1] sino devuelve [0].
- */
-int getInt(int* numero, char mensajeIngreso[], char mensajeError[], int conLimInf, int minimo, int conLimSup, int maximo, int cantIntentos)
-{
-    int aux;
-    char input[4096];
-    int intentosDisponibles=cantIntentos;
-
-    do
-    {
-        if (intentosDisponibles==0)
-        {
-            printf("\n Se ha superado la cantidad de intentos de ingreso de un dato valido! \n El ingreso se detendra. \n");
-            return EL_DATO_NO_ES_VALIDO;
-        }
-        else if (intentosDisponibles!=cantIntentos)
-            printf("%s",mensajeError);
-        if(conLimInf!=0)
-            printf("\n El valor a ingresar no puede ser inferior a %d ",minimo);
-        if(conLimSup!=0)
-            printf("\n El valor a ingresar no puede ser superior a %d ",maximo);
-
-        printf("\n (Cantidad de intentos disponibles: %d)",intentosDisponibles);
-        intentosDisponibles--;
-
-        getString(mensajeIngreso,input);
-        if ( esCadenaSoloNumeros(input,0,1) == EL_DATO_NO_ES_VALIDO )
-            continue;
-        aux = atoi(input);
-
-        if(conLimInf==0)
-            minimo=aux;
-        if(conLimSup==0)
-            maximo=aux;
-    } while ( aux < minimo || aux > maximo );
-
-    *numero = aux;
-    return EL_DATO_ES_VALIDO;
-}
-
-
-/**
- * \brief Solicitar al usuario un numero y validarlo dentro de un rango de flotantes.
- * \param numero: donde se va a guardar el numero ya validado.
- * \param mensajeIngreso: mensaje a mostrar para pedir el dato.
- * \param mensajeError: mensaje a mostrar si el dato no esta dentro del rango valido.
- * \param conLimInf: si se recibe 1 como parametro valida el limite inferior, sino no.
- * \param minimo: valor minimo que el usuario puede ingresar como dato valido.
- * \param conLimSup: si se recibe 1 como parametro valida el limite superior, sino no.
- * \param maximo: valor maximo que el usuario puede ingresar como dato valido.
- * \param salir: variable donde se almacena el valor que la funcion que llamó a ésta pide devolver en caso de que se haya superado el limite maximo de ingresos.
- * \return Si obtuvo un numero valido devuelve [1] sino devuelve [0].
- */
-float getFloat(float* numero, char mensajeIngreso[], char mensajeError[], int conLimInf, float minimo, int conLimSup, float maximo, int cantIntentos)
-{
-    float aux;
-    char input[4096];
-    int intentosDisponibles=cantIntentos;
-
-    do
-    {
-        if (intentosDisponibles==0)
-        {
-            printf("\n Se ha superado la cantidad de intentos de ingreso de un dato valido! \n El ingreso se detendra. \n");
-            return EL_DATO_NO_ES_VALIDO;
-        }
-        else if (intentosDisponibles!=cantIntentos)
-            printf("%s",mensajeError);
-        if(conLimInf!=0)
-            printf("\n El valor a ingresar no puede ser inferior a %f ",minimo);
-        if(conLimSup!=0)
-            printf("\n El valor a ingresar no puede ser superior a %f ",maximo);
-
-        printf("\n (Cantidad de intentos disponibles: %d)",intentosDisponibles);
-        intentosDisponibles--;
-
-        getString(mensajeIngreso,input);
-        if ( esCadenaSoloNumeros(input,1,1) == EL_DATO_NO_ES_VALIDO )
-            continue;
-        aux = atof(input);
-
-        if(conLimInf==0)
-            minimo=aux;
-        if(conLimSup==0)
-            maximo=aux;
-    } while ( aux < minimo || aux > maximo );
-
-    *numero = aux;
-    return EL_DATO_ES_VALIDO;
-}
 
 /**
  * \brief Verifica que una array esté compuesto solo por numeros.
@@ -334,41 +340,6 @@ int esNumeroFecha(char vector[], int posicionInicio, int posicionFin, char* numF
     return i;
 }
 
-
-
-
-/**
- * \brief Informa al usuario limitaciones en las operaciones posibles a realizar.
- * \param flagA y flagB variables cuyo valor va a permitir verificar si el usuario ya ingresó los valores de A y B respectivamente (x e y en main.c)
- * \param option es la variable donde se va a guardar la opcion del menu elegida por el usuario
- * \param A es la variable donde se va a almacenar el valor del primer operando
- * \return no devuelve nada al proceso que llamo a la funcion
- */
-void infDatosIng(int flagA, int flagB, int option, float A)
-{
-    if ( (option>2 && (flagA + flagB)<2) || option==0 )
-    {
-        printf("\n\n Atencion!! No se puede realizar niguna operacion ");
-        if (flagA == 1) /// si solo se ingresó el dato A
-        {
-            if (A<0)
-                printf("\n (ni siquiera factorial) porque el valor del primer operando es negativo y ");
-            else
-                printf("\n (salvo factorial) porque ");
-
-            printf("falta ingresar el valor del 2do operando. \n\n ");
-            printf("Aclaraciones: \n * Solo se calculara el factorial de numeros enteros del 0 al 100 \n ");
-            printf("* En caso de haber ingresado un numero con decimales se calculara el factorial de la porcion entera. \n ");
-        }
-        else if (flagB == 1) /// si solo se ingreso el dato B
-            { printf("\n porque falta ingresar el valor del 1er operando. \n"); }
-        else /// si todavia no se ingreso ningun dato de A y B
-            { printf("\n porque todavia no ha ingresado el valor de ningun operando. \n"); }
-    }
-    printf(" (La precision de la calculadora es con hasta 8 digitos para el valor de los operandos) \n");
-    if ( (flagA + flagB)==2 && A<0 )
-        { printf("\n No se podra calcular factorial porque el valor del primer operando es negativo. \n"); }
-}
 
 
 
