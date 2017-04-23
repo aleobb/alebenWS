@@ -7,6 +7,11 @@
 #include "funcMatematicas.h"
 #include "funcOrdenar.h"
 
+#define BUFFER 4084
+#define EL_DATO_ES_VALIDO 1
+#define EL_DATO_NO_ES_VALIDO 0
+
+
 /**
  * \brief calcula la division entre dos numeros (A dividido por B)
  * \param A y B son las variables con cuyos valores se va a calcular la division.
@@ -17,7 +22,7 @@ float division(float A, float B)
     if ( B == 0 ) /// controla el error de dividir por 0
     {
         printf("\n El divisor es igual a 0 y por tanto no puede realizarse la division. Modifiquelo e intente nuevamente. \n\n");
-        return 0;
+        return EL_DATO_NO_ES_VALIDO;
     }
     else
         { return (A/B); }
@@ -65,52 +70,41 @@ int cantPosNegFloat (float array[], int posInicio, int posFin, int posNeg)
  * \param posInicio es la posicion del vector desde la que se va a analizar.
  * \param posFin es la posicion del vector hasta la que se va a analizar (inclusive).
  * \param maxMin parametro que indica si se van a hallar el maximo (1) o el minimo (-1).
- * \param posValor si es 1 devuelve la posicion en el vector, de lo contrario devuelve el valor.
- * \return devuelve el valor maximo o minimo encontrado.
+ * \return devuelve la posicion en el array del valor maximo o minimo encontrado y si no la econtró devuelve -1.
  */
-int maxMinArrayInt (int array[], int posInicio, int posFin, int maxMin, int posValor)
+int maxMinArrayInt (int array[], int posInicio, int posFin, int maxMin)
 {
     int extremo;
-    int posicion;
-    if ( posInicio <= posFin )
+    int posicion = -1;
+    int i;
+    for ( i = posInicio ; i <= posFin ; i++ )
     {
-        for ( int i = posInicio ; i <= posFin ; i++ )
+        if( (array[i]*maxMin) > (extremo*maxMin) || i == posInicio )
         {
-            if( (array[i]*maxMin) > (extremo*maxMin) || i = posInicio )
-            {
-                extremo=array[i];
-                posicion = i;
-            }
+            extremo=array[i];
+            posicion = i;
         }
-        if (posValor==1)
-            return posicion;
-        return extremo;
     }
-    return 0;
+    return posicion;
 }
 
 /**
  * Idem maxMinArrayInt pero para un array de flotantes.
  */
-float maxMinArrayFloat (float array[], int posInicio, int posFin, int maxMin, int posValor)
+float maxMinArrayFloat (float array[], int posInicio, int posFin, int maxMin)
 {
     float extremo;
-    int posicion;
-    if ( posInicio <= posFin )
+    int posicion = -1;
+    int i;
+    for ( i = posInicio ; i <= posFin ; i++ )
     {
-        for ( int i = posInicio ; i <= posFin ; i++ )
+        if( (array[i]*maxMin) > (extremo*maxMin) || i == posInicio )
         {
-            if( (array[i]*maxMin) > (extremo*maxMin) || i = posInicio )
-            {
-                extremo=array[i];
-                posicion = i;
-            }
+            extremo=array[i];
+            posicion = i;
         }
-        if (posValor==1)
-            return posicion;
-        return extremo;
     }
-    return 0;
+    return posicion;
 }
 
 
@@ -121,14 +115,14 @@ float maxMinArrayFloat (float array[], int posInicio, int posFin, int maxMin, in
  * \param array es el vector que contiene los valores a analizar.
  * \param posInicio es la posicion del vector desde la que se va a analizar.
  * \param posFin es la posicion del vector hasta la que se va a analizar (inclusive).
- * \return devuelve el promedio calculado.
+ * \return devuelve el promedio calculado (siempre la cantidad posiciones a analizar sea mayor a cero, sino devuelve 0).
  */
 float promedioArrayInt (int array[], int posInicio, int posFin)
 {
+    int i;
     int acumulador=0;
     if (posInicio>posFin)
     {
-        int i;
         for ( i = posInicio ; i <= posFin ; i++ )
             acumulador=acumulador+array[i];
         return acumulador/(i-posInicio);

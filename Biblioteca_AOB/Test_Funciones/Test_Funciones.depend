@@ -5,3 +5,18 @@
 	<string.h>
 	<ctype.h>
 
+1492958714 source:g:\alebenws\biblioteca_aob\test_funciones\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"testBiblioteca.h"
+
+1492958242 g:\alebenws\biblioteca_aob\test_funciones\testbiblioteca.h
+
+1492958400 source:g:\alebenws\biblioteca_aob\test_funciones\testbiblioteca.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+

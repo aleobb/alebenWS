@@ -6,3 +6,7 @@
 #include "funcValidacion.h"
 #include "funcMatematicas.h"
 #include "funcOrdenar.h"
+
+#define BUFFER 4084
+#define EL_DATO_ES_VALIDO 1
+#define EL_DATO_NO_ES_VALIDO 0

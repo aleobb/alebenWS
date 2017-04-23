@@ -3,22 +3,60 @@
 #include <string.h>
 #include <ctype.h>
 
+#define BUFFER 4084
+#define EL_DATO_ES_VALIDO 1
+#define EL_DATO_NO_ES_VALIDO 0
+
 void main()
 {
-    char dato[100];
-    if (getString("Ingrese dato", )==0)
-        printf("\n El dato ingresado es: %s",dato);
-    else
-        printf("\n El dato ingresado es invalido!");
+    float dato[100]={1,50,-52,0,330};
+    float valor;
+    printf("el extremo es: %f",dato[maxMinArrayInt(dato,0,4,1)]);
 }
 
-int getString(char mensajeIngreso[], char input[])
+/**
+ * \brief halla el valor maximo o minimo de un vector de enteros
+ * \param array es el vector que contiene los valores a analizar.
+ * \param posInicio es la posicion del vector desde la que se va a analizar.
+ * \param posFin es la posicion del vector hasta la que se va a analizar (inclusive).
+ * \param maxMin parametro que indica si se van a hallar el maximo (1) o el minimo (-1).
+ * \return devuelve la posicion en el array del valor maximo o minimo encontrado y si no la econtró devuelve -1.
+ */
+int maxMinArrayInt (int array[], int posInicio, int posFin, int maxMin)
 {
-    char buffer[4084];
-    printf("%s",mensajeIngreso);
-    scanf("%s",buffer);
-    if ( strlen(buffer) > 0 )
-        strcpy(input,buffer);
-        return 0;
-    return -1;
+    int extremo;
+    int posicion = -1;
+    int i;
+    for ( i = posInicio ; i <= posFin ; i++ )
+    {
+        if( (array[i]*maxMin) > (extremo*maxMin) || i == posInicio )
+        {
+            extremo=array[i];
+            posicion = i;
+        }
+    }
+    return posicion;
 }
+
+/**
+ * Idem maxMinArrayInt pero para un array de flotantes.
+ */
+float maxMinArrayFloat (float array[], int posInicio, int posFin, int maxMin)
+{
+    float extremo;
+    int posicion = -1;
+    int i;
+    for ( i = posInicio ; i <= posFin ; i++ )
+    {
+        if( (array[i]*maxMin) > (extremo*maxMin) || i == posInicio )
+        {
+            extremo=array[i];
+            posicion = i;
+        }
+    }
+    return posicion;
+}
+
+
+
+
