@@ -42,6 +42,30 @@ int expandArray(int array[], int size, int indice)
 }
 
 
+
+void bubleSort(Empleado array[], int size)
+{
+    int i;
+    int flagSwap = 1;
+    Empleado aux;
+    while(flagSwap)
+    {
+        flagSwap = 0;
+        for(i = 0; i<size-1 ; i++)
+        {
+            if(strcmp(array[i].nombre,array[i+1].nombre) > 0)
+            {
+                aux = array[i];
+                array[i] = array[i+1];
+                array[i+1] = aux;
+                flagSwap = 1;
+            }
+        }
+    }
+}
+
+
+
 /// todo el proceso empieza aca:  ****** NADIA SORT ******
 void nadiaSort(int array[], int size,int arrayOrdenado[]) /// minimo-compactar repetidas veces hasta todo el tamaño del array
 {

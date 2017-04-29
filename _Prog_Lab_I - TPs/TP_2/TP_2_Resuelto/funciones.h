@@ -34,10 +34,47 @@ int buscarPorDni(EPersona arrayPersonas[], int sizeArray, long int dni);
 /**
  * @brief Realiza el ingresdo de datos de una persona.
  * @param arrayPersonas el array se pasa como parametro.
- * @param indice se pasa como parametro el indice donde se van a guardar los datos de la persona.
+ * @param sizeArray el tamaño del array se pasa como parametro.
  * @return devuelve 1 (EL_DATO_ES_VALIDO) si el ingreso se pudo realizar correctamente.
  */
-int ingresoPersona(EPersona* arrayPersonas,int indice);
+int ingresoPersona(EPersona arrayPersonas[],int sizeArray);
 
+
+
+/**
+ * @brief Realiza la modificacion de datos de una persona.
+ * @param arrayPersonas el array se pasa como parametro.
+ * @param sizeArray el tamaño del array se pasa como parametro.
+ * @return devuelve 1 (EL_DATO_ES_VALIDO) si la modificacion se pudo realizar correctamente.
+ */
+int modificacionPersona(EPersona arrayPersonas[], int sizeArray);
+
+
+/**
+ * @brief Realiza la baja logica del registro de datos de una persona.
+ * @param arrayPersonas el array se pasa como parametro.
+ * @param sizeArray el tamaño del array se pasa como parametro.
+ * @return devuelve 1 (EL_DATO_ES_VALIDO) si la baja se pudo realizar correctamente.
+ */
+int eliminarPersona(EPersona arrayPersonas[], int sizeArray);
+
+long int ingresoDNI();
+
+void ingresoDatos(EPersona arrayAuxiliar[]);
+
+/**
+ * @brief Realiza la inicializacion del arrayPersonas ingresando el valor -1 en el campo estado.
+ * @param arrayPersonas el array se pasa como parametro.
+ * @param sizeArray el tamaño del array se pasa como parametro.
+ * @return no devuelve nada.
+ */
+void initArray(EPersona arrayPersonas[],int sizeArray);
+
+
+void listarPorNombre(EPersona arrayPersonas[], int sizeArray);
+
+void ordenarPorNombre(EPersona arrayPersonas[], int sizeArray);
+
+void graficoEdades(EPersona arrayPersonas[], int sizeArray);
 
 #endif // FUNCIONES_H_INCLUDED

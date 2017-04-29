@@ -27,6 +27,12 @@ int getType(char mensajeIngreso[], char mensajeError[], int bucle, int type, cha
 
 void testIngresoString();
 
+int esCadenaEmail (char vector[], char arrayCharsAdmitidos[]);
+
+int esCadenaTelefono (char vector[]);
+
+void testIngresoEmail();
+
 int main()
 {
  /*    char vector[10]="1212.";
@@ -38,7 +44,7 @@ int main()
 */
     //int cmin, min, cmax, max;
 
-    testIngresoString();
+    testIngresoEmail();
 
 
     /*
@@ -47,6 +53,19 @@ int main()
     printf("%s",arreglo);
 */
  return 0;
+}
+
+void testIngresoEmail()
+{
+    int aux;
+    char charsAdm [10]={"@."};
+    char dato[100];
+    aux=getType("\n Ingrese un dato: ", "\n El dato ingresado es invalido", 1, 5, charsAdm, 20, dato);
+    if (aux)
+        printf("\nEl dato valido ingresado es: %s",dato);
+    else
+        printf("\nEl dato no se pudo ingresar correctamente");
+    return 0;
 }
 
 void testIngresoString()
@@ -111,6 +130,10 @@ int getType(char mensajeIngreso[], char mensajeError[], int bucle, int type, cha
             case 3:
                 validacion=esCadenaFecha(buffer);
                 break;
+            case 4:
+                validacion=esCadenaTelefono(buffer);
+            case 5:
+                validacion=esCadenaEmail(buffer, arrayCharsAdmitidos);
         }
         if(validacion==EL_DATO_NO_ES_VALIDO || strlen(buffer)>maxExtensionArray)
         {
@@ -206,6 +229,85 @@ int esCadenaSoloNumeros (char vector[], int cantPuntos, int admiteNegativos)
             return 0;
     }
     return 1;
+}
+
+
+
+/**
+ * \brief Verifica que una array esté compuesto solo por numeros, guiones y/o parentesis.
+ * \param vector: es el array a evaluar
+ * \return Si el array esta compuesto por una cadena telefono devuelve [1] sino devuelve [0].
+ */
+int esCadenaTelefono (char vector[])
+{
+    int i=0;
+    int flagAbrirParentesis=0;
+    int flagGuion=0;
+    int cantCaracteresTel=6;
+    if (vector[0]=='-' || vector[0]==')' || vector[0]=='\0')
+        return EL_DATO_NO_ES_VALIDO;
+    else if (vector[0]=='(' && vector[1]!='\0')
+    {
+        i++;
+        flagAbrirParentesis++;
+        cantCaracteresTel=cantCaracteresTel+3;
+    }
+
+    for ( ; vector[i]!='\0'; i++)
+    {
+        if (vector[i]==')' && flagAbrirParentesis==1 && vector[i+1]!='\0')
+            continue;
+        else if (vector[i]=='-' && vector[i-1]!='(' && vector[i-1]!=')' && vector[i+1]!='\0')
+        {
+            flagGuion++;
+            continue;
+        }
+        else if (vector[i]<'0' || vector[i]>'9')
+            return EL_DATO_NO_ES_VALIDO;
+    }
+    if (flagGuion==0 || flagGuion>2 || strlen(vector)<cantCaracteresTel)
+        return EL_DATO_NO_ES_VALIDO;
+    return EL_DATO_ES_VALIDO;
+}
+
+
+int esCadenaEmail (char vector[], char arrayCharsAdmitidos[])
+{
+    int i;
+    int flagArroba=0;
+    int flagPunto=0;
+    int cantCaracteres=6;
+    if (vector[0]=='@' || vector[0]=='.' || vector[0]=='\0' || esCadenaAlfanumerica(vector, arrayCharsAdmitidos)==0 || strlen(vector)<cantCaracteres)
+    {
+        printf("\n llego aca \n");
+        return EL_DATO_NO_ES_VALIDO;
+    }
+    for (i=1 ; vector[i]!='\0'; i++)
+    {
+        if (vector[i]=='@')
+        {
+            flagArroba++;
+            if (flagArroba>1 || flagPunto>0 || vector[i+1]=='\0' || vector[i+1]=='.')
+            {
+                printf("\n llego aca2 \n");
+                return EL_DATO_NO_ES_VALIDO;
+            }
+            continue;
+        }
+        else if (vector[i]=='.')
+        {
+            flagPunto++;
+            if (flagArroba==0 || flagPunto>1 || vector[i+1]=='\0')
+            {
+                printf("\n llego aca3 \n");
+                return EL_DATO_NO_ES_VALIDO;
+            }
+            continue;
+        }
+    }
+    if (flagArroba==0 || flagPunto==0)
+        return EL_DATO_NO_ES_VALIDO;
+    return EL_DATO_ES_VALIDO;
 }
 
 

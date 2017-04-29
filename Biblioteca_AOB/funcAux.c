@@ -108,4 +108,52 @@ int esCadenaSoloNumeros (char vector[], int cantPuntos, int admiteNegativos)
 
 
 
+void cargaAutomatica(EPersona arrayPersonas[], int sizeArray)
+{
+    int i;
+    int dni = 1;
+///    char nombre[10]="nombre";
+    int edad = dni*10;
+
+    for (i=0; i<10; i++)
+    {
+
+        arrayPersonas[i].dni=dni;
+        arrayPersonas[i].edad=edad;
+        arrayPersonas[i].estado=1;
+
+        dni++;
+        edad = dni*10;
+    }
+
+    for ( ; i<20; i++)
+    {
+
+        arrayPersonas[i].dni=dni;
+        arrayPersonas[i].edad=edad;
+        arrayPersonas[i].estado=1;
+
+        dni++;
+        edad = dni-6;
+    }
+
+
+    strcpy(arrayPersonas[0].nombre,"BBB");
+    strcpy(arrayPersonas[1].nombre,"AAA");
+    strcpy(arrayPersonas[2].nombre,"CCC");
+    strcpy(arrayPersonas[3].nombre,"EEE");
+    strcpy(arrayPersonas[4].nombre,"DDD");
+    strcpy(arrayPersonas[5].nombre,"RRR");
+    strcpy(arrayPersonas[6].nombre,"PPP");
+    strcpy(arrayPersonas[7].nombre,"ACE");
+    strcpy(arrayPersonas[8].nombre,"Del");
+    strcpy(arrayPersonas[9].nombre,"HUN");
+
+    ///     printf("\n indice: %d",indice);
+}
+
+
+
+
+
 

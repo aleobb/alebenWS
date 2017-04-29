@@ -3,6 +3,9 @@
 #include <string.h>
 #include <ctype.h>
 
+#include "funcionesAuxiliares.h"
+#include "funciones.h"
+
 #define BUFFER 4084
 #define EL_DATO_ES_VALIDO 1
 #define EL_DATO_NO_ES_VALIDO 0

@@ -128,7 +128,7 @@ int getLongInt(long int* numero, char mensajeIngreso[], char mensajeError[], int
  * \param mensajeIngreso: es el mensaje a mostrar para pedir el ingreso.
  * \param mensajeError: mensaje a mostrar si el dato no esta dentro del rango valido.
  * \param bucle: el codigo se va a repetir hasta que se ingrese un tipo de dato valido.
- * \param type: tipo de ingreso que se quiere obtener como valido (1- cadena solo letras / 2-cadena alfanumerica / 3-cadena fecha)
+ * \param type: tipo de ingreso que se quiere obtener como valido (1- cadena solo letras / 2-cadena alfanumerica / 3-cadena fecha / 4-cadena telefono / 5-cadena email)
  * \param arrayCharsAdmitidos es el array que contiene los caracteres que tambien van a resultar validos.
  * \param maxExtensionArray: indica la extension maxima (en cantidad de caracteres) para el array.
  * \param input: es el array donde se va a guardar la cadena.
@@ -152,6 +152,10 @@ int getType(char mensajeIngreso[], char mensajeError[], int bucle, int type, cha
             case 3:
                 validacion=esCadenaFecha(buffer);
                 break;
+            case 4:
+                validacion=esCadenaTelefono(buffer);
+            case 5:
+                validacion=esCadenaEmail(buffer, arrayCharsAdmitidos);
         }
         if(validacion==EL_DATO_NO_ES_VALIDO || strlen(buffer)>maxExtensionArray)
             printf(mensajeError);
@@ -198,6 +202,8 @@ int esCadenaSoloNumeros (char vector[], int cantPuntos, int admiteNegativos)
         else
             return EL_DATO_NO_ES_VALIDO;
     }
+    else if (vector[0]=='\0')
+        return EL_DATO_NO_ES_VALIDO;
     for ( ; vector[i]!='\0'; i++)
     {
         if (vector[i]=='.' && cantPuntos>0)
@@ -205,6 +211,81 @@ int esCadenaSoloNumeros (char vector[], int cantPuntos, int admiteNegativos)
         else if (vector[i]<'0' || vector[i]>'9')
             return EL_DATO_NO_ES_VALIDO;
     }
+    return EL_DATO_ES_VALIDO;
+}
+
+
+/**
+ * \brief Verifica que una array esté compuesto solo por numeros, guiones y/o parentesis.
+ * \param vector: es el array a evaluar
+ * \return Si el array esta compuesto solo por numeros devuelve [1] sino devuelve [0].
+ */
+int esCadenaTelefono (char vector[])
+{
+    int i=0;
+    int flagAbrirParentesis=0;
+    int flagGuion=0;
+    int cantCaracteresTel=6;
+    if (vector[0]=='-' || vector[0]==')' || vector[0]=='\0')
+        return EL_DATO_NO_ES_VALIDO;
+    else if (vector[0]=='(' && vector[1]!='\0')
+    {
+        i++;
+        flagAbrirParentesis++;
+        cantCaracteresTel=cantCaracteresTel+3;
+    }
+
+    for ( ; vector[i]!='\0'; i++)
+    {
+        if (vector[i]==')' && flagAbrirParentesis==1 && vector[i+1]!='\0')
+            continue;
+        else if (vector[i]=='-' && vector[i-1]!='(' && vector[i-1]!=')' && vector[i+1]!='\0')
+        {
+            flagGuion++;
+            continue;
+        }
+        else if (vector[i]<'0' || vector[i]>'9')
+            return EL_DATO_NO_ES_VALIDO;
+    }
+    if (flagGuion==0 || flagGuion>2 || strlen(vector)<cantCaracteresTel)
+        return EL_DATO_NO_ES_VALIDO;
+    return EL_DATO_ES_VALIDO;
+}
+
+
+/**
+ * \brief Verifica que una array esté compuesto solo por letras, numeros, y como minimo un '@' y un '.'.
+ * \param vector: es el array a evaluar
+ * \param arrayCharsAdmitidos es el array que contiene los caracteres que tambien van a resultar validos.
+ * \return Si el array esta compuesto por una cadena email devuelve [1] sino devuelve [0].
+ */
+int esCadenaEmail(char vector[], char arrayCharsAdmitidos[])
+{
+    int i;
+    int flagArroba=0;
+    int flagPunto=0;
+    int cantCaracteres=6;
+    if (vector[0]=='@' || vector[0]=='.' || vector[0]=='\0' || esCadenaAlfanumerica(vector, arrayCharsAdmitidos)==0 || strlen(vector)<cantCaracteres)
+        return EL_DATO_NO_ES_VALIDO;
+    for (i=1 ; vector[i]!='\0'; i++)
+    {
+        if (vector[i]=='@')
+        {
+            flagArroba++;
+            if (flagArroba>1 || flagPunto>0 || vector[i+1]=='\0' || vector[i+1]=='.')
+                return EL_DATO_NO_ES_VALIDO;
+            continue;
+        }
+        else if (vector[i]=='.')
+        {
+            flagPunto++;
+            if (flagArroba==0 || flagPunto>1 || vector[i+1]=='\0')
+                return EL_DATO_NO_ES_VALIDO;
+            continue;
+        }
+    }
+    if (flagArroba==0 || flagPunto==0)
+        return EL_DATO_NO_ES_VALIDO;
     return EL_DATO_ES_VALIDO;
 }
 
