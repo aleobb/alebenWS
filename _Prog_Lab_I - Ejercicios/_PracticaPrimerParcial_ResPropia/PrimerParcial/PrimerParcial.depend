@@ -1,0 +1,43 @@
+# depslib dependency file v1.0
+1493678380 source:g:\alebenws\_prog_lab_i - ejercicios\_practicaprimerparcial_respropia\primerparcial\abonados.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funcionesAuxiliares.h"
+	"Abonados.h"
+	"Llamadas.h"
+
+1493654360 g:\alebenws\_prog_lab_i - ejercicios\_practicaprimerparcial_respropia\primerparcial\funcionesauxiliares.h
+
+1493678480 g:\alebenws\_prog_lab_i - ejercicios\_practicaprimerparcial_respropia\primerparcial\abonados.h
+
+1493678480 g:\alebenws\_prog_lab_i - ejercicios\_practicaprimerparcial_respropia\primerparcial\llamadas.h
+
+1493654296 source:g:\alebenws\_prog_lab_i - ejercicios\_practicaprimerparcial_respropia\primerparcial\funcionesauxiliares.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funcionesAuxiliares.h"
+
+1493678382 source:g:\alebenws\_prog_lab_i - ejercicios\_practicaprimerparcial_respropia\primerparcial\llamadas.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funcionesAuxiliares.h"
+	"Abonados.h"
+	"Llamadas.h"
+
+1493675446 source:g:\alebenws\_prog_lab_i - ejercicios\_practicaprimerparcial_respropia\primerparcial\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funcionesAuxiliares.h"
+	"Abonados.h"
+	"Llamadas.h"
+
+1493675990 source:g:\alebenws\_prog_lab_i - ejercicios\_practicaprimerparcial_respropia\primerparcial\informes.c
+

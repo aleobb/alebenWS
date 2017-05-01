@@ -6,11 +6,11 @@
 #include "funcValidacion.h"
 #include "funcMatematicas.h"
 #include "funcOrdenar.h"
+#include "funcEstructuras.h"
 
 #define BUFFER 4084
 #define EL_DATO_ES_VALIDO 1
 #define EL_DATO_NO_ES_VALIDO 0
-
 
 
 /**
@@ -47,7 +47,6 @@ int getInt(int* numero, char mensajeIngreso[], char mensajeError[], int bucle, i
     } while (  bucle==1 && validacion==EL_DATO_NO_ES_VALIDO );
     return validacion;
 }
-
 
 
 /**
@@ -120,7 +119,6 @@ int getLongInt(long int* numero, char mensajeIngreso[], char mensajeError[], int
     } while (  bucle==1 && validacion==EL_DATO_NO_ES_VALIDO );
     return validacion;
 }
-
 
 
 /**
@@ -316,6 +314,7 @@ int esCadenaSoloLetras (char vector[], char arrayCharsAdmitidos[])
     return EL_DATO_ES_VALIDO;
 }
 
+
 /**
  * \brief Verifica que una array esté compuesto solo por numeros y/o espacios y/o letras (mayusculas y/o minusculas).
  * \param vector es el array a evaluar
@@ -341,7 +340,6 @@ int esCadenaAlfanumerica (char vector[], char arrayCharsAdmitidos[])
     }
     return EL_DATO_ES_VALIDO;
 }
-
 
 
 /**
@@ -420,13 +418,3 @@ int esNumeroFecha(char vector[], int posicionInicio, int posicionFin, char* numF
         return EL_DATO_NO_ES_VALIDO;
     return i;
 }
-
-
-
-
-
-
-
-
-
-

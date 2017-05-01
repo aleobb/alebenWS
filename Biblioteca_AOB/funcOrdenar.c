@@ -6,10 +6,12 @@
 #include "funcValidacion.h"
 #include "funcMatematicas.h"
 #include "funcOrdenar.h"
+#include "funcEstructuras.h"
 
 #define BUFFER 4084
 #define EL_DATO_ES_VALIDO 1
 #define EL_DATO_NO_ES_VALIDO 0
+
 
 /**
  * \brief compacta un array eliminando el nro. de posición recibido como parametro indice.
@@ -42,7 +44,6 @@ int expandArray(int array[], int size, int indice)
 }
 
 
-
 void bubleSort(Empleado array[], int size)
 {
     int i;
@@ -64,6 +65,35 @@ void bubleSort(Empleado array[], int size)
     }
 }
 
+
+int comparar(Empleado empleadoA, Empleado empleadoB)
+{
+    int retorno = 0;
+    if(strcmp(empleadoA.nombre,empleadoB.nombre) > 0)
+        retorno = 1;
+    else if(strcmp(empleadoA.nombre,empleadoB.nombre) < 0)
+        retorno = -1;
+    else
+    {
+        if(strcmp(empleadoA.apellido,empleadoB.apellido) > 0)
+            retorno = 1;
+        else if(strcmp(empleadoA.apellido,empleadoB.apellido) < 0)
+            retorno = -1;
+        else
+        {
+            if(strcmp(empleadoA.legajo,empleadoB.legajo) > 0)
+                retorno = 1;
+            else if(strcmp(empleadoA.legajo,empleadoB.legajo) < 0)
+                retorno = -1;
+            else
+            {
+                retorno = 0;
+            }
+        }
+    }
+
+    return retorno;
+}
 
 
 /// todo el proceso empieza aca:  ****** NADIA SORT ******

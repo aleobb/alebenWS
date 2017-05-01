@@ -6,6 +6,7 @@
 #include "funcValidacion.h"
 #include "funcMatematicas.h"
 #include "funcOrdenar.h"
+#include "funcEstructuras.h"
 
 #define BUFFER 4084
 #define EL_DATO_ES_VALIDO 1
@@ -28,6 +29,7 @@ float division(float A, float B)
         { return (A/B); }
 }
 
+
 /**
  * \brief calcula la cantidad de numeros positivos/negativos en un vector de enteros
  * \param array es el vector que contiene los valores a analizar.
@@ -48,8 +50,14 @@ int cantPosNegInt (int array[], int posInicio, int posFin, int posNeg)
     return cant;
 }
 
+
 /**
- * Idem cantPosNegInt pero para un array de flotantes.
+ * \brief calcula la cantidad de numeros positivos/negativos en un vector de flotantes.
+ * \param array es el vector que contiene los valores a analizar.
+ * \param posInicio es la posicion del vector desde la que se va a analizar.
+ * \param posFin es la posicion del vector hasta la que se va a analizar (inclusive).
+ * \param posNeg parametro que indica si se van a calcular la cantidad de positivos (1) o de negativos (-1).
+ * \return devuelve la cantidad de valores positivos o negativos encontrados.
  */
 int cantPosNegFloat (float array[], int posInicio, int posFin, int posNeg)
 {
@@ -88,10 +96,16 @@ int maxMinArrayInt (int array[], int posInicio, int posFin, int maxMin)
     return posicion;
 }
 
+
 /**
- * Idem maxMinArrayInt pero para un array de flotantes.
+ * \brief halla el valor maximo o minimo de un vector de flotantes
+ * \param array es el vector que contiene los valores a analizar.
+ * \param posInicio es la posicion del vector desde la que se va a analizar.
+ * \param posFin es la posicion del vector hasta la que se va a analizar (inclusive).
+ * \param maxMin parametro que indica si se van a hallar el maximo (1) o el minimo (-1).
+ * \return devuelve la posicion en el array del valor maximo o minimo encontrado y si no la econtró devuelve -1.
  */
-float maxMinArrayFloat (float array[], int posInicio, int posFin, int maxMin)
+int maxMinArrayFloat (float array[], int posInicio, int posFin, int maxMin)
 {
     float extremo;
     int posicion = -1;
@@ -106,8 +120,6 @@ float maxMinArrayFloat (float array[], int posInicio, int posFin, int maxMin)
     }
     return posicion;
 }
-
-
 
 
 /**
@@ -130,12 +142,17 @@ float promedioArrayInt (int array[], int posInicio, int posFin)
     return 0;
 }
 
+
 /**
- * Idem promedioArrayInt pero para un array de flotantes.
+ * \brief halla el promedio de un vector de flotantes.
+ * \param array es el vector que contiene los valores a analizar.
+ * \param posInicio es la posicion del vector desde la que se va a analizar.
+ * \param posFin es la posicion del vector hasta la que se va a analizar (inclusive).
+ * \return devuelve el promedio calculado (siempre la cantidad posiciones a analizar sea mayor a cero, sino devuelve 0).
  */
-float promedioArrayInt (float array[], int posInicio, int posFin)
+float promedioArrayFloat (float array[], int posInicio, int posFin)
 {
-    int acumulador=0;
+    float acumulador=0;
     if (posInicio>posFin)
     {
         int i;
@@ -145,19 +162,6 @@ float promedioArrayInt (float array[], int posInicio, int posFin)
     }
     return 0;
 }
-
-
-
-
-
-
-
-/**
- * \brief
- * \param
- * \return
- */
-
 
 
  /**
@@ -187,13 +191,13 @@ double factorial(int A)
     }
 }
 
+
 /**
  * \brief Genera un número aleatorio
  * \param desde Número aleatorio mínimo
  * \param hasta Número aleatorio máximo
  * \param iniciar Indica si se trata del primer número solicitado 1 indica que si
  * \return retorna el número aleatorio generado
- *
  */
 char getNumeroAleatorio(int desde , int hasta, int iniciar)
 {
@@ -201,4 +205,3 @@ char getNumeroAleatorio(int desde , int hasta, int iniciar)
         srand (time(NULL));
     return desde + (rand() % (hasta + 1 - desde)) ;
 }
-

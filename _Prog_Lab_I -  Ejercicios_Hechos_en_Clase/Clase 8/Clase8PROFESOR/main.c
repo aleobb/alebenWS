@@ -54,33 +54,21 @@ int comparar (Empleado empleadoA, Empleado empleadoB)
 {
     int retorno = 0;
     if(strcmp(empleadoA.nombre,empleadoB.nombre) > 0)
-    {
         retorno = 1;
-    }
     else if(strcmp(empleadoA.nombre,empleadoB.nombre) < 0)
-    {
         retorno = -1;
-    }
     else
     {
         if(strcmp(empleadoA.apellido,empleadoB.apellido) > 0)
-        {
             retorno = 1;
-        }
         else if(strcmp(empleadoA.apellido,empleadoB.apellido) < 0)
-        {
             retorno = -1;
-        }
         else
         {
             if(strcmp(empleadoA.legajo,empleadoB.legajo) > 0)
-            {
                 retorno = 1;
-            }
             else if(strcmp(empleadoA.legajo,empleadoB.legajo) < 0)
-            {
                 retorno = -1;
-            }
             else
             {
                 retorno = 0;
