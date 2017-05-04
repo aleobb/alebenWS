@@ -6,6 +6,7 @@
 #include "funcionesAuxiliares.h"
 #include "Abonados.h"
 #include "Llamadas.h"
+#include "Informes.h"
 
 
 #define EL_DATO_ES_VALIDO 1
@@ -119,13 +120,14 @@ int nuevaLlamada(ELlamada* arrayLlamadas, int sizeArrayLlamadas, EAbonado* array
             if (existeAbonado==-1)
                 printf("\n El id de abonado ingresado no se encuentra cargado! \n ");
         }
-        arrayAuxiliarLlamada[0].idAbonado=arrayAuxiliarLlamada[0].idAbonado;
+
         arrayAuxiliarLlamada[0].motivo=ingresoMotivoLlamada();
         arrayAuxiliarLlamada[0].estado=EN_CURSO;
         arrayAuxiliarLlamada[0].tiempo=0;
         arrayAuxiliarLlamada[0].flagRegistro=USED;
 
         arrayLlamadas[indice]=arrayAuxiliarLlamada[0];
+        arrayAbonados[buscarAbonadoPorId(arrayAbonados,sizeArrayAbonados,arrayAuxiliarLlamada[0].idAbonado)].contadorLlamadas++;
         retorno=1;
         printf("\n El Llamada ha sido cargado correctamente. \n");
     }
@@ -148,7 +150,8 @@ int modificarLlamadaPorId(ELlamada* arrayLlamadas, int sizeArrayLlamadas)
 
     if ( existenLlamadasEnCurso(arrayLlamadas, sizeArrayLlamadas)==0 )
     {
-        printf("\n No se pueden modificar datos de Llamadas porque no hay ninguna cargada! \n");
+        /// printf("\n No se pueden modificar datos de Llamadas porque no hay ninguna cargada! \n");
+        printf("\n No se pueden finalizar Llamadas porque no hay ninguna cargada o estan todas finalizadas! \n");
         salir='s';
     }
     while (salir!='s' && salir!='S')
@@ -294,4 +297,40 @@ void listarLlamadas(ELlamada* arrayLlamadas, int sizeArrayLlamadas)
     printf("\n");
 }
 
+
+void cargaAutomaticaLlamadas(ELlamada* arrayLlamadas, int sizeArrayLlamadas, EAbonado* arrayAbonados)
+{
+    arrayLlamadas[0].id=1;
+    arrayLlamadas[0].idAbonado=1;
+    arrayAbonados[0].contadorLlamadas++;
+    arrayLlamadas[0].motivo=FALLA_3G;
+    arrayLlamadas[0].estado=EN_CURSO;
+    arrayLlamadas[0].tiempo=0;
+    arrayLlamadas[0].flagRegistro=USED;
+
+    arrayLlamadas[1].id=2;
+    arrayLlamadas[1].idAbonado=2;
+    arrayAbonados[1].contadorLlamadas++;
+    arrayLlamadas[1].motivo=FALLA_EQUIPO;
+    arrayLlamadas[1].estado=EN_CURSO;
+    arrayLlamadas[1].tiempo=0;
+    arrayLlamadas[1].flagRegistro=USED;
+
+    arrayLlamadas[2].id=3;
+    arrayLlamadas[2].idAbonado=2;
+    arrayAbonados[1].contadorLlamadas++;
+    arrayLlamadas[2].motivo=FALLA_EQUIPO;
+    arrayLlamadas[2].estado=EN_CURSO;
+    arrayLlamadas[2].tiempo=0;
+    arrayLlamadas[2].flagRegistro=USED;
+
+    arrayLlamadas[3].id=4;
+    arrayLlamadas[3].idAbonado=3;
+    arrayAbonados[2].contadorLlamadas++;
+    arrayLlamadas[3].motivo=FALLA_LTE;
+    arrayLlamadas[3].estado=SOLUCIONADO;
+    arrayLlamadas[3].tiempo=15;
+    arrayLlamadas[3].flagRegistro=USED;
+
+}
 

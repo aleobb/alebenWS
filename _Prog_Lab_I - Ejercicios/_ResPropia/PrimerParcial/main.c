@@ -18,6 +18,7 @@
 #include "funcionesAuxiliares.h"
 #include "Abonados.h"
 #include "Llamadas.h"
+#include "Informes.h"
 
 
 #define EL_DATO_ES_VALIDO 1
@@ -40,8 +41,8 @@ int main()
     if ( initArrayAbonados(arrayAbonados,QTYABONADO)==0 || initArrayLlamadas(arrayLlamadas,QTYLLAMADA)==0 )
         seguir='n';
 
-///    cargaAutomatica(arrayAbonados,QTYABONADO);
-
+    cargaAutomaticaAbonados(arrayAbonados,QTYABONADO);
+    cargaAutomaticaLlamadas(arrayLlamadas,QTYLLAMADA,arrayAbonados);
 
     while(seguir=='s')
     {
@@ -80,8 +81,15 @@ int main()
             case 5:
                 modificarLlamadaPorId(arrayLlamadas,QTYLLAMADA);
                 break;
-
-
+            case 6:
+                listarAbonadoConMasMenosReclamos(arrayAbonados,QTYABONADO,1);
+                break;
+            case 7:
+                listarMotivoLlamadaMasRealizado(arrayLlamadas,QTYLLAMADA);
+                break;
+            case 8:
+                listarReclamoQueMasDemora(arrayLlamadas,QTYLLAMADA);
+                break;
             case 9:
                 seguir = 'n';
                 break;

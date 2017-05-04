@@ -6,6 +6,7 @@
 #include "funcionesAuxiliares.h"
 #include "Abonados.h"
 #include "Llamadas.h"
+#include "Informes.h"
 
 
 #define EL_DATO_ES_VALIDO 1
@@ -320,4 +321,33 @@ void listarAbonados(EAbonado* arrayAbonados, int sizeArrayAbonados)
                    ", arrayAbonados[i].id, arrayAbonados[i].numero, arrayAbonados[i].nombre, arrayAbonados[i].apellido, arrayAbonados[i].contadorLlamadas, arrayAbonados[i].flagRegistro);
     printf("\n");
 }
+
+
+void cargaAutomaticaAbonados(EAbonado* arrayAbonados, int sizeArrayAbonados)
+{
+    arrayAbonados[0].id=1;
+    arrayAbonados[0].numero=10;
+    strcpy(arrayAbonados[0].nombre,"AAA");
+    strcpy(arrayAbonados[0].apellido,"AAA");
+    arrayAbonados[0].contadorLlamadas=0;
+    arrayAbonados[0].flagRegistro=USED;
+
+    arrayAbonados[1].id=2;
+    arrayAbonados[1].numero=20;
+    strcpy(arrayAbonados[1].nombre,"CCC");
+    strcpy(arrayAbonados[1].apellido,"CCC");
+    arrayAbonados[1].contadorLlamadas=0;
+    arrayAbonados[1].flagRegistro=USED;
+
+    arrayAbonados[2].id=3;
+    arrayAbonados[2].numero=30;
+    strcpy(arrayAbonados[2].nombre,"BBB");
+    strcpy(arrayAbonados[2].apellido,"BBB");
+    arrayAbonados[2].contadorLlamadas=0;
+    arrayAbonados[2].flagRegistro=USED;
+
+}
+
+
+
 
