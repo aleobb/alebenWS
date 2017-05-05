@@ -28,7 +28,7 @@ int initArrayAbonados(EAbonado* arrayAbonados, int sizeArrayAbonados)
 {
     int i;
     int retorno=0;
-    if ( arrayAbonados==NULL && sizeArrayAbonados<=0 )
+    if ( arrayAbonados==NULL || sizeArrayAbonados<=0 )
         printf("\n La ejecucion se detendrá! Tamaño de array invalido o puntero NULO \n");
     else
     {
@@ -52,7 +52,7 @@ int initArrayAbonados(EAbonado* arrayAbonados, int sizeArrayAbonados)
 int obtenerPosicionLibreArrayAbonados(EAbonado* arrayAbonados, int sizeArrayAbonados)
 {
     int i;
-    if ( arrayAbonados==NULL && sizeArrayAbonados<=0 )
+    if ( arrayAbonados==NULL || sizeArrayAbonados<=0 )
         printf("\n La ejecucion se detendrá! Tamaño de array invalido o puntero NULO \n");
     else
     {
@@ -75,7 +75,7 @@ int obtenerPosicionLibreArrayAbonados(EAbonado* arrayAbonados, int sizeArrayAbon
 int buscarAbonadoPorId(EAbonado* arrayAbonados, int sizeArrayAbonados, int idAbonado)
 {
     int i;
-    if ( arrayAbonados==NULL && sizeArrayAbonados<=0 )
+    if ( arrayAbonados==NULL || sizeArrayAbonados<=0 )
         printf("\n La ejecucion se detendrá! Tamaño de array invalido o puntero NULO \n");
     else
         for (i=0; i<sizeArrayAbonados; i++)
@@ -95,7 +95,7 @@ int buscarAbonadoPorId(EAbonado* arrayAbonados, int sizeArrayAbonados, int idAbo
 int buscarAbonadoPorNumero(EAbonado* arrayAbonados, int sizeArrayAbonados, int numeroAbonado)
 {
     int i;
-    if ( arrayAbonados==NULL && sizeArrayAbonados<=0 )
+    if ( arrayAbonados==NULL || sizeArrayAbonados<=0 )
         printf("\n La ejecucion se detendrá! Tamaño de array invalido o puntero NULO \n");
     else
         for (i=0; i<sizeArrayAbonados; i++)
@@ -258,7 +258,7 @@ int calcularIdAbonado(EAbonado* arrayAbonados, int sizeArrayAbonados)
 {
     int nextIdAbonado=0;
     int i;
-    if ( arrayAbonados==NULL && sizeArrayAbonados<=0 )
+    if ( arrayAbonados==NULL || sizeArrayAbonados<=0 )
         printf("\n La ejecucion se detendrá! Tamaño de array invalido o puntero NULO \n");
     else
         for (i=0; i<sizeArrayAbonados; i++)
@@ -277,7 +277,7 @@ int calcularIdAbonado(EAbonado* arrayAbonados, int sizeArrayAbonados)
 int existenAbonados(EAbonado* arrayAbonados, int sizeArrayAbonados)
 {
     int i;
-    if ( arrayAbonados==NULL && sizeArrayAbonados<=0 )
+    if ( arrayAbonados==NULL || sizeArrayAbonados<=0 )
         printf("\n La ejecucion se detendra! Tamaño de array invalido o puntero NULO \n");
     else
         for (i=0; i<sizeArrayAbonados; i++)

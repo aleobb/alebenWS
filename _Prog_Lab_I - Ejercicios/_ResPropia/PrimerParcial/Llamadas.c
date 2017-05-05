@@ -35,7 +35,7 @@ int initArrayLlamadas(ELlamada* arrayLlamadas, int sizeArrayLlamadas)
 {
     int i;
     int retorno=0;
-    if ( arrayLlamadas==NULL && sizeArrayLlamadas<=0 )
+    if ( arrayLlamadas==NULL || sizeArrayLlamadas<=0 )
         printf("\n La ejecucion se detendrá! Tamaño de array invalido o puntero NULO \n");
     else
     {
@@ -59,7 +59,7 @@ int initArrayLlamadas(ELlamada* arrayLlamadas, int sizeArrayLlamadas)
 int obtenerPosicionLibreArrayLlamadas(ELlamada* arrayLlamadas, int sizeArrayLlamadas)
 {
     int i;
-    if ( arrayLlamadas==NULL && sizeArrayLlamadas<=0 )
+    if ( arrayLlamadas==NULL || sizeArrayLlamadas<=0 )
         printf("\n La ejecucion se detendrá! Tamaño de array invalido o puntero NULO \n");
     else
     {
@@ -229,7 +229,7 @@ int calcularIdLlamada(ELlamada* arrayLlamadas, int sizeArrayLlamadas)
 {
     int nextIdLlamada=0;
     int i;
-    if ( arrayLlamadas==NULL && sizeArrayLlamadas<=0 )
+    if ( arrayLlamadas==NULL || sizeArrayLlamadas<=0 )
         printf("\n La ejecucion se detendrá! Tamaño de array invalido o puntero NULO \n");
     else
         for (i=0; i<sizeArrayLlamadas; i++)
@@ -248,7 +248,7 @@ int calcularIdLlamada(ELlamada* arrayLlamadas, int sizeArrayLlamadas)
 int existenLlamadasEnCurso(ELlamada* arrayLlamadas, int sizeArrayLlamadas)
 {
     int i;
-    if ( arrayLlamadas==NULL && sizeArrayLlamadas<=0 )
+    if ( arrayLlamadas==NULL || sizeArrayLlamadas<=0 )
         printf("\n La ejecucion se detendra! Tamaño de array invalido o puntero NULO \n");
     else
         for (i=0; i<sizeArrayLlamadas; i++)
@@ -268,7 +268,7 @@ int eliminarLlamadasPorBajaAbonado(ELlamada* arrayLlamadas, int sizeArrayLlamada
 {
     int retorno=0;
     int i;
-    if ( arrayLlamadas==NULL && sizeArrayLlamadas<=0 )
+    if ( arrayLlamadas==NULL || sizeArrayLlamadas<=0 )
         printf("\n La ejecucion se detendra! Tamaño de array invalido o puntero NULO \n");
     else
         for (i=0; i<sizeArrayLlamadas; i++)
