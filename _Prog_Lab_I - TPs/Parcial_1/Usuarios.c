@@ -173,20 +173,6 @@ int bajaUsuarioPorId(EUsuario* arrayUsuarios, int sizeArrayUsuarios, EProducto* 
     return retorno;
 }
 
-/*
-/ **
- * @brief pide al usuario el id del usuario y lo devuelve validado dentro de un rango de enteros.
- * @param no recibe parametros.
- * @return el numero validado como int.
- * /
-int ingresoIdUsuario()
-{
-    int idUsuario;
-    getInt(&idUsuario, "\n Ingrese el id del usuario: ", "\n El dato ingresado es invalido!\
-        \n El id debe ser un numero positvo entre 1 y 31999",1,1,1,1,31999);
-    return idUsuario;
-}
-*/
 
 /**
  * @brief cacula el proximo numero de id de usuario en una secuencia autoincrementable.
@@ -327,6 +313,35 @@ void listarUsuarios(EUsuario* arrayUsuarios, int sizeArrayUsuarios)
                    ",i, arrayUsuarios[i].id, arrayUsuarios[i].nombre, arrayUsuarios[i].password,
                    arrayUsuarios[i].contadorCalificaciones, arrayUsuarios[i].acumuladorCalificaciones, arrayUsuarios[i].flagRegistro);
     printf("\n");
+}
+
+
+/**
+ * \brief Imprime por pantalla el listado de publicaciones activas de un usuario
+ * \param arrayUsuarios se le pasa como parametro el array-estructura donde se van a modificar los datos
+ * \param sizeArrayUsuarios es el tamaño del array-estructura donde se van a guardar los datos
+ * \param arrayProductos se le pasa como parametro el array-estructura donde se van a modificar los datos
+ * \param sizeArrayProductos es el tamaño del array-estructura donde se van a guardar los datos
+ * \return no devuelve nada
+ */
+void listarPublicacionesUsuarioPorId(EUsuario* arrayUsuarios, int sizeArrayUsuarios, EProducto* arrayProductos, int sizeArrayProductos)
+{
+    int idUsuario;
+    int indiceUsuario;
+    if ( arrayProductos==NULL || sizeArrayProductos<=0 || arrayUsuarios==NULL || sizeArrayUsuarios<=0 )
+        printf("\n La ejecucion se detendra! Tamaño de array invalido o puntero NULO \n");
+    else if ( existenProductosPublicados(arrayProductos, sizeArrayProductos)==0 )
+        printf("\n No se pueden listar publicaciones de usuarios porque no hay ninguna cargado! \n");
+    else
+    {
+        indiceUsuario=tomarYcomprobarExistenciaUsuarioPorId(arrayUsuarios,sizeArrayUsuarios,&idUsuario,"\n El listado de publicaciones del usuario ha sido cancelada. \n");
+        if(indiceUsuario>=0)
+        {
+            printf("\n Las publicaciones activas del usuario idUsuario %d - Nombre %s son: \n", idUsuario, arrayUsuarios[indiceUsuario].nombre);
+            if( listarProductosUsuario(arrayProductos, sizeArrayProductos, idUsuario)==0 );
+                printf("\n No existen publicaciones activas para ese usuario \n");
+        }
+    }
 }
 
 

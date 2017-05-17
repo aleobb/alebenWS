@@ -98,7 +98,9 @@ int nuevaPublicacion(EProducto* arrayProductos, int sizeArrayProductos, EUsuario
     int indiceProducto = obtenerPosicionLibreArrayProductos(arrayProductos,sizeArrayProductos);
     int indiceUsuario;
 
-    if ( existenUsuarios(arrayUsuarios, sizeArrayUsuarios)==0 )
+    if ( arrayProductos==NULL || sizeArrayProductos<=0 || arrayUsuarios==NULL || sizeArrayUsuarios<=0 )
+        printf("\n La ejecucion se detendra! Tamaño de array invalido o puntero NULO \n");
+    else if ( existenUsuarios(arrayUsuarios, sizeArrayUsuarios)==0 )
         printf("\n No se puede hacer una Publicacion porque no existe ningun usuario cargado! \n");
     else if (indiceProducto!=-1)
     {
@@ -127,6 +129,8 @@ int nuevaPublicacion(EProducto* arrayProductos, int sizeArrayProductos, EUsuario
  * \brief Realiza la modificacion de datos de una Publicaion
  * \param arrayProductos se le pasa como parametro el array-estructura donde se van a modificar los datos
  * \param sizeArrayProductos es el tamaño del array-estructura donde se van a guardar los datos
+ * \param arrayUsuarios se le pasa como parametro el array-estructura de usuarios para validar su existencia
+ * \param sizeArrayUsuarios es el tamaño del array-estructura usuarios
  * \return devuelve (0) si Tamaño invalido o puntero NULL pointer o si no se encuentra el Producto - (1) si la modificacion se pudo realizar.
  */
 int modificarPublicacionPorIdUsuario(EProducto* arrayProductos, int sizeArrayProductos, EUsuario* arrayUsuarios, int sizeArrayUsuarios)
@@ -138,7 +142,9 @@ int modificarPublicacionPorIdUsuario(EProducto* arrayProductos, int sizeArrayPro
     int controlIdProducto=0;
     int controlIdUsuario=0;
 
-    if ( existenProductosPublicados(arrayProductos, sizeArrayProductos)==0 )
+    if ( arrayProductos==NULL || sizeArrayProductos<=0 || arrayUsuarios==NULL || sizeArrayUsuarios<=0 )
+        printf("\n La ejecucion se detendra! Tamaño de array invalido o puntero NULO \n");
+    else if ( existenProductosPublicados(arrayProductos, sizeArrayProductos)==0 )
         printf("\n No se pueden modificar publicaciones porque no hay ninguna cargada! \n");
     else
     {
@@ -179,6 +185,8 @@ int modificarPublicacionPorIdUsuario(EProducto* arrayProductos, int sizeArrayPro
  * \brief Realiza la baja logica de una publicacion
  * \param arrayProductos se le pasa como parametro el array-estructura donde se van a modificar los datos
  * \param sizeArrayProductos es el tamaño del array-estructura donde se van a guardar los datos
+ * \param arrayUsuarios se le pasa como parametro el array-estructura donde se van a modificar los datos
+ * \param sizeArrayUsuarios es el tamaño del array-estructura donde se van a guardar los datos
  * \return devuelve (0) si Tamaño invalido o puntero NULL pointer o si no se encuentra el Producto - (1) si la baja se pudo realizar.
  */
 int cancelarPublicacionPorIdUsuario(EProducto* arrayProductos, int sizeArrayProductos, EUsuario* arrayUsuarios, int sizeArrayUsuarios)
@@ -190,7 +198,9 @@ int cancelarPublicacionPorIdUsuario(EProducto* arrayProductos, int sizeArrayProd
     int controlIdProducto=0;
     int controlIdUsuario=0;
 
-    if ( existenProductosPublicados(arrayProductos, sizeArrayProductos)==0 )
+    if ( arrayProductos==NULL || sizeArrayProductos<=0 || arrayUsuarios==NULL || sizeArrayUsuarios<=0 )
+        printf("\n La ejecucion se detendra! Tamaño de array invalido o puntero NULO \n");
+    else if ( existenProductosPublicados(arrayProductos, sizeArrayProductos)==0 )
         printf("\n No se pueden eliminar publicaciones porque no hay ninguna cargada! \n");
     else
     {
@@ -259,6 +269,67 @@ int tomarYcomprobarExistenciaProductoPorId(EProducto* arrayProductos, int sizeAr
                     retorno=indiceProducto;
             }
         }
+    return retorno;
+}
+
+
+/**
+ * \brief Realiza la baja logica de una publicacion
+ * \param arrayProductos se le pasa como parametro el array-estructura donde se van a modificar los datos
+ * \param sizeArrayProductos es el tamaño del array-estructura donde se van a guardar los datos
+ * \param arrayUsuarios se le pasa como parametro el array-estructura donde se van a modificar los datos
+ * \param sizeArrayUsuarios es el tamaño del array-estructura donde se van a guardar los datos
+ * \return devuelve (0) si Tamaño invalido o puntero NULL pointer o si no se encuentra el Producto - (1) si la baja se pudo realizar.
+ */
+int comprarProductoPorId(EProducto* arrayProductos, int sizeArrayProductos, EUsuario* arrayUsuarios, int sizeArrayUsuarios)
+{
+    int retorno=0;
+    int indiceProducto;
+    int indiceUsuario;
+    int idProducto;
+    int calificacion;
+    int cantidadVendida;
+    int controlStock=0;
+
+    if ( arrayProductos==NULL || sizeArrayProductos<=0 || arrayUsuarios==NULL || sizeArrayUsuarios<=0 )
+        printf("\n La ejecucion se detendra! Tamaño de array invalido o puntero NULO \n");
+    else if ( existenProductosPublicados(arrayProductos, sizeArrayProductos)==0 )
+        printf("\n No se puede realizar ninguna compra porque no hay ninguna publicacion cargada! \n");
+    else
+    {
+        indiceProducto=tomarYcomprobarExistenciaProductoPorId(arrayProductos, sizeArrayProductos, &idProducto,"\n La modificacion de la publicacion ha sido cancelada. \n");
+        if(indiceProducto>=0)
+        {
+            if(arrayProductos[indiceProducto].stock==0)
+                printf("\n No hay existencias para el producto ingresado! \n");
+            else
+                controlStock=-1;
+        }
+
+        while(controlStock<0)
+        {
+            getInt(&cantidadVendida, "\n Ingrese cantidad a comprar del Producto: ", "\n El dato ingresado es invalido!\
+                \n El cantidad a comprar debe ser un numero positvo entre 1 y 31999",1,1,1,1,31999);
+            controlStock=arrayProductos[indiceProducto].stock-cantidadVendida;
+            if(controlStock<0)
+                printf("\n La cantidad ingresada supera la cantidad en stock! Reingrese. \n");
+            else
+            {
+                arrayProductos[indiceProducto].stock=controlStock;
+                arrayProductos[indiceProducto].cantidadVendida+=cantidadVendida;
+
+                printf("idUsuario: %d \n",arrayProductos[indiceProducto].idUsuario);
+                getInt(&calificacion, "Ingrese una calificacion para el usuario: ", "\n El dato ingresado es invalido!\
+                \n La calificacion debe ser un numero positvo entre 1 y 10 \n",1,1,1,1,10);
+
+                indiceUsuario=buscarUsuarioPorId(arrayUsuarios,sizeArrayUsuarios,arrayProductos[indiceProducto].idUsuario);
+                arrayUsuarios[indiceUsuario].acumuladorCalificaciones+=calificacion;
+                arrayUsuarios[indiceUsuario].contadorCalificaciones++;
+                retorno=1;
+                printf("\n La publicacion ha sido dada de baja correctamente. \n");
+            }
+        }
+    }
     return retorno;
 }
 
@@ -403,7 +474,7 @@ int eliminarProductosPorBajaUsuario(EProducto* arrayProductos, int sizeArrayProd
 
 
 /**
- * @brief muetra por pantalla un listado con los Productos.
+ * @brief muestra por pantalla un listado con los Productos publicados por un usuario.
  * @param arrayProductos el array se pasa como parametro.
  * @param idUsuario se pasa como parametro.
  * @param sizeArrayProductos el tamaño del array se pasa como parametro.
@@ -426,7 +497,7 @@ int listarProductosUsuario(EProducto* arrayProductos, int sizeArrayProductos, in
 
 
 /**
- * @brief muetra por pantalla un listado con los Productos.
+ * @brief muestra por pantalla un listado con los Productos.
  * @param arrayProductos el array se pasa como parametro.
  * @param sizeArrayProductos el tamaño del array se pasa como parametro.
  * @return no devuelve nada.
@@ -439,6 +510,33 @@ void listarProductos(EProducto* arrayProductos, int sizeArrayProductos)
             printf("\n Indice %d - Id %d - Nombre %s - idUsuario %d - Precio %.2f - Stock %d - CantVendida %d (isPub %d - FlagReg %d)\
                    ",i, arrayProductos[i].id, arrayProductos[i].nombre, arrayProductos[i].idUsuario, arrayProductos[i].precio,
                    arrayProductos[i].stock, arrayProductos[i].cantidadVendida, arrayProductos[i].isPublished, arrayProductos[i].flagRegistro);
+    printf("\n");
+}
+
+
+/**
+ * @brief muestra por pantalla un listado con los Productos.
+ * @param arrayProductos el array se pasa como parametro.
+ * @param sizeArrayProductos el tamaño del array se pasa como parametro.
+ * @param arrayUsuarios se le pasa como parametro
+ * @param sizeArrayUsuarios es el tamaño del arrayUsuarios
+ * @return no devuelve nada.
+ */
+void listarProductosConNombreUsuario(EProducto* arrayProductos, int sizeArrayProductos, EUsuario* arrayUsuarios, int sizeArrayUsuarios)
+{
+    int i;
+
+
+    if ( arrayProductos==NULL || sizeArrayProductos<=0 || arrayUsuarios==NULL || sizeArrayUsuarios<=0 )
+        printf("\n La ejecucion se detendra! Tamaño de array invalido o puntero NULO \n");
+    else if ( existenProductosPublicados(arrayProductos, sizeArrayProductos)==0 )
+        printf("\n No se pueden listar publicaciones de usuarios porque no hay ninguna cargada! \n");
+    else
+        for (i=0; i<sizeArrayProductos; i++)
+            if (arrayProductos[i].flagRegistro!=EMPTY)
+                printf("\n idProducto %d - Nombre %s - Precio %.2f - Stock %d - CantVendida %d - Nombre Usuario %s\
+                       ", arrayProductos[i].id, arrayProductos[i].nombre, arrayProductos[i].precio, arrayProductos[i].stock, arrayProductos[i].cantidadVendida,
+                       arrayUsuarios[buscarUsuarioPorId(arrayUsuarios, sizeArrayUsuarios, arrayProductos[i].idUsuario)].nombre );
     printf("\n");
 }
 

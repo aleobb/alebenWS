@@ -83,24 +83,13 @@ int main()
                 cancelarPublicacionPorIdUsuario(arrayProductos, QTYPRODUCTO, arrayUsuarios, QTYUSUARIO);
                 break;
             case 7:
-
+                comprarProductoPorId(arrayProductos, QTYPRODUCTO, arrayUsuarios, QTYUSUARIO);
                 break;
             case 8:
-                /*
-                while(sigue==TRUE)
-                {
-                    existeUsuario=ingresoIdUsuario();
-                    if ( buscarUsuarioPorId(arrayUsuarios, QTYUSUARIO, existeUsuario) != -1)
-                    {
-                        printf("\n El nro. de id del usuario NO se encuentra ingresado! Reingrese \n");
-                        sigue=FALSE;
-                    }
-                }
-                listarProductosUsuario(arrayProductos, QTYUSUARIO, existeUsuario);
-                */
+                listarPublicacionesUsuarioPorId(arrayProductos, QTYPRODUCTO, arrayUsuarios, QTYUSUARIO);
                 break;
             case 9:
-
+                listarProductosConNombreUsuario(arrayProductos, QTYPRODUCTO, arrayUsuarios, QTYUSUARIO);
                 break;
             case 10:
                 listarUsuariosConCalificaciones(arrayUsuarios, QTYUSUARIO);

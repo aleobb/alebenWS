@@ -37,3 +37,5 @@ void listarUsuariosConCalificaciones(EUsuario* arrayUsuarios, int sizeArrayUsuar
 
 void listarUsuarios(EUsuario* arrayUsuarios, int sizeArrayUsuarios);
 
+/// void listarPublicacionesUsuarioPorId(EUsuario* arrayUsuarios, int sizeArrayUsuarios, EProducto* arrayProductos, int sizeArrayProductos);
+

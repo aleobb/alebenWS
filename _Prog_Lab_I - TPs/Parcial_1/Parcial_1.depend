@@ -89,13 +89,13 @@
 	"Productos.h"
 	"Informes.h"
 
-1494814876 g:\alebenws\_prog_lab_i - tps\parcial_1\usuarios.h
+1494989178 g:\alebenws\_prog_lab_i - tps\parcial_1\usuarios.h
 
 1493936246 g:\alebenws\_prog_lab_i - tps\parcial_1\publicaciones.h
 
 1493934760 g:\alebenws\_prog_lab_i - tps\parcial_1\informes.h
 
-1494812598 source:g:\alebenws\_prog_lab_i - tps\parcial_1\main.c
+1494989146 source:g:\alebenws\_prog_lab_i - tps\parcial_1\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -107,7 +107,7 @@
 
 1494816444 g:\alebenws\_prog_lab_i - tps\parcial_1\productos.h
 
-1494816394 source:g:\alebenws\_prog_lab_i - tps\parcial_1\productos.c
+1494989228 source:g:\alebenws\_prog_lab_i - tps\parcial_1\productos.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -128,7 +128,7 @@
 	"Productos.h"
 	"Informes.h"
 
-1494815988 source:g:\alebenws\_prog_lab_i - tps\parcial_1\usuarios.c
+1494989252 source:g:\alebenws\_prog_lab_i - tps\parcial_1\usuarios.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
