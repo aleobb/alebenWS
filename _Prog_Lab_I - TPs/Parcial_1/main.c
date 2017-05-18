@@ -29,22 +29,20 @@
 
 int main()
 {
-    EUsuario arrayUsuarios[QTYUSUARIO];
-    EProducto arrayProductos[QTYPRODUCTO];
+    EUsuario arrayUsuarios[QTYUSUARIO];  /// Declaro los arrays de las Identidades que necesito usar
+    EProducto arrayProductos[QTYPRODUCTO];  /// Declaro los arrays de las Identidades que necesito usar
 
     int opcion=0;
-
 
     if ( initArrayUsuarios(arrayUsuarios,QTYUSUARIO)==0 || initArrayProductos(arrayProductos,QTYPRODUCTO)==0 )
         opcion=11;
 
-    /// cargaAutomaticaUsuarios(arrayUsuarios,QTYUSUARIO);
-    /// cargaAutomaticaProductos(arrayProductos,QTYPRODUCTO,arrayUsuarios);
+    //cargaAutomatica(arrayUsuarios, QTYUSUARIO, arrayProductos, QTYPRODUCTO);
 
     while(opcion!=11)
     {
-        listarUsuarios(arrayUsuarios,QTYUSUARIO);
-        listarProductos(arrayProductos,QTYPRODUCTO);
+        // listarUsuarios(arrayUsuarios,QTYUSUARIO);
+        // listarProductos(arrayProductos,QTYPRODUCTO);
 
         printf("\n");
         printf(" 1- Alta de Usuario \n");
@@ -56,7 +54,7 @@ int main()
         printf(" 7- Comprar Producto \n");
         printf(" 8- Listar Publicaciones de Usuario \n");
         printf(" 9- Listar Publicaciones \n");
-        printf("10- Listar Usuarios \n");
+        printf("10- Listar Usuarios (con calificaciones)\n");
         printf("\n");
         printf("11- Salir \n");
 
@@ -86,7 +84,7 @@ int main()
                 comprarProductoPorId(arrayProductos, QTYPRODUCTO, arrayUsuarios, QTYUSUARIO);
                 break;
             case 8:
-                listarPublicacionesUsuarioPorId(arrayProductos, QTYPRODUCTO, arrayUsuarios, QTYUSUARIO);
+                listarPublicacionesUsuarioPorId(arrayUsuarios, QTYUSUARIO, arrayProductos, QTYPRODUCTO);
                 break;
             case 9:
                 listarProductosConNombreUsuario(arrayProductos, QTYPRODUCTO, arrayUsuarios, QTYUSUARIO);

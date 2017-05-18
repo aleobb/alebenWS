@@ -60,7 +60,7 @@ int getString(char mensajeIngreso[], char* input)
     char buffer[BUFFER];
     printf("%s",mensajeIngreso);
     fflush(stdin);
-    scanf("%[^\n]s",buffer);
+    gets(buffer);
     if ( strlen(buffer)==0 || buffer[0]=='\0' )
         return EL_DATO_NO_ES_VALIDO;
     strcpy(input,buffer);

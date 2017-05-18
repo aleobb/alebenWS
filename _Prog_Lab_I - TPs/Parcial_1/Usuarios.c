@@ -96,20 +96,27 @@ int altaUsuario(EUsuario* arrayUsuarios, int sizeArrayUsuarios)
 {
     EUsuario arrayAuxiliarUsuario[1]; /// es el array-estructura donde se van a guardar provisoriamente los datos
     int retorno=0;
-    int indice = obtenerPosicionLibreArrayUsuarios(arrayUsuarios,sizeArrayUsuarios);
+    int indice;
 
-    arrayAuxiliarUsuario[0].id=calcularIdUsuario(arrayUsuarios,sizeArrayUsuarios);
-    printf("\n El nro de id para el usuario a cargar es: %d \n",arrayAuxiliarUsuario[0].id);
-    if(arrayAuxiliarUsuario[0].id>0)
+    if ( arrayUsuarios==NULL || sizeArrayUsuarios<=0 )
+        printf("\n La ejecucion se detendrá! Tamaño de array invalido o puntero NULO \n");
+    else
     {
-        cargaNombreYpasswordUsuario(arrayAuxiliarUsuario);
-        arrayAuxiliarUsuario[0].flagRegistro=USED;
-        arrayAuxiliarUsuario[0].contadorCalificaciones=0;
-        arrayAuxiliarUsuario[0].acumuladorCalificaciones=0;
+        indice = obtenerPosicionLibreArrayUsuarios(arrayUsuarios,sizeArrayUsuarios);
 
-        arrayUsuarios[indice]=arrayAuxiliarUsuario[0];
-        retorno=1;
-        printf("\n El usuario ha sido cargado correctamente. \n");
+        arrayAuxiliarUsuario[0].id=calcularIdUsuario(arrayUsuarios,sizeArrayUsuarios);
+        printf("\n El nro de id para el usuario a cargar es: %d \n",arrayAuxiliarUsuario[0].id);
+        if(arrayAuxiliarUsuario[0].id>0)
+        {
+            cargaNombreYpasswordUsuario(arrayAuxiliarUsuario);
+            arrayAuxiliarUsuario[0].flagRegistro=USED;
+            arrayAuxiliarUsuario[0].contadorCalificaciones=0;
+            arrayAuxiliarUsuario[0].acumuladorCalificaciones=0;
+
+            arrayUsuarios[indice]=arrayAuxiliarUsuario[0];
+            retorno=1;
+            printf("\n El usuario ha sido cargado correctamente. \n");
+        }
     }
     return retorno;
 }
@@ -127,7 +134,9 @@ int modificarUsuarioPorId(EUsuario* arrayUsuarios, int sizeArrayUsuarios)
     int retorno=0;
     int indiceUsuario;
 
-    if ( existenUsuarios(arrayUsuarios, sizeArrayUsuarios)==0 )
+    if ( arrayUsuarios==NULL || sizeArrayUsuarios<=0 )
+        printf("\n La ejecucion se detendrá! Tamaño de array invalido o puntero NULO \n");
+    else if ( existenUsuarios(arrayUsuarios, sizeArrayUsuarios)==0 )
         printf("\n No se pueden modificar datos de usuarios porque no hay ninguno cargado! \n");
     else
     {
@@ -157,7 +166,9 @@ int bajaUsuarioPorId(EUsuario* arrayUsuarios, int sizeArrayUsuarios, EProducto* 
     int indiceUsuario;
     int idUsuario;
 
-    if ( existenUsuarios(arrayUsuarios, sizeArrayUsuarios)==0 )
+    if ( arrayUsuarios==NULL || sizeArrayUsuarios<=0 || arrayProductos==NULL || sizeArrayProductos<=0 )
+        printf("\n La ejecucion se detendrá! Tamaño de array invalido o puntero NULO \n");
+    else if ( existenUsuarios(arrayUsuarios, sizeArrayUsuarios)==0 )
         printf("\n No se puede eliminar un usuario porque no hay ninguno cargado! \n");
     else
     {
@@ -231,7 +242,7 @@ int tomarYcomprobarExistenciaUsuarioPorId(EUsuario* arrayUsuarios, int sizeArray
     int retorno=-2;
     int indiceUsuario;
 
-    if ( arrayUsuarios==NULL || sizeArrayUsuarios<=0 )
+    if ( arrayUsuarios==NULL || sizeArrayUsuarios<=0 || arrayProductos==NULL || sizeArrayProductos<=0 )
         printf("\n La ejecucion se detendra! Tamaño de array invalido o puntero NULO \n");
     else
         while(retorno<-1)
@@ -268,80 +279,3 @@ void cargaNombreYpasswordUsuario(EUsuario* arrayAuxiliarUsuario)
     getType("\n Ingrese el password del usuario: ", "\n El dato ingresado es invalido!\
         \n Solo se adminten letras, numeros, el caracter '-' y que no exceda los 49 caracteres \n",1,2,arrayCharsAdmitidos,49,arrayAuxiliarUsuario[0].password);
 }
-
-
-/**
- * @brief muetra por pantalla un listado con los usuarios.
- * @param arrayUsuarios el array se pasa como parametro.
- * @param sizeArrayUsuarios el tamaño del array se pasa como parametro.
- * @return no devuelve nada.
- */
-void listarUsuariosConCalificaciones(EUsuario* arrayUsuarios, int sizeArrayUsuarios)
-{
-    int i;
-    int flag=0;
-    if ( existenUsuarios(arrayUsuarios, sizeArrayUsuarios)==0 )
-        printf("\n No se pueden listar usuarios porque no hay ninguno cargado! \n");
-    else
-    {
-        for (i=0; i<sizeArrayUsuarios; i++)
-            if (arrayUsuarios[i].flagRegistro!=EMPTY && arrayUsuarios[i].contadorCalificaciones!=0)
-            {
-                printf("\n Id %d - Nombre %s - Promedio Calificaciones %.2f \
-                       ", arrayUsuarios[i].id, arrayUsuarios[i].nombre, arrayUsuarios[i].acumuladorCalificaciones/arrayUsuarios[i].contadorCalificaciones);
-                flag=1;
-            }
-        printf("\n");
-        if (flag==0)
-            printf(" No se pueden listar usuarios porque no hay ninguno con calificaicones! \n");
-    }
-}
-
-
-/**
- * @brief muetra por pantalla un listado con los usuarios.
- * @param arrayUsuarios el array se pasa como parametro.
- * @param sizeArrayUsuarios el tamaño del array se pasa como parametro.
- * @return no devuelve nada.
- */
-void listarUsuarios(EUsuario* arrayUsuarios, int sizeArrayUsuarios)
-{
-    int i;
-    for (i=0; i<sizeArrayUsuarios; i++)
-        if (arrayUsuarios[i].flagRegistro!=EMPTY)
-            printf("\n indice %d - Id %d - Nombre %s - Password %s - ContCalif %d - AcumCalif %d - flaReg %d\
-                   ",i, arrayUsuarios[i].id, arrayUsuarios[i].nombre, arrayUsuarios[i].password,
-                   arrayUsuarios[i].contadorCalificaciones, arrayUsuarios[i].acumuladorCalificaciones, arrayUsuarios[i].flagRegistro);
-    printf("\n");
-}
-
-
-/**
- * \brief Imprime por pantalla el listado de publicaciones activas de un usuario
- * \param arrayUsuarios se le pasa como parametro el array-estructura donde se van a modificar los datos
- * \param sizeArrayUsuarios es el tamaño del array-estructura donde se van a guardar los datos
- * \param arrayProductos se le pasa como parametro el array-estructura donde se van a modificar los datos
- * \param sizeArrayProductos es el tamaño del array-estructura donde se van a guardar los datos
- * \return no devuelve nada
- */
-void listarPublicacionesUsuarioPorId(EUsuario* arrayUsuarios, int sizeArrayUsuarios, EProducto* arrayProductos, int sizeArrayProductos)
-{
-    int idUsuario;
-    int indiceUsuario;
-    if ( arrayProductos==NULL || sizeArrayProductos<=0 || arrayUsuarios==NULL || sizeArrayUsuarios<=0 )
-        printf("\n La ejecucion se detendra! Tamaño de array invalido o puntero NULO \n");
-    else if ( existenProductosPublicados(arrayProductos, sizeArrayProductos)==0 )
-        printf("\n No se pueden listar publicaciones de usuarios porque no hay ninguna cargado! \n");
-    else
-    {
-        indiceUsuario=tomarYcomprobarExistenciaUsuarioPorId(arrayUsuarios,sizeArrayUsuarios,&idUsuario,"\n El listado de publicaciones del usuario ha sido cancelada. \n");
-        if(indiceUsuario>=0)
-        {
-            printf("\n Las publicaciones activas del usuario idUsuario %d - Nombre %s son: \n", idUsuario, arrayUsuarios[indiceUsuario].nombre);
-            if( listarProductosUsuario(arrayProductos, sizeArrayProductos, idUsuario)==0 );
-                printf("\n No existen publicaciones activas para ese usuario \n");
-        }
-    }
-}
-
-

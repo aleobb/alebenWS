@@ -326,7 +326,7 @@ int comprarProductoPorId(EProducto* arrayProductos, int sizeArrayProductos, EUsu
                 arrayUsuarios[indiceUsuario].acumuladorCalificaciones+=calificacion;
                 arrayUsuarios[indiceUsuario].contadorCalificaciones++;
                 retorno=1;
-                printf("\n La publicacion ha sido dada de baja correctamente. \n");
+                printf("\n La compra se ha realizado exitosamente. \n");
             }
         }
     }
@@ -470,115 +470,4 @@ int eliminarProductosPorBajaUsuario(EProducto* arrayProductos, int sizeArrayProd
             }
     return retorno;
 }
-
-
-
-/**
- * @brief muestra por pantalla un listado con los Productos publicados por un usuario.
- * @param arrayProductos el array se pasa como parametro.
- * @param idUsuario se pasa como parametro.
- * @param sizeArrayProductos el tamaño del array se pasa como parametro.
- * @return devuelve 1 si tiene algo que imprimir pantalla o 0 si no hay publicaciones de ese usuario.
- */
-int listarProductosUsuario(EProducto* arrayProductos, int sizeArrayProductos, int idUsuario)
-{
-    int i;
-    int retorno=0;
-    for (i=0; i<sizeArrayProductos; i++)
-        if (arrayProductos[i].flagRegistro!=EMPTY && arrayProductos[i].isPublished==TRUE && arrayProductos[i].idUsuario==idUsuario)
-        {
-            printf("\n idProducto %d - Nombre %s - Precio %.2f - Cantidad Vendida %d - Stock %d\
-                   ", arrayProductos[i].id, arrayProductos[i].nombre, arrayProductos[i].precio, arrayProductos[i].cantidadVendida, arrayProductos[i].stock);
-            retorno=1;
-        }
-    printf("\n");
-    return retorno;
-}
-
-
-/**
- * @brief muestra por pantalla un listado con los Productos.
- * @param arrayProductos el array se pasa como parametro.
- * @param sizeArrayProductos el tamaño del array se pasa como parametro.
- * @return no devuelve nada.
- */
-void listarProductos(EProducto* arrayProductos, int sizeArrayProductos)
-{
-    int i;
-    for (i=0; i<sizeArrayProductos; i++)
-        if (arrayProductos[i].flagRegistro!=EMPTY)
-            printf("\n Indice %d - Id %d - Nombre %s - idUsuario %d - Precio %.2f - Stock %d - CantVendida %d (isPub %d - FlagReg %d)\
-                   ",i, arrayProductos[i].id, arrayProductos[i].nombre, arrayProductos[i].idUsuario, arrayProductos[i].precio,
-                   arrayProductos[i].stock, arrayProductos[i].cantidadVendida, arrayProductos[i].isPublished, arrayProductos[i].flagRegistro);
-    printf("\n");
-}
-
-
-/**
- * @brief muestra por pantalla un listado con los Productos.
- * @param arrayProductos el array se pasa como parametro.
- * @param sizeArrayProductos el tamaño del array se pasa como parametro.
- * @param arrayUsuarios se le pasa como parametro
- * @param sizeArrayUsuarios es el tamaño del arrayUsuarios
- * @return no devuelve nada.
- */
-void listarProductosConNombreUsuario(EProducto* arrayProductos, int sizeArrayProductos, EUsuario* arrayUsuarios, int sizeArrayUsuarios)
-{
-    int i;
-
-
-    if ( arrayProductos==NULL || sizeArrayProductos<=0 || arrayUsuarios==NULL || sizeArrayUsuarios<=0 )
-        printf("\n La ejecucion se detendra! Tamaño de array invalido o puntero NULO \n");
-    else if ( existenProductosPublicados(arrayProductos, sizeArrayProductos)==0 )
-        printf("\n No se pueden listar publicaciones de usuarios porque no hay ninguna cargada! \n");
-    else
-        for (i=0; i<sizeArrayProductos; i++)
-            if (arrayProductos[i].flagRegistro!=EMPTY)
-                printf("\n idProducto %d - Nombre %s - Precio %.2f - Stock %d - CantVendida %d - Nombre Usuario %s\
-                       ", arrayProductos[i].id, arrayProductos[i].nombre, arrayProductos[i].precio, arrayProductos[i].stock, arrayProductos[i].cantidadVendida,
-                       arrayUsuarios[buscarUsuarioPorId(arrayUsuarios, sizeArrayUsuarios, arrayProductos[i].idUsuario)].nombre );
-    printf("\n");
-}
-
-
-
-/*
-
-void cargaAutomaticaLlamadas(EProducto* arrayProductos, int sizeArrayProductos, EUsuario* arrayUsuarios)
-{
-    arrayProductos[0].id=1;
-    arrayProductos[0].idUsuario=1;
-    arrayUsuarios[0].contadorLlamadas++;
-    arrayProductos[0].motivo=FALLA_3G;
-    arrayProductos[0].estado=EN_CURSO;
-    arrayProductos[0].tiempo=0;
-    arrayProductos[0].flagRegistro=USED;
-
-    arrayProductos[1].id=2;
-    arrayProductos[1].idUsuario=2;
-    arrayUsuarios[1].contadorLlamadas++;
-    arrayProductos[1].motivo=FALLA_EQUIPO;
-    arrayProductos[1].estado=EN_CURSO;
-    arrayProductos[1].tiempo=0;
-    arrayProductos[1].flagRegistro=USED;
-
-    arrayProductos[2].id=3;
-    arrayProductos[2].idUsuario=2;
-    arrayUsuarios[1].contadorLlamadas++;
-    arrayProductos[2].motivo=FALLA_EQUIPO;
-    arrayProductos[2].estado=EN_CURSO;
-    arrayProductos[2].tiempo=0;
-    arrayProductos[2].flagRegistro=USED;
-
-    arrayProductos[3].id=4;
-    arrayProductos[3].idUsuario=3;
-    arrayUsuarios[2].contadorLlamadas++;
-    arrayProductos[3].motivo=FALLA_LTE;
-    arrayProductos[3].estado=SOLUCIONADO;
-    arrayProductos[3].tiempo=15;
-    arrayProductos[3].flagRegistro=USED;
-
-}
-
-*/
 

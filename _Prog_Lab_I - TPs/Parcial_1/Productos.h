@@ -27,6 +27,8 @@ int cancelarPublicacionPorIdUsuario(EProducto* arrayProductos, int sizeArrayProd
 
 int tomarYcomprobarExistenciaProductoPorId(EProducto* arrayProductos, int sizeArrayProductos,int* idProducto, char* leyendaCancelar);
 
+int comprarProductoPorId(EProducto* arrayProductos, int sizeArrayProductos, EUsuario* arrayUsuarios, int sizeArrayUsuarios);
+
 void cargaNombreProducto(EProducto* arrayAuxiliarProducto);
 
 int ingresoIdProducto();
@@ -43,8 +45,5 @@ int existenProductosPublicados(EProducto* arrayProductos, int sizeArrayProductos
 
 int eliminarProductosPorBajaUsuario(EProducto* arrayProductos, int sizeArrayProductos, int idUsuario);
 
-int listarProductosUsuario(EProducto* arrayProductos, int sizeArrayProductos, int idUsuario);
-
-void listarProductos(EProducto* arrayProductos, int sizeArrayProductos);
 
 

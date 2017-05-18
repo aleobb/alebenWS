@@ -21,7 +21,7 @@ int altaUsuario(EUsuario* arrayUsuarios, int sizeArrayUsuarios);
 
 int modificarUsuarioPorId(EUsuario* arrayUsuarios, int sizeArrayUsuarios);
 
-/// int bajaUsuarioPorId(EUsuario* arrayUsuarios, int sizeArrayUsuarios, EProducto* arrayProductos, int sizeArrayProductos);
+///int bajaUsuarioPorId(EUsuario* arrayUsuarios, int sizeArrayUsuarios, EProducto* arrayProductos, int sizeArrayProductos);
 
 int ingresoIdUsuario();
 
@@ -32,10 +32,4 @@ int existenUsuarios(EUsuario* arrayUsuarios, int sizeArrayUsuarios);
 int tomarYcomprobarExistenciaUsuarioPorId(EUsuario* arrayUsuarios, int sizeArrayUsuarios, int* idUsuario, char* leyendaCancelar);
 
 void cargaNombreYpasswordUsuario(EUsuario* arrayAuxiliarUsuario);
-
-void listarUsuariosConCalificaciones(EUsuario* arrayUsuarios, int sizeArrayUsuarios);
-
-void listarUsuarios(EUsuario* arrayUsuarios, int sizeArrayUsuarios);
-
-/// void listarPublicacionesUsuarioPorId(EUsuario* arrayUsuarios, int sizeArrayUsuarios, EProducto* arrayProductos, int sizeArrayProductos);
 
