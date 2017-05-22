@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1495152548 source:e:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\clase_punteros\array_punteros\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
