@@ -1,0 +1,214 @@
+
+#include <LiquidCrystal.h>
+
+LiquidCrystal lcd(8, 9, 4, 5, 6, 7); // Pines utilizados
+
+const int analogInPin = A0;  
+
+int sensorValue = 0;
+
+int milisegundos,decimas,segundos,minutos,horas;
+
+// unsigned long acumuladorPausa=0;
+
+int contadorPausas=0;
+
+int tiempoBoton=0;
+
+int indicador=0;  // hora=1 , min=2 , seg=3
+
+
+void setup() 
+{
+  // initialize serial communications at 9600 bps:
+  Serial.begin(9600);
+
+  lcd.begin(16, 2); // inicializo la biblioteca indicando 16 caracteres por 2 lineas
+
+  lcd.setCursor(0,0);
+
+  lcd.setCursor(0,0);
+  lcd.print("HH:MM:SS:D");
+  lcd.setCursor(0,1);
+  lcd.print("00:00:00:0");
+  
+}
+
+void loop() 
+{
+  
+  sensorValue = analogRead(analogInPin);
+
+ // if ( contadorPausas%2==0)
+    milisegundos=millis(); // -acumuladorPausa;
+ // else
+ //   acumuladorPausa=millis()-milisegundos;
+
+if(milisegundos % 100==0)
+{
+  if ( contadorPausas%2==0)
+  {
+    decimas++;
+    lcd.setCursor(9,1);
+    if (decimas<10) 
+      lcd.print(decimas);
+  } 
+}
+if(decimas>9)
+{
+    decimas = 0;
+    segundos++;
+    
+    if(segundos<=9)
+    {
+     lcd.setCursor(6,1);
+      lcd.print("0");
+      lcd.setCursor(7,1);
+      lcd.print(segundos);
+    }
+    else if (segundos<=59)
+    {
+      lcd.setCursor(6,1);
+      lcd.print(segundos);
+    }
+      
+
+}
+
+if(segundos>59)
+{
+    segundos=0;
+    minutos++;
+    lcd.setCursor(6,1);
+    lcd.print("00");
+
+    if(minutos<=9)
+    {
+     lcd.setCursor(3,1);
+      lcd.print("0");
+      lcd.setCursor(4,1);
+      lcd.print(minutos);
+    }
+    else if (minutos<=59)
+    {
+      lcd.setCursor(3,1);
+      lcd.print(minutos);
+    }
+
+    
+}
+if(minutos>59)
+{
+    minutos=0;
+    horas++;
+
+    lcd.setCursor(3,1);
+    lcd.print("00");
+
+    if(horas<=9)
+    {
+     lcd.setCursor(0,1);
+      lcd.print("0");
+      lcd.setCursor(1,1);
+      lcd.print(horas);
+    }
+    else if (horas<=59)
+    {
+      lcd.setCursor(0,1);
+      lcd.print(horas);
+    }
+
+
+
+
+
+    
+}
+
+
+ if (Serial.available()>0)
+ {
+    lcd.print(Serial.readString());
+    
+    sprintf("%s","hola");
+ }
+
+ 
+ if (sensorValue>882)
+ {
+  //Serial.print("\n");
+  //lcd.print("");
+ }
+ else if (sensorValue>623) /// Con select reiniciamos el contador  /// && (millis()-tiempoBoton)<2000 
+ {
+  // Serial.print("\n select");
+  // lcd.print("Select         ");
+ /// tiempoBoton=millis();
+  
+  milisegundos=0;
+  decimas=0;
+  segundos=0;
+  minutos=0;
+  horas=0;
+  lcd.setCursor(0,1);
+  lcd.print("00:00:00:0");
+
+  
+ }
+ else if (sensorValue>416 ) /// Con left pausamos el contador
+ {
+  // Serial.print("\n left");
+  // lcd.print("Left            ");
+   
+    contadorPausas++;
+
+ }
+ else if (sensorValue>235)
+ {
+  Serial.print("\n down");
+  lcd.print("Down           ");
+  
+ }
+ else if (sensorValue>71)
+ {
+  Serial.print("\n up");
+  lcd.print("Up              ");
+ }
+ else  /// Con este seleccionamos eldigito a incrementar (hora, min, seg)
+ {
+  // Serial.print("\n right");
+  // lcd.print("Right           ");
+
+  
+        lcd.setCursor(11,0);
+        lcd.print("Modif");
+        lcd.setCursor(12,1);
+  
+    switch (indicador)
+    {
+        
+
+      case 0:
+        indicador=1;
+        lcd.print("Hora");        
+        break;
+      case 1:
+        indicador=2;
+        lcd.print("Min ");
+        break;
+      case 2:
+        indicador=3;
+        lcd.print("Seg ");
+        break;
+      case 3:
+        lcd.setCursor(12,0);
+        lcd.print("     ");
+        lcd.setCursor(12,1);
+        lcd.print("     ");
+        indicador=0;
+       break;
+    }
+ }
+
+  
+}
