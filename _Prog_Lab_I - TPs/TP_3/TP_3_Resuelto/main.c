@@ -1,29 +1,49 @@
+/********************************************************************************************
+ * Programa: Trabajo Practico Nº 3
+ *
+ * Realizar un programa que permita agregar, borrar y modificar peliculas en un archivo binario
+ * mediante un menú:
+ * 1. Agregar película
+ * 2. Borrar película
+ * 3. Modificar película
+ * 4. Generar página web
+ * 5. Salir
+ *
+ * Version: 1.0 31 de Mayo de 2017.
+ * Autor: Ben Alejandro
+ *
+ ********************************************************************************************/
+
+
 #include <stdio.h>
 #include <stdlib.h>
-#include "funciones.h"
+#include <string.h>
+#include <ctype.h>
 
-typedef struct{
-    char titulo[20];
-    char genero[20];
-    int duracion;
-    char descripcion[50];
-    int puntaje;
-    char linkImagen[50];
-}EMovie;
+#include "funciones.h"
+#include "funcionesAuxiliares.h"
+
 
 int main()
 {
-    char seguir='s';
+    EMovie* arrayPeliculas;  /// Declaro el array de peliculas usando memoria dinamica
+
+    if ( initArrayPeliculas(arrayPeliculas)==-1 )
+        opcion=11;
+
     int opcion=0;
 
-    while(seguir=='s')
+    while(opcion!=5)
     {
-        printf("1- Agregar pelicula\n");
-        printf("2- Borrar pelicula\n");
-        printf("3- Generar pagina web\n");
-        printf("4- Salir\n");
+        printf("\n");
+        printf(" 1- Agregar pelicula\n");
+        printf(" 2- Borrar pelicula\n");
+        printf(" 3- Modificar pelicula\n");
+        printf(" 4- Generar pagina web\n");
+        printf("\n");
+        printf(" 5- Salir\n");
 
-        scanf("%d",&opcion);
+        getInt(&opcion,"\n Ingrese una opcion: ","\n\n La opcion ingresada es incorrecta! Debe elegir una opcion del 1 al 5. \n",1,1,1,1,11);
 
         switch(opcion)
         {
@@ -34,7 +54,9 @@ int main()
             case 3:
                break;
             case 4:
-                seguir = 'n';
+                break;
+            case 5:
+                printf("\n\n PROCESO TERMINADO. \n");
                 break;
         }
     }
