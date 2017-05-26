@@ -15,6 +15,7 @@ void cargarArrayPersonas (EPersona* arrayPersonas, FILE* pData)
 {
     int id;
     int isEmpty;
+    int i=0;
 
     while( !feof(pData) )
     {
@@ -23,6 +24,7 @@ void cargarArrayPersonas (EPersona* arrayPersonas, FILE* pData)
         (arrayPersonas+i)->id=atoi(id);
         (arrayPersonas+i)->isEmpty=atoi(isEmpty);
         i++;
+
     }
 
 }

@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1495755278 source:g:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\archivos\archivos_estructuras\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+

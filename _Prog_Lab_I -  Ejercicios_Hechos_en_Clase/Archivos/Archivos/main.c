@@ -10,16 +10,19 @@ void
 
 int main()
 {
-   /* id,first_name,last_name,is_empty */
+    /* id,first_name,last_name,is_empty */
+
 
     char id[4096];
     char name[4096];
     char lastName[4096];
     char isEmpty[4096];
 
+
     FILE* pData;
 
-    EPersona* arrayPersonas;
+    EPersona* arrayPersonas=(EPersona*)malloc(sizeof(EPersona)*1);
+
 
     /*
     char* buffer=(char*)malloc(sizeof(char)*SIZEBUFFER+1+100000);
@@ -42,8 +45,6 @@ int main()
     {
         /* candidadLeidos=fread(buffer+(qty-SIZEBUFFER),sizeof(char),SIZEBUFFER,pData);
         /// if( candidadLeidos != SIZEBUFFER ); /// chequear esto me va a indicar donde tengo que ponder el '\0'
-
-
 
         pChar=realloc(buffer, sizeof(char)*(qty+SIZEBUFFER) );
 

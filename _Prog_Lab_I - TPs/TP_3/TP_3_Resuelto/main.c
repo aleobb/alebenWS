@@ -14,24 +14,22 @@
  *
  ********************************************************************************************/
 
-
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
 
 #include "funciones.h"
 #include "funcionesAuxiliares.h"
 
+#define SIZE 100
 
 int main()
 {
-    EMovie* arrayPeliculas;  /// Declaro el array de peliculas usando memoria dinamica
-
-    if ( initArrayPeliculas(arrayPeliculas)==-1 )
-        opcion=11;
-
     int opcion=0;
+    ///int sizeArrayPeliculas=SIZE
+    EMovie* arrayPeliculas = initArrayPeliculas(SIZE);  /// Declaro el array de peliculas usando memoria dinamica
+
+    if ( arrayPeliculas==NULL )
+        opcion=5;
 
     while(opcion!=5)
     {
@@ -43,7 +41,7 @@ int main()
         printf("\n");
         printf(" 5- Salir\n");
 
-        getInt(&opcion,"\n Ingrese una opcion: ","\n\n La opcion ingresada es incorrecta! Debe elegir una opcion del 1 al 5. \n",1,1,1,1,11);
+        getInt(&opcion,"\n Ingrese una opcion: ","\n\n La opcion ingresada es incorrecta! Debe elegir una opcion del 1 al 5. \n",1,1,1,1,5);
 
         switch(opcion)
         {
