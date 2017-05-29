@@ -2,25 +2,24 @@
 #define FUNCIONES_H_INCLUDED
 
 typedef struct{
-    int id;
+    // int id;
     char titulo[20];
     char genero[20];
     int duracion;
     char descripcion[50];
     int puntaje;
     char linkImagen[50];
-    int flagRegistro;  ///  Lo dejo o lo saco????
+    // int flagRegistro;
 }EMovie;
 
+EMovie ingresoDatosPelicula(char* titulo);
 
-EMovie* initArrayPeliculas();
+void ingresoTitulo(char* titulo);
 
-/**
- *  Agrega una pelicula al archivo binario
- *  @param movie la estructura a ser agregada al archivo
- *  @return retorna 1 o 0 de acuerdo a si pudo agregar la pelicula o no
- */
-int agregarPelicula(EMovie movie);
+int agregarPelicula();
+
+void listarDatosPelicula(EMovie movie);
+
 
 /**
  *  Borra una pelicula del archivo binario

@@ -18,18 +18,22 @@
 #include <stdlib.h>
 
 #include "funciones.h"
+#include "funcArchivos.h"
 #include "funcionesAuxiliares.h"
 
 #define SIZE 100
 
+#define ARCHIVO "\"Peliculas.bin\""
+
 int main()
 {
     int opcion=0;
-    ///int sizeArrayPeliculas=SIZE
-    EMovie* arrayPeliculas = initArrayPeliculas(SIZE);  /// Declaro el array de peliculas usando memoria dinamica
 
-    if ( arrayPeliculas==NULL )
-        opcion=5;
+    ///int sizeArrayPeliculas=SIZE
+///    EMovie* arrayPeliculas = initArrayPeliculas(SIZE);  /// Declaro el array de peliculas usando memoria dinamica
+
+ ///   if ( arrayPeliculas==NULL )
+ ///       opcion=5;
 
     while(opcion!=5)
     {
@@ -46,6 +50,7 @@ int main()
         switch(opcion)
         {
             case 1:
+                agregarPelicula();
                 break;
             case 2:
                 break;
