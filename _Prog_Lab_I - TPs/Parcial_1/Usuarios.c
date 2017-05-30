@@ -242,7 +242,7 @@ int tomarYcomprobarExistenciaUsuarioPorId(EUsuario* arrayUsuarios, int sizeArray
     int retorno=-2;
     int indiceUsuario;
 
-    if ( arrayUsuarios==NULL || sizeArrayUsuarios<=0 || arrayProductos==NULL || sizeArrayProductos<=0 )
+    if ( arrayUsuarios==NULL || sizeArrayUsuarios<=0 )
         printf("\n La ejecucion se detendra! Tamaño de array invalido o puntero NULO \n");
     else
         while(retorno<-1)

@@ -104,6 +104,62 @@ void listarDatosPelicula(EMovie movie)
 }
 
 
+/**
+ * \brief
+ * \param
+ * \return EMovie* Retorna un puntero al array de peliculas o NULL en caso de error
+ */
+Emovie* cargarPeliculasEnArray()
+{
+    FILE* pArchivo=NULL;
+    EMovie* pPeliculas=NULL;
+    int i;
+    int cantPeliculas=contarPeliculasEnArchivo();
+
+    if ( cantPeliculas > 0 )
+    {
+        pPeliculas = (EMovie*)malloc(sizeof(EMovie)*cantPeliculas); /// Creo un array para la cantidad de peliculas guardadas en el archivo
+        if( pPeliculas == NULL )
+            printf("\n La ejecucion se detendra! No se pudo asignar espacio en memoria para realizar esta operacion. \n");
+        else
+        {
+            pArchivo = fopen(ARCHIVO,"rb"); ///  Abrirlo como solo lectura
+            if ( pArchivo == NULL )
+                printf("\n El archivo %s no pudo ser abierto! La ejecucion se detendra. \n", ARCHIVO);
+            else
+            {
+                fread( pPeliculas, sizeof(EMovie), cantPeliculas, pArchivo )
+                cerrarArch(pArchivo);
+            }
+        }
+    }
+    else
+        printf("\n La opcion seleccionada no se puede ejecutar porque no hay peliculas guardadas en el archivo \n");
+    return pPeliculas;
+}
+
+
+/**
+ * \brief obtiene la cantidad de peliculas guardadas en el archivo
+ * \param no recibe parametros
+ * \return retorna la cantidad peliculas guardadas en el archivo o -1 en caso de error
+ */
+int contarPeliculasEnArchivo()
+{
+    int retorno=-1;
+    FILE* pArchivo=NULL;
+    pArchivo = fopen(ARCHIVO,"rb"); ///  Abrirlo como solo lectura
+    if ( pArchivo == NULL )
+        printf("\n El archivo %s no pudo ser abierto! La ejecucion se detendra. \n", ARCHIVO);
+    else
+    {
+        fseek(pArchivo, 0, SEEK_END);
+        retorno=(EMovie*)ftell(pArchivo); // ftell(pArchivo)/sizeof(EMovie);
+        cerrarArch(pArchivo);
+    }
+    return retorno;
+}
+
 ///int borrarPelicula(EMovie movie)
 
 ///void generarPagina(EMovie* lista[], char nombre[])
