@@ -22,15 +22,15 @@
 EMovie ingresoDatosPelicula(char* titulo)
 {
     EMovie auxPelicula; /// es la variable donde se van a guardar provisoriamente los datos
-    char arrayCharsAdmitidos[1]="-";
+    char arrayCharsAdmitidos[20]="-";
 
-    strcpy(auxPelicula.titulo,titulo);
+    strcpy(auxPelicula.titulo, titulo);
     getType("\n Ingrese el genero: ", "\n El dato ingresado es invalido!\n Solo se adminten letras, numeros,\
-             el caracter '-' y que no exceda los 19 caracteres \n",1,2,arrayCharsAdmitidos,19,auxPelicula.genero);
+            el caracter '-' y que no exceda los 19 caracteres \n",1,2,arrayCharsAdmitidos,19,auxPelicula.genero);
     getInt(&auxPelicula.duracion, "\n Ingrese la duracion de la pelicula en minutos: ", "\n El dato ingresado es invalido!\
-            \n La duracion debe ser un numero positvo entre 1 y 500",1,1,1,1,500);
+           \n La duracion debe ser un numero positvo entre 1 y 500",1,1,1,1,500);
     getType("\n Ingrese la descripcion: ", "\n El dato ingresado es invalido!\n Solo se adminten letras, numeros,\
-             el caracter '-' y que no exceda los 49 caracteres \n",1,2,arrayCharsAdmitidos,49,auxPelicula.descripcion);
+            el caracter '-' y que no exceda los 49 caracteres \n",1,2,arrayCharsAdmitidos,49,auxPelicula.descripcion);
     getInt(&auxPelicula.puntaje, "\n Ingrese el puntaje de la pelicula del 1 al 10: ", "\n El dato ingresado es invalido!\
             \n El puntaje debe ser un numero positvo entre 1 y 10",1,1,1,1,10);
 
@@ -49,7 +49,7 @@ EMovie ingresoDatosPelicula(char* titulo)
  */
 void ingresoTitulo(char* titulo)
 {
-    char arrayCharsAdmitidos[1]="-";
+    char arrayCharsAdmitidos[]="-";
     getType("\n Ingrese el titulo: ", "\n El dato ingresado es invalido!\n Solo se adminten letras, numeros,\
              el caracter '-' y que no exceda los 19 caracteres \n",1,2,arrayCharsAdmitidos,19,titulo);
     // printf("\n %s",titulo);
@@ -67,8 +67,11 @@ int agregarPelicula()
     int retorno=-2;
 
     char titulo[20];
-    ingresoTitulo(titulo);
+    ingresoTitulo(titulo); /************** AGREGAR CONTROL TITULO YA INGRESADO *************/
+                           /************** AGREGAR CONTROL TITULO YA INGRESADO *************/
+                           /************** AGREGAR CONTROL TITULO YA INGRESADO *************/
     EMovie movie = ingresoDatosPelicula(titulo);
+
     // listarDatosPelicula(movie);
 
     pArchivo = fopen(ARCHIVO,"ab"); // if ( abrirArchBinModoAppend(pArchivo,ARCHIVO) == 0 )
@@ -105,20 +108,37 @@ void listarDatosPelicula(EMovie movie)
 
 
 /**
+ * \brief Lista por pantalla los datos de una pelicula
+ * \param la variable que contiene los datos de la pelicula del tipo EMovie se le pasa como parametro
+ * \return no devuelve nada.
+ */
+void listarPeliculas()
+{
+    int i;
+    int sizeArrayPeliculas;
+    EMovie* arrayPeliculas=cargarPeliculasEnArray(&sizeArrayPeliculas);
+
+    if ( arrayPeliculas==NULL || sizeArrayPeliculas<=0 )
+        printf("\n La ejecucion se detendra! Tamaño de array invalido o puntero NULO \n");
+    else
+        for (i=0; i<sizeArrayPeliculas; i++)
+            listarDatosPelicula( arrayPeliculas[i] );
+}
+
+/**
  * \brief
  * \param
  * \return EMovie* Retorna un puntero al array de peliculas o NULL en caso de error
  */
-Emovie* cargarPeliculasEnArray()
+EMovie* cargarPeliculasEnArray(int* cantPeliculas)
 {
     FILE* pArchivo=NULL;
     EMovie* pPeliculas=NULL;
-    int i;
-    int cantPeliculas=contarPeliculasEnArchivo();
+    *cantPeliculas=contarPeliculasEnArchivo();
 
-    if ( cantPeliculas > 0 )
+    if ( (*cantPeliculas) > 0 )
     {
-        pPeliculas = (EMovie*)malloc(sizeof(EMovie)*cantPeliculas); /// Creo un array para la cantidad de peliculas guardadas en el archivo
+        pPeliculas = (EMovie*)malloc(sizeof(EMovie)*(*cantPeliculas)); /// Creo un array para la cantidad de peliculas guardadas en el archivo
         if( pPeliculas == NULL )
             printf("\n La ejecucion se detendra! No se pudo asignar espacio en memoria para realizar esta operacion. \n");
         else
@@ -128,7 +148,7 @@ Emovie* cargarPeliculasEnArray()
                 printf("\n El archivo %s no pudo ser abierto! La ejecucion se detendra. \n", ARCHIVO);
             else
             {
-                fread( pPeliculas, sizeof(EMovie), cantPeliculas, pArchivo )
+                fread( pPeliculas, sizeof(EMovie), (*cantPeliculas), pArchivo );
                 cerrarArch(pArchivo);
             }
         }
@@ -154,7 +174,7 @@ int contarPeliculasEnArchivo()
     else
     {
         fseek(pArchivo, 0, SEEK_END);
-        retorno=(EMovie*)ftell(pArchivo); // ftell(pArchivo)/sizeof(EMovie);
+        retorno= ( ftell(pArchivo)/sizeof(EMovie) );
         cerrarArch(pArchivo);
     }
     return retorno;

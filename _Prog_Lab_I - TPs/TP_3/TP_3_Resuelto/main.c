@@ -57,6 +57,7 @@ int main()
             case 3:
                break;
             case 4:
+                listarPeliculas();
                 break;
             case 5:
                 printf("\n\n PROCESO TERMINADO. \n");

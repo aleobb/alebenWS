@@ -20,6 +20,8 @@ int agregarPelicula();
 
 void listarDatosPelicula(EMovie movie);
 
+EMovie* cargarPeliculasEnArray(int* cantPeliculas);
+
 
 /**
  *  Borra una pelicula del archivo binario
