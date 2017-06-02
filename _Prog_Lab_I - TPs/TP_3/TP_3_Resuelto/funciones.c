@@ -7,11 +7,12 @@
 #include "funcArchivos.h"
 #include "funcionesAuxiliares.h"
 
-#define EMPTY 0
-#define USED 1
-#define DELETED 2
 
-#define ARCHIVO "Peliculas.bin" // Cadena con comillas: \"
+#define TRUE 1
+#define FALSE 0
+#define DELETE 2
+
+#define ARCHIVO "Peliculas.bin" // Para cadena con comillas usar: \"
 
 
 /**
@@ -65,27 +66,78 @@ int agregarPelicula()
 {
     FILE* pArchivo=NULL;
     int retorno=-2;
-
     char titulo[20];
-    ingresoTitulo(titulo); /************** AGREGAR CONTROL TITULO YA INGRESADO *************/
-                           /************** AGREGAR CONTROL TITULO YA INGRESADO *************/
-                           /************** AGREGAR CONTROL TITULO YA INGRESADO *************/
-    EMovie movie = ingresoDatosPelicula(titulo);
 
-    // listarDatosPelicula(movie);
+    int posPelicula=tomarTituloYchequearExistencia(titulo, TRUE);
 
-    pArchivo = fopen(ARCHIVO,"ab"); // if ( abrirArchBinModoAppend(pArchivo,ARCHIVO) == 0 )
-    if (pArchivo!=NULL)
+    if ( posPelicula == -3 )
+        printf("\n El ingreso ha sido cancelado. \n");
+    else if( posPelicula != -1 )
     {
-        // printf("pArchivo abierto correctamente \n");
-        if ( fwrite(&movie,sizeof(EMovie),1,pArchivo) == 1 )
+        EMovie movie = ingresoDatosPelicula(titulo);
+        // listarDatosPelicula(movie);
+        pArchivo = fopen(ARCHIVO,"ab"); // if ( abrirArchBinModoAppend(pArchivo,ARCHIVO) == 0 )
+        if (pArchivo!=NULL)
         {
-            printf("\n La pelicula fue agregada en el archivo correctamente \n");
-            retorno=cerrarArch(pArchivo);
+            // printf("pArchivo abierto correctamente \n");
+            if ( fwrite(&movie,sizeof(EMovie),1,pArchivo) == 1 )
+            {
+                printf("\n La pelicula fue agregada en el archivo correctamente \n");
+                retorno=cerrarArch(pArchivo);
+            }
+            else
+                printf("\n Error de escritura en el archivo \"%s\"! La pelicula NO pudo ser agregada. \n", ARCHIVO);
+        }
+        else
+            printf("\n El archivo \"%s\" NO pudo ser abierto en modo escritura! La carga de la pelicula fue cancelada. \n", ARCHIVO);
+    }
+    return retorno;
+}
+
+
+/**
+ *  \brief Modificar una pelicula al archivo binario
+ *  \param no recibe parametros
+ *  \return retorna 0 si se pudo modificar correctamente o -2 si no se pudo grabar y -1 si se pudo grabar pero no cerrar el archivo
+ */
+int modificarPelicula()
+{
+    FILE* pArchivo=NULL;
+    int retorno=-2;
+    char titulo[20];
+
+    printf("\n INGRESE LOS DATOS DE LA PELICULA A MODIFICAR: rc\n ---------------------------------------------");
+    int posPelicula=tomarTituloYchequearExistencia(titulo, FALSE);
+
+    if ( posPelicula == -3 )
+        printf("\n El ingreso ha sido cancelado. \n");
+    else
+        printf("\n INGRESE LOS DATOS NUEVOS DE LA PELICULA: \n ----------------------------------------");
+    if( posPelicula >= 0 && tomarTituloYchequearExistencia(titulo, TRUE) == 0 )
+    {
+        EMovie movie = ingresoDatosPelicula(titulo);
+        // listarDatosPelicula(movie);
+        pArchivo = fopen(ARCHIVO,"rb"); // if ( abrirArchBinModoAppend(pArchivo,ARCHIVO) == 0 )
+
+        if( ( pArchivo = fopen(ARCHIVO,"r+b") ) == NULL )
+            if( ( pArchivo = fopen(ARCHIVO,"wb") ) == NULL )
+                printf("\n El archivo \"%s\" NO pudo ser abierto en modo escritura! La carga de la pelicula fue cancelada. \n", ARCHIVO);
+
+        if (pArchivo!=NULL) // printf("pArchivo abierto correctamente \n");
+        {
+            //rewind (FILE* pArchivo);
+            fseek (pArchivo, posPelicula*sizeof(EMovie), SEEK_SET);
+
+            if ( fwrite(&movie,sizeof(EMovie),1,pArchivo) == 1 )
+            {
+                printf("\n La pelicula fue modificada en el archivo correctamente \n");
+                retorno=cerrarArch(pArchivo);
+            }
+            else
+                printf("\n Error de escritura en el archivo \"%s\"! La pelicula NO pudo ser modificada. \n", ARCHIVO);
         }
     }
-    else
-        printf("\n El archivo \"%s\" NO pudo ser abierto en modo escritura! La carga de la pelicula fue cancelada. \n", ARCHIVO);
+
     return retorno;
 }
 
@@ -109,7 +161,7 @@ void listarDatosPelicula(EMovie movie)
 
 /**
  * \brief Lista por pantalla los datos de una pelicula
- * \param la variable que contiene los datos de la pelicula del tipo EMovie se le pasa como parametro
+ * \param no se le pasan parametros
  * \return no devuelve nada.
  */
 void listarPeliculas()
@@ -118,17 +170,89 @@ void listarPeliculas()
     int sizeArrayPeliculas;
     EMovie* arrayPeliculas=cargarPeliculasEnArray(&sizeArrayPeliculas);
 
-    if ( arrayPeliculas==NULL || sizeArrayPeliculas<=0 )
-        printf("\n La ejecucion se detendra! Tamaño de array invalido o puntero NULO \n");
+    if ( sizeArrayPeliculas==0 )
+        printf("\n No hay ninguna pelicula cargada en el archivo! \n");
+    else if ( arrayPeliculas==NULL || sizeArrayPeliculas<0 )
+        printf("\n El archivo que contiene las peliculas a listar NO se pudo abrir. \n");
     else
+    {
         for (i=0; i<sizeArrayPeliculas; i++)
             listarDatosPelicula( arrayPeliculas[i] );
+        free(arrayPeliculas);
+    }
 }
 
+
 /**
- * \brief
- * \param
- * \return EMovie* Retorna un puntero al array de peliculas o NULL en caso de error
+ * \brief busca una pelicula por su titulo en una array cargado en memoria con los datos del archivo donde se almacenan
+ * \param titulo: se le pasa como parametro un puntero a una cadena de caracteres donde se va a guardar el titulo de la pelicula
+ * \param alta: se pasa 1 para el alta de una nueva pelicula o 0 para modificar o borrar
+ * \return retorna 0 o el indice del array si se pudo realizar la operacion, -3 si se canceló el ingreso -2 si no se pudo abrir el archivo o -1 si no se lo encontró o no se pudo abrir el archivo.
+ */
+int tomarTituloYchequearExistencia(char titulo[], int alta)  /// **************   DEVOLVER INDICE O EL PUNTERO AL ARRAY ?!?!?!? ******************
+{
+    int retorno=-1;
+    int i;
+    int flag=0;
+    char seguir='s';
+    char arrayCharsAdmitidos[]="-";
+    int sizeArrayPeliculas;
+    EMovie* arrayPeliculas=cargarPeliculasEnArray(&sizeArrayPeliculas);
+
+    if ( sizeArrayPeliculas<0 && alta!=TRUE )
+        printf("\n El archivo que contiene las peliculas NO se pudo abrir, y por tanto no se puede verificar la existencia del titulo a ingresar. \n");
+    else if ( alta==FALSE && sizeArrayPeliculas==0 )
+        printf("\n La opcion seleccionada no se puede ejecutar porque no hay peliculas guardadas en el archivo \n");
+    else
+    {
+        while (retorno<0)
+        {
+
+            if (flag>3)
+                printf("\n Se supero la cantidad de intentos! \n");
+            else if (flag>0)
+            {
+                printf("\n Reintenta? (s/n): ");
+                scanf("%c",&seguir);
+            }
+            if ( (seguir=='n' || seguir=='N') || flag>3 )
+            {
+                retorno=-3;
+                break;
+            }
+            getType("\n Ingrese el titulo: ", "\n El dato ingresado es invalido!\n Solo se adminten letras, numeros,\
+                     el caracter '-' y que no exceda los 19 caracteres \n",1,2,arrayCharsAdmitidos,19,titulo);
+            // printf("\n %s",titulo);
+            //if ( arrayPeliculas==NULL && alta!=TRUE)
+            //    printf("\n La ejecucion se detendra! Error Puntero NULO.");
+            for (i=0; i<sizeArrayPeliculas && arrayPeliculas!=NULL; i++)
+                if( strcmp(arrayPeliculas[i].titulo,titulo)==0 )
+                {
+                    retorno=i;
+                    break;
+                }
+            if (alta==TRUE && retorno>=0)
+            {
+                printf("\n El titulo ingresado ya se encuentra cargado en el archivo! Reintente. \n");
+                retorno=-1;
+            }
+            else if (alta==TRUE) /// si se está dando de alta una pelicula (y no se encontró un titulo que coincida con el recien ingresado) cambio el valor de retorno para cortar el while
+                retorno=0;
+            else if (alta==FALSE && retorno<0)
+                printf("\n El titulo ingresado no coincide con ninguno guardado en el archivo! Reintente. \n");
+            flag++;
+        }
+        free(arrayPeliculas);
+    }
+    //printf("\n indice: %d",retorno);
+    return retorno;
+}
+
+
+/**
+ * \brief Carga los datos de las peliculas en un array
+ * \param se le pasa la cantidad de peliculas que va a leer del archivo
+ * \return EMovie* Retorna un puntero al array de peliculas (con todos sus datos) o NULL en caso de error
  */
 EMovie* cargarPeliculasEnArray(int* cantPeliculas)
 {
@@ -144,17 +268,17 @@ EMovie* cargarPeliculasEnArray(int* cantPeliculas)
         else
         {
             pArchivo = fopen(ARCHIVO,"rb"); ///  Abrirlo como solo lectura
-            if ( pArchivo == NULL )
-                printf("\n El archivo %s no pudo ser abierto! La ejecucion se detendra. \n", ARCHIVO);
-            else
+            //if ( pArchivo == NULL )
+            //    printf("\n El archivo %s no pudo ser abierto! La ejecucion se detendra. \n", ARCHIVO);
+            if ( pArchivo != NULL )
             {
                 fread( pPeliculas, sizeof(EMovie), (*cantPeliculas), pArchivo );
                 cerrarArch(pArchivo);
             }
         }
     }
-    else
-        printf("\n La opcion seleccionada no se puede ejecutar porque no hay peliculas guardadas en el archivo \n");
+    //else if  ( (*cantPeliculas) == 0 )
+    //    printf("\n La opcion seleccionada no se puede ejecutar porque no hay peliculas guardadas en el archivo \n");
     return pPeliculas;
 }
 
@@ -169,119 +293,23 @@ int contarPeliculasEnArchivo()
     int retorno=-1;
     FILE* pArchivo=NULL;
     pArchivo = fopen(ARCHIVO,"rb"); ///  Abrirlo como solo lectura
-    if ( pArchivo == NULL )
-        printf("\n El archivo %s no pudo ser abierto! La ejecucion se detendra. \n", ARCHIVO);
-    else
+
+    //if ( pArchivo == NULL )
+    //    printf("\n El archivo %s no pudo ser abierto! La ejecucion se detendra. \n", ARCHIVO);
+    //else
+    if ( pArchivo != NULL )
     {
         fseek(pArchivo, 0, SEEK_END);
         retorno= ( ftell(pArchivo)/sizeof(EMovie) );
         cerrarArch(pArchivo);
     }
+    //printf("\n cant pelis: %d", retorno);
     return retorno;
 }
+
 
 ///int borrarPelicula(EMovie movie)
 
 ///void generarPagina(EMovie* lista[], char nombre[])
 
 
-
-///static void initialize(EMovie* movie, int age, int something);
-
-
-/**
- * \brief  Reseva espacio en memoria para una cantidad de peliculas e inicializa el array
- * \param  sizeArray se le pasa el tamaño inicial del array
- * \return EMovie* Retorna un puntero al array de peliculas o NULL en caso de error
- */
- /*
-EMovie* initArrayPeliculas(int sizeArray)
-{
-    int i;
-    EMovie* pPeliculas = (EMovie*)malloc(sizeof(EMovie)*sizeArray);
-    if(pPeliculas != NULL)
-        for (i=0;i<sizeArray;i++)
-            (pPeliculas+i)->flagRegistro=EMPTY;
-    else
-        printf("\n La ejecucion se detendra! No se pudo asignar espacio en memoria. \n");
-
-    return pPeliculas;
-}
-*/
-
-/**
- * @brief Obtiene el primer indice libre del array.
- * @param arrayPeliculas el array se pasa como parametro.
- * @param sizeArrayPeliculas el tamaño del array se pasa como parametro.
- * @return devuelve el primer indice disponible (o -1 si no exite ninguno disponible o -2 si el tamaño del array es invalido o un puntero NULO)
- */
- /*
-int obtenerPosicionLibreArrayPeliculas(EMovie* arrayPeliculas, int sizeArrayPeliculas)
-{
-    int i;
-    int retorno=-2
-    if ( arrayPeliculas==NULL || sizeArrayPeliculas<=0 )
-        printf("\n La ejecucion se detendrá! Tamaño de array invalido o puntero NULO \n");
-    else
-    {
-        for (i=0; i<sizeArrayPeliculas; i++)
-            if ( (pPeliculas+i)->flagRegistro == EMPTY )
-                return i;
-        retorno++;
-    }
-    return retorno;
-}
-
-*/
-
-
-/**
- * \brief  Reseva espacio en memoria para una cantidad de peliculas e inicializa el array
- * \param  arrayPeliculas se pasa el array de estructuras a incrementar
- * \param increase: incremento de memoria en cantidad de registros (0 para inicializar la primera vez)
- * \return EMovie* Retorna un puntero al array de peliculas o NULL en caso de error
- */
- /*
-EMovie* memoryAsign(EMovie* arrayPeliculas,int indiceSiguiente, int increase)
-{
-    int i;
-    EMovie* pPeliculas;
-    if (increase==0)
-    {
-        increase=SIZE;
-        indiceSiguiente=0;
-        pPeliculas = (EMovie*)malloc(sizeof(EMovie)*increase);
-    }
-    else
-        pPeliculas = (EMovie*)realloc(arrayPeliculas, sizeof(EMovie)*increase);
-
-    if(arrayPeliculas != NULL)
-        for (i=indiceSiguiente;i<increase;i++)
-            (arrayPeliculas+i)->flagRegistro=0;
-    else
-        printf("\n La ejecucion se detendra! No se pudo asignar espacio en memoria. \n");
-
-    return pPeliculas;
-}
-*/
-
-
-
-
-
-
-
-/** \brief  Inicializa a una pelicula recibida como parametro
- * \param EMovie* movie Puntero a la pelicula
- * \param int age Edad de la pelicula
- * \param int something Otros datos
- * \return void
- */
-
- /*
-static void initialize(EMovie* movie, int age, int something)
-{
-    movie->age = age;
-    movie->something = something;
-}
-*/

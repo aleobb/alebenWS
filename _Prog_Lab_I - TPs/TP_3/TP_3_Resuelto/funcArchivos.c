@@ -4,6 +4,24 @@
 #include <ctype.h>
 
 
+//#include <io.h>
+#include <fcntl.h>
+
+
+#define ARCHIVO "Peliculas.bin"
+
+
+int resizeFile()
+{
+    FILE* pArchivo = NULL;
+    if( ( pArchivo = fopen(ARCHIVO,"r+b") ) == NULL )
+            if( ( pArchivo = fopen(ARCHIVO,"wb") ) == NULL )
+                printf("\n El archivo \"%s\" NO pudo ser abierto en modo escritura! La carga de la pelicula fue cancelada. \n", ARCHIVO);
+    ///  http://programacion.yoreparo.com/programacion/como-borrar-datos-de-un-fichero-en-c--t51582.html
+    chsize(1,1);
+    return 0;
+}
+
 
 /**
  *  Abre un archivo binario en modo lectura

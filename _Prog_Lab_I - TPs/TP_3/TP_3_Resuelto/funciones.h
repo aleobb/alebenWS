@@ -22,6 +22,14 @@ void listarDatosPelicula(EMovie movie);
 
 EMovie* cargarPeliculasEnArray(int* cantPeliculas);
 
+int tomarTituloYchequearExistencia(char titulo[], int alta);
+
+int contarPeliculasEnArchivo();
+
+void listarPeliculas();
+
+int modificarPelicula();
+
 
 /**
  *  Borra una pelicula del archivo binario

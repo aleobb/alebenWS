@@ -1,0 +1,28 @@
+# depslib dependency file v1.0
+1496272397 source:d:\recup1erparciallabi\recup1erparciallabi\funcaux.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funcAux.h"
+
+1496272397 d:\recup1erparciallabi\recup1erparciallabi\funcaux.h
+
+1496275977 source:d:\recup1erparciallabi\recup1erparciallabi\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funcAux.h"
+	"utn.h"
+
+1496274755 d:\recup1erparciallabi\recup1erparciallabi\utn.h
+
+1496276169 source:d:\recup1erparciallabi\recup1erparciallabi\utn.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funcAux.h"
+	"utn.h"
+
