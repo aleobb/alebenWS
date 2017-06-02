@@ -106,7 +106,7 @@ int modificarPelicula()
     int retorno=-2;
     char titulo[20];
 
-    printf("\n INGRESE LOS DATOS DE LA PELICULA A MODIFICAR: rc\n ---------------------------------------------");
+    printf("\n INGRESE LOS DATOS DE LA PELICULA A MODIFICAR: \n ---------------------------------------------");
     int posPelicula=tomarTituloYchequearExistencia(titulo, FALSE);
 
     if ( posPelicula == -3 )
@@ -141,6 +141,65 @@ int modificarPelicula()
     return retorno;
 }
 
+
+/**
+ *  \brief Eliminar una pelicula del archivo binario
+ *  \param no recibe parametros
+ *  \return retorna 0 si se pudo modificar correctamente o -2 si no se pudo grabar y -1 si se pudo grabar pero no cerrar el archivo
+ */
+int borrarPelicula()
+{
+    FILE* pArchivo=NULL;
+    int retorno=-2;
+    char titulo[20];
+    char confirm='n';
+    int i;
+
+    printf("\n INGRESE LOS DATOS DE LA PELICULA A ELIMINAR: \n ---------------------------------------------");
+    int posPelicula=tomarTituloYchequearExistencia(titulo, FALSE);
+    if ( posPelicula == -3 )
+        printf("\n El ingreso ha sido cancelado. \n");
+    else if( posPelicula >= 0 )
+    {
+        printf("\n Confirma que desea eliminar la pelicula \"%s\" y todos sus datos? (s/n): ",titulo);
+        scanf("%c",&confirm);
+        if (confirm!='s' && confirm!='S')
+        {
+            printf("\n Operacion cancelada! La pelicula no ha sido eliminada");
+            retorno=0;
+        }
+        else
+        {
+            int sizeArrayPeliculas;
+            EMovie* arrayPeliculas=cargarPeliculasEnArray(&sizeArrayPeliculas);
+            if ( arrayPeliculas==NULL || sizeArrayPeliculas<=0 )
+                printf("\n El archivo que contiene las peliculas a listar NO se pudo abrir o no se pudo leer. \n");
+            else
+            {
+                pArchivo = fopen(ARCHIVO,"wb");
+                if (pArchivo!=NULL)
+                {
+                    // printf("pArchivo abierto correctamente \n");
+                    //printf("\n Pelicula a borrar: %s ", arrayPeliculas[posPelicula].titulo);
+                    *(arrayPeliculas+posPelicula)=*(arrayPeliculas+sizeArrayPeliculas-1);
+                    //rewind (pArchivo);
+                    //printf("\n sizeArrayPeliculas: %d",sizeArrayPeliculas);
+                    //if ( fwrite(arrayPeliculas,sizeof(EMovie)*(sizeArrayPeliculas-1),sizeArrayPeliculas-1,pArchivo) == (sizeArrayPeliculas-1) )
+                    //    printf("\n La pelicula fue borrada del archivo satisfactoriamente \n");
+                    for (i=0; i<sizeArrayPeliculas-1; i++)
+                        fwrite(arrayPeliculas+i,sizeof(EMovie),1,pArchivo);
+                    //else
+                    //    printf("\n Error de escritura en el archivo \"%s\"! La pelicula NO pudo ser borrada. \n", ARCHIVO);
+                    retorno=cerrarArch(pArchivo);
+                }
+                else
+                     printf("\n Error de escritura en el archivo \"%s\"! La pelicula NO pudo ser borrada. \n", ARCHIVO);
+                free(arrayPeliculas);
+            }
+        }
+    }
+    return retorno;
+}
 
 /**
  * \brief Lista por pantalla los datos de una pelicula

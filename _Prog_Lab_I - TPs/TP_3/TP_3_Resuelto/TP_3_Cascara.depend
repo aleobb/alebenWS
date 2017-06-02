@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1496350534 source:g:\alebenws\_prog_lab_i - tps\tp_3\tp_3_resuelto\funciones.c
+1496437830 source:g:\alebenws\_prog_lab_i - tps\tp_3\tp_3_resuelto\funciones.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -8,7 +8,7 @@
 	"funcArchivos.h"
 	"funcionesAuxiliares.h"
 
-1496331796 g:\alebenws\_prog_lab_i - tps\tp_3\tp_3_resuelto\funciones.h
+1496426990 g:\alebenws\_prog_lab_i - tps\tp_3\tp_3_resuelto\funciones.h
 
 1495658484 g:\alebenws\_prog_lab_i - tps\tp_3\tp_3_resuelto\funcionesauxiliares.h
 
@@ -19,26 +19,31 @@
 	<ctype.h>
 	"funcionesAuxiliares.h"
 
-1496331646 source:g:\alebenws\_prog_lab_i - tps\tp_3\tp_3_resuelto\main.c
+1496438788 source:g:\alebenws\_prog_lab_i - tps\tp_3\tp_3_resuelto\main.c
 	<stdio.h>
 	<stdlib.h>
 	"funciones.h"
 	"funcArchivos.h"
 	"funcionesAuxiliares.h"
 
-1496075524 source:g:\alebenws\_prog_lab_i - tps\tp_3\tp_3_resuelto\funcarchivos.c
+1496440178 source:g:\alebenws\_prog_lab_i - tps\tp_3\tp_3_resuelto\funcarchivos.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<ctype.h>
+	<fcntl.h>
+	"funciones.h"
+	"funcArchivos.h"
+	"funcionesAuxiliares.h"
 
-1495995576 g:\alebenws\_prog_lab_i - tps\tp_3\tp_3_resuelto\funcarchivos.h
+1496438880 g:\alebenws\_prog_lab_i - tps\tp_3\tp_3_resuelto\funcarchivos.h
 
-1496075524 source:i:\alebenws\_prog_lab_i - tps\tp_3\tp_3_resuelto\funcarchivos.c
+1496423730 source:i:\alebenws\_prog_lab_i - tps\tp_3\tp_3_resuelto\funcarchivos.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<ctype.h>
+	<fcntl.h>
 
 1495658486 source:i:\alebenws\_prog_lab_i - tps\tp_3\tp_3_resuelto\funcionesauxiliares.c
 	<stdio.h>
@@ -49,18 +54,18 @@
 
 1495658484 i:\alebenws\_prog_lab_i - tps\tp_3\tp_3_resuelto\funcionesauxiliares.h
 
-1496402388 source:i:\alebenws\_prog_lab_i - tps\tp_3\tp_3_resuelto\main.c
+1496426950 source:i:\alebenws\_prog_lab_i - tps\tp_3\tp_3_resuelto\main.c
 	<stdio.h>
 	<stdlib.h>
 	"funciones.h"
 	"funcArchivos.h"
 	"funcionesAuxiliares.h"
 
-1496401996 i:\alebenws\_prog_lab_i - tps\tp_3\tp_3_resuelto\funciones.h
+1496426990 i:\alebenws\_prog_lab_i - tps\tp_3\tp_3_resuelto\funciones.h
 
 1495995576 i:\alebenws\_prog_lab_i - tps\tp_3\tp_3_resuelto\funcarchivos.h
 
-1496420464 source:i:\alebenws\_prog_lab_i - tps\tp_3\tp_3_resuelto\funciones.c
+1496426950 source:i:\alebenws\_prog_lab_i - tps\tp_3\tp_3_resuelto\funciones.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

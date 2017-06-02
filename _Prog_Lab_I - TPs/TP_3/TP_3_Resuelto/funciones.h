@@ -30,13 +30,14 @@ void listarPeliculas();
 
 int modificarPelicula();
 
+int borrarPelicula();
 
 /**
  *  Borra una pelicula del archivo binario
  *  @param movie la estructura a ser eliminada al archivo
  *  @return retorna 1 o 0 de acuerdo a si pudo eliminar la pelicula o no
  */
-int borrarPelicula(EMovie movie);
+//int borrarPelicula(EMovie movie);
 
 /**
  *  Genera un archivo html a partir de las peliculas cargadas en el archivo binario.
