@@ -28,14 +28,19 @@ EMovie ingresoDatosPelicula(char* titulo)
     strcpy(auxPelicula.titulo, titulo);
     getType("\n Ingrese el genero: ", "\n El dato ingresado es invalido!\n Solo se adminten letras, numeros,\
             el caracter '-' y que no exceda los 19 caracteres \n",1,2,arrayCharsAdmitidos,19,auxPelicula.genero);
-    getInt(&auxPelicula.duracion, "\n Ingrese la duracion de la pelicula en minutos: ", "\n El dato ingresado es invalido!\
-           \n La duracion debe ser un numero positvo entre 1 y 500",1,1,1,1,500);
     getType("\n Ingrese la descripcion: ", "\n El dato ingresado es invalido!\n Solo se adminten letras, numeros,\
             el caracter '-' y que no exceda los 49 caracteres \n",1,2,arrayCharsAdmitidos,49,auxPelicula.descripcion);
-    getInt(&auxPelicula.puntaje, "\n Ingrese el puntaje de la pelicula del 1 al 10: ", "\n El dato ingresado es invalido!\
+    strcpy(arrayCharsAdmitidos,"0");
+    getType("\n Ingrese la duracion de la pelicula en minutos: ", "\n El dato ingresado es invalido!\n \
+            La duracion debe ser un numero positvo entre 1 y 999 \n",1,3,arrayCharsAdmitidos,3,auxPelicula.duracion);
+    //getInt(&auxPelicula.duracion, "\n Ingrese la duracion de la pelicula en minutos: ", "\n El dato ingresado es invalido!\
+           \n La duracion debe ser un numero positvo entre 1 y 500",1,1,1,1,500);
+    getType("\n Ingrese el puntaje de la pelicula del 1 al 10: ", "\n El dato ingresado es invalido!\n \
+            La duracion debe ser un numero positvo entre 1 y 9 \n",1,3,arrayCharsAdmitidos,1,auxPelicula.puntaje);
+    //getInt(&auxPelicula.puntaje, "\n Ingrese el puntaje de la pelicula del 1 al 10: ", "\n El dato ingresado es invalido!\
             \n El puntaje debe ser un numero positvo entre 1 y 10",1,1,1,1,10);
 
-    strcpy(arrayCharsAdmitidos,"-.");
+    strcpy(arrayCharsAdmitidos,"-./+_@,:");
     getType("\n Ingrese el link de la Imagen: ", "\n El dato ingresado es invalido!\n Solo se adminten letras, numeros,\
              el caracter '-' y que no exceda los 49 caracteres \n",1,2,arrayCharsAdmitidos,49,auxPelicula.linkImagen);
 
@@ -210,9 +215,9 @@ void listarDatosPelicula(EMovie movie)
 {
     printf("\n Titulo: \t %s",movie.titulo);
     printf("\n Genero: \t %s",movie.genero);
-    printf("\n Duracion: \t %d",movie.duracion);
+    printf("\n Duracion: \t %s",movie.duracion);
     printf("\n Descripcion: \t %s",movie.descripcion);
-    printf("\n Puntaje: \t %d",movie.puntaje);
+    printf("\n Puntaje: \t %s",movie.puntaje);
     printf("\n Link Imagen: \t %s",movie.linkImagen);
     printf("\n");
 }

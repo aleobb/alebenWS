@@ -27,6 +27,10 @@ struct
 
 }typedef Employee;
 
+///Employee* employee_new(void);
+///void employee_delete();
+
+
 
 int employee_compare(void* pEmployeeA,void* pEmployeeB);
 void employee_print(Employee* this);

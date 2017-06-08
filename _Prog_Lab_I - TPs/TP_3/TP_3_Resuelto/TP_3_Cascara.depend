@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1496437830 source:g:\alebenws\_prog_lab_i - tps\tp_3\tp_3_resuelto\funciones.c
+1496444664 source:g:\alebenws\_prog_lab_i - tps\tp_3\tp_3_resuelto\funciones.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -8,11 +8,11 @@
 	"funcArchivos.h"
 	"funcionesAuxiliares.h"
 
-1496426990 g:\alebenws\_prog_lab_i - tps\tp_3\tp_3_resuelto\funciones.h
+1496444022 g:\alebenws\_prog_lab_i - tps\tp_3\tp_3_resuelto\funciones.h
 
 1495658484 g:\alebenws\_prog_lab_i - tps\tp_3\tp_3_resuelto\funcionesauxiliares.h
 
-1495658486 source:g:\alebenws\_prog_lab_i - tps\tp_3\tp_3_resuelto\funcionesauxiliares.c
+1496444256 source:g:\alebenws\_prog_lab_i - tps\tp_3\tp_3_resuelto\funcionesauxiliares.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -26,7 +26,7 @@
 	"funcArchivos.h"
 	"funcionesAuxiliares.h"
 
-1496440178 source:g:\alebenws\_prog_lab_i - tps\tp_3\tp_3_resuelto\funcarchivos.c
+1496443544 source:g:\alebenws\_prog_lab_i - tps\tp_3\tp_3_resuelto\funcarchivos.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
