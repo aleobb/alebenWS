@@ -302,7 +302,7 @@ int al_push(ArrayList* this, int index, void* pElement)
     int i;
 
     ///int     al_add(ArrayList* this, void* pElement)
-    ///void*   al_get(ArrayList* this , int index)
+    ///void*   al_get(ArrayList* this, int index)
     ///int     al_set(ArrayList* this, int index,void* pElement)
 
 
@@ -329,10 +329,10 @@ int al_push(ArrayList* this, int index, void* pElement)
                 returnAux=0;
             }
 
-
+        }
 
            // this->size++;
-        }
+
         /*
                 else
         {
@@ -404,10 +404,15 @@ int al_isEmpty(ArrayList* this)
  * \return int Return (NULL) if Error [pList is NULL pointer or invalid index]
  *                  - ( element pointer) if Ok
  */
-void* al_pop(ArrayList* pList,int index)
+void* al_pop(ArrayList* this, int index)
 {
     void* returnAux = NULL;
 
+    if ( this!= NULL && index >= 0 && index < this->size )
+    {
+        returnAux = al_get(this, index);
+        contract(this,index);
+    }
     return returnAux;
 }
 
@@ -420,9 +425,20 @@ void* al_pop(ArrayList* pList,int index)
  * \return int Return (NULL) if Error [pList is NULL pointer or invalid 'from' or invalid 'to']
  *                  - ( pointer to new array) if Ok
  */
-ArrayList* al_subList(ArrayList* pList,int from,int to)
+ArrayList* al_subList(ArrayList* this, int from, int to)
 {
-    void* returnAux = NULL;
+    ArrayList* returnAux = NULL;
+
+    ArrayList* pListClone = al_newArrayList();
+
+    int i;
+
+    if ( this!= NULL && pListClone!= NULL && from >= 0 && to <= this->size )
+    {
+        for ( i=from ; i < to ; i++ )
+            al_add( pListClone, al_get(this,i) );
+        returnAux=pListClone;
+    }
 
     return returnAux ;
 }

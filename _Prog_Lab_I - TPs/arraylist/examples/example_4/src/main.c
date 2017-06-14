@@ -59,9 +59,9 @@ int main(void)
     //    startTesting(11);
         startTesting(12);
         startTesting(13);
-    /*    startTesting(14);
+        startTesting(14);
         startTesting(15);
-        startTesting(16);
+    /*    startTesting(16);
         startTesting(17);*/
     #else
         //run();
