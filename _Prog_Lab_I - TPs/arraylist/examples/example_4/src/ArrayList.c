@@ -308,7 +308,7 @@ int al_push(ArrayList* this, int index, void* pElement)
 
     if ( this!= NULL && pElement!=NULL && index >= 0 && index <= this->size )
     {
-        if (this->size==index)
+        if ( this->size == index)
         {
             al_add(this, pElement );
             returnAux=0;
@@ -453,10 +453,25 @@ ArrayList* al_subList(ArrayList* this, int from, int to)
  * \return int Return (-1) if Error [pList or pList2 are NULL pointer]
  *                  - (0) if Not contains All - (1) if is contains All
  */
-int al_containsAll(ArrayList* pList,ArrayList* pList2)
+int al_containsAll(ArrayList* this, ArrayList* this2)
 {
     int returnAux = -1;
+    int i;
 
+    if ( this!= NULL && this2!= NULL )
+    {
+        returnAux=0;
+        if ( this2->size >= this->size )
+            for ( i=0 ; i < (this->size) ; i++ )
+            {
+                returnAux=1;
+                if ( al_contains(this2, this->pElements[i] ) != 1 )
+                {
+                    returnAux=0;
+                    break;
+                }
+            }
+    }
     return returnAux;
 }
 
@@ -467,12 +482,42 @@ int al_containsAll(ArrayList* pList,ArrayList* pList2)
  * \return int Return (-1) if Error [pList or pFunc are NULL pointer]
  *                  - (0) if ok
  */
-int al_sort(ArrayList* pList, int (*pFunc)(void* ,void*), int order)
+int al_sort(ArrayList* this, int (*pFunc)(void* ,void*), int order)
 {
     int returnAux = -1;
+    void* pElement = NULL;
+    int compareAux;
+    int i;
 
+    if ( this!= NULL )
+    {
+        returnAux=0;
+        for ( i=0 ; i < (this->size)-1 ; i++ )
+        {
+            ///compareAux = pFunc(this->pElements[i], this->pElements[i+1]);
+            if ( compareAux != 1 )
+                swapElement (this->pElements[i], this->pElements[i+1]);
+        }
+    }
     return returnAux;
 }
+
+
+int swapElement (void* pElement1 , void* pElement2)
+{
+    int returnAux = -1;
+    void* pElementAux = NULL;
+
+    if ( pElement1!= NULL && pElement2!= NULL )
+    {
+        pElementAux=pElement1;
+        pElement1=pElement2;
+        pElement2=pElementAux;
+        returnAux=0;
+    }
+    return returnAux;
+}
+
 
 
 /** \brief Increment the number of elements in pList in AL_INCREMENT elements.
