@@ -50,8 +50,6 @@ Employee* newEmployee(int id, char name[],char lastName[],float salary,int secto
         pEmployee->isEmpty = 0;
         returnAux = pEmployee;
     }
-
     return returnAux;
-
 }
 

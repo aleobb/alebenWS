@@ -2901,19 +2901,306 @@
 	<string.h>
 	"../inc/ArrayList.h"
 
-1463521274 source:g:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\employee.c
+1497564564 source:g:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\employee.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"../inc/Employee.h"
 
-1497524720 source:g:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\main.c
+1497652892 source:g:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"../testing/inc/main_test.h"
 	"../inc/ArrayList.h"
 	"../inc/Employee.h"
+	"funcAux.h"
+	"Usuarios.h"
+	"Productos.h"
 
 1463521274 g:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\testing\inc\main_test.h
+
+1463521274 source:e:\alebenws\_prog_lab_i - tps\tp_4\utest.c
+	"utest.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1463521274 e:\alebenws\_prog_lab_i - tps\tp_4\utest.h
+
+1463521274 source:e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\testing\src\eighthtest.c
+	<utest.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../../inc/ArrayList.h"
+	"../../inc/Employee.h"
+
+1497488172 e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\inc\arraylist.h
+
+1463521274 e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\inc\employee.h
+
+1465421600 source:e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\testing\src\eleventhtest.c
+	<utest.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../../inc/ArrayList.h"
+	"../../inc/Employee.h"
+
+1465427902 source:e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\testing\src\fifteenthtest.c
+	<utest.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../../inc/ArrayList.h"
+	"../../inc/Employee.h"
+
+1463521274 source:e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\testing\src\fifthtest.c
+	<utest.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../../inc/ArrayList.h"
+	"../../inc/Employee.h"
+
+1463521274 source:e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\testing\src\firsttest.c
+	<utest.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../../inc/ArrayList.h"
+
+1463521274 source:e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\testing\src\fourteenthtest.c
+	<utest.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../../inc/ArrayList.h"
+	"../../inc/Employee.h"
+
+1463521274 source:e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\testing\src\fourthtest.c
+	<utest.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../../inc/ArrayList.h"
+	"../../inc/Employee.h"
+
+1463521274 source:e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\testing\src\main_test.c
+	<utest.h>
+	<stdio.h>
+	<stdlib.h>
+	"../inc/firstTest.h"
+	"../inc/secondTest.h"
+	"../inc/thirdTest.h"
+	"../inc/fourthTest.h"
+	"../inc/fifthTest.h"
+	"../inc/sixthTest.h"
+	"../inc/seventhTest.h"
+	"../inc/eighthTest.h"
+	"../inc/ninthTest.h"
+	"../inc/tenthTest.h"
+	"../inc/eleventhTest.h"
+	"../inc/twelfthTest.h"
+	"../inc/thirteenthTest.h"
+	"../inc/fourteenthTest.h"
+	"../inc/fifteenthTest.h"
+	"../inc/sixteenthTest.h"
+	"../inc/seventeenthTest.h"
+
+1463521274 e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\testing\inc\firsttest.h
+
+1463521274 e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\testing\inc\secondtest.h
+
+1463521274 e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\testing\inc\thirdtest.h
+
+1463521274 e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\testing\inc\fourthtest.h
+
+1463521274 e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\testing\inc\fifthtest.h
+
+1463521274 e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\testing\inc\sixthtest.h
+
+1463521274 e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\testing\inc\seventhtest.h
+
+1463521274 e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\testing\inc\eighthtest.h
+
+1463521274 e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\testing\inc\ninthtest.h
+
+1463521274 e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\testing\inc\tenthtest.h
+
+1463521274 e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\testing\inc\eleventhtest.h
+
+1463521274 e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\testing\inc\twelfthtest.h
+
+1463521274 e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\testing\inc\thirteenthtest.h
+
+1463521274 e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\testing\inc\fourteenthtest.h
+
+1463521274 e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\testing\inc\fifteenthtest.h
+
+1463521274 e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\testing\inc\sixteenthtest.h
+
+1463521274 e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\testing\inc\seventeenthtest.h
+
+1463521274 source:e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\testing\src\ninthtest.c
+	<utest.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../../inc/ArrayList.h"
+	"../../inc/Employee.h"
+
+1463521274 source:e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\testing\src\secondtest.c
+	<utest.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../../inc/ArrayList.h"
+	"../../inc/Employee.h"
+
+1463521274 source:e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\testing\src\seventeenthtest.c
+	<utest.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../../inc/ArrayList.h"
+	"../../inc/Employee.h"
+
+1463521274 source:e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\testing\src\seventhtest.c
+	<utest.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../../inc/ArrayList.h"
+	"../../inc/Employee.h"
+
+1465517092 source:e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\testing\src\sixteenthtest.c
+	<utest.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../../inc/ArrayList.h"
+	"../../inc/Employee.h"
+
+1463521274 source:e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\testing\src\sixthtest.c
+	<utest.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../../inc/ArrayList.h"
+	"../../inc/Employee.h"
+
+1463521274 source:e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\testing\src\tenthtest.c
+	<utest.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../../inc/ArrayList.h"
+	"../../inc/Employee.h"
+
+1463521274 source:e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\testing\src\thirdtest.c
+	<utest.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../../inc/ArrayList.h"
+	"../../inc/Employee.h"
+
+1463521274 source:e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\testing\src\thirteenthtest.c
+	<utest.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../../inc/ArrayList.h"
+	"../../inc/Employee.h"
+
+1463521274 source:e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\testing\src\twelfthtest.c
+	<utest.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../../inc/ArrayList.h"
+	"../../inc/Employee.h"
+
+1497488126 source:e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../inc/ArrayList.h"
+
+1497564564 source:e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\employee.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../inc/Employee.h"
+
+1497562322 source:e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\funcaux.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funcAux.h"
+
+1497562322 e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\funcaux.h
+
+1497570178 source:e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../testing/inc/main_test.h"
+	"../inc/ArrayList.h"
+	"../inc/Employee.h"
+	"funcAux.h"
+	"Usuarios.h"
+	"Productos.h"
+
+1463521274 e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\testing\inc\main_test.h
+
+1497572156 e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\usuarios.h
+
+1497564190 e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\productos.h
+
+1497565434 source:e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\productos.c
+	<stdio.h>
+	<stdlib.h>
+	"funcAux.h"
+	<string.h>
+	"Productos.h"
+
+1497572084 source:e:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\usuarios.c
+	<stdio.h>
+	<stdlib.h>
+	"../inc/ArrayList.h"
+	"funcAux.h"
+	<string.h>
+	"Usuarios.h"
+
+1497562322 source:g:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\funcaux.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funcAux.h"
+
+1497562322 g:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\funcaux.h
+
+1497652970 g:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\usuarios.h
+
+1497564190 g:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\productos.h
+
+1497565434 source:g:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\productos.c
+	<stdio.h>
+	<stdlib.h>
+	"funcAux.h"
+	<string.h>
+	"Productos.h"
+
+1497653804 source:g:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\usuarios.c
+	<stdio.h>
+	<stdlib.h>
+	"../inc/ArrayList.h"
+	"funcAux.h"
+	<string.h>
+	"Usuarios.h"
 

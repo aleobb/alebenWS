@@ -23,24 +23,26 @@
 #define ELEMENTS 5
 
 #include "../testing/inc/main_test.h"
+
 //#define TEST
 
 #include "../inc/ArrayList.h"
 #include "../inc/Employee.h"
 
-void printArrayListEmployee(ArrayList* lista)
-{
-  int i=0;
-  for(i=0;i<lista->len(lista);i++)
-  {
-      Employee* pAux = lista->get(lista,i);
-      printf("%d) ",i);
-      printEmployee(pAux);
-  }
-}
+#include "funcAux.h"
+#include "Usuarios.h"
+#include "Productos.h"
 
+#define ALL 0
+#define ACTIVE 1
+#define DELETED 2
 
+void printArrayListEmployee(ArrayList* lista);
 int run2(void);
+
+
+int run(void);
+int printMenu(void);
 
 int main(void)
 {
@@ -64,14 +66,106 @@ int main(void)
         startTesting(16);
         startTesting(17);
     #else
-        //run();
-        run2();
+        run();
+        //run2();
     #endif
 
     return 0;
 }
 
 
+int run(void)
+{
+    printMenu();
+
+    return 0;
+}
+
+int printMenu(void)
+{
+    int opcion=0;
+
+    ArrayList* listaUsuarios = al_newArrayList();
+    ArrayList* listaProductos = al_newArrayList();
+
+    if ( listaUsuarios == NULL || listaProductos == NULL )
+        opcion=11;
+
+///  cargaInicialUsuarios(listaUsuarios);
+
+    while(opcion!=11)
+    {
+        listarUsuarios(listaUsuarios, ALL);
+
+        printf("\n");
+        printf(" 1- Alta de Usuario \n");
+        printf(" 2- Modificar datos del Usuario \n");
+        printf(" 3- Baja del Usuario (inhabilitar o borrado definitivo) \n");
+        printf(" 4- Publicar Producto \n");
+        printf(" 5- Modificar Publicacion \n");
+        printf(" 6- Cancelar Publicacion \n");
+        printf(" 7- Comprar Producto \n");
+        printf(" 8- Listar Publicaciones de Usuario \n");
+        printf(" 9- Listar Publicaciones \n");
+        printf("10- Listar Usuarios (con calificaciones)\n");
+        printf("\n");
+        printf("11- Salir \n");
+
+        getInt(&opcion,"\n Ingrese una opcion: ","\n\n La opcion ingresada es incorrecta! Debe elegir una opcion del 1 al 11. \n",1,1,1,1,11);
+
+        switch(opcion)
+        {
+            case 1:
+                altaUsuario(listaUsuarios);
+                break;
+            case 2:
+
+                break;
+            case 3:
+                bajaUsuario(listaUsuarios);
+                break;
+            case 4:
+
+                break;
+            case 5:
+
+                break;
+            case 6:
+
+                break;
+            case 7:
+
+                break;
+            case 8:
+
+                break;
+            case 9:
+
+                break;
+            case 10:
+                listarUsuarios(listaUsuarios, ALL);
+                break;
+            case 11:
+                printf("\n\n PROCESO TERMINADO. \n");
+                break;
+        }
+    }
+
+    return 0;
+}
+
+
+
+void printArrayListEmployee(ArrayList* lista)
+{
+  int i=0;
+  for(i=0;i<lista->len(lista);i++)
+  {
+      Employee* pAux = lista->get(lista,i);
+      printf("%d) ",i);
+      printEmployee(pAux);
+  }
+}
 
 
 int run2(void)
@@ -86,6 +180,7 @@ int run2(void)
     printEmployee(p1);
     printEmployee(p2);
     printEmployee(p3);
+
     //__________________________________________
 
 
