@@ -71,31 +71,24 @@ ArrayList* al_newArrayList(void)
  */
 int al_add(ArrayList* this, void* pElement)
 {
-    /*
-        void** pElements;
-        int size;
-        int reservedSize;
-    */
-
     int returnAux = -1;
 
-    if ( this!= NULL && pElement!=NULL )
+    if ( this != NULL && pElement != NULL )
     {
         if ( resizeUp(this) == 0 )
         {
-            returnAux = 0;
             this->pElements[ this->size ] = pElement;
             /// *( (this->pElements)+(this->size) ) = pElement;   esta linea es igual a la de arriba
             this->size++;
+            returnAux = 0;
         }
-
     }
-
     return returnAux;
 
     /*
             if( this->size < this->reservedSize )
             {
+                returnAux = 0;
                 this->pElements[ this->size ] = pElement;
             /// *( (this->pElements)+(this->size) ) = pElement;   esta linea es igual a la de arriba
                 this->size++;
@@ -108,9 +101,6 @@ int al_add(ArrayList* this, void* pElement)
                 }
             }
     */
-
-    // returnAux = 0; ya lo puse arriba
-
 }
 
 /** \brief  Delete arrayList
@@ -141,9 +131,7 @@ int al_len(ArrayList* this)
     int returnAux = -1;
 
     if ( this!= NULL )
-    {
-        returnAux=this->size;
-    }
+        returnAux = this->size;
 
     return returnAux;
 }
@@ -159,11 +147,8 @@ void* al_get(ArrayList* this, int index)
 {
     void* returnAux = NULL;
 
-    if ( this != NULL && index >= 0 && index <= this->size)
-    {
-        returnAux=this->pElements[index];
-
-    }
+    if ( this != NULL && index >= 0 && index <= this->size )
+        returnAux = this->pElements[index];
 
     return returnAux;
 }
@@ -182,14 +167,14 @@ int al_contains(ArrayList* this, void* pElement)
     int returnAux = -1;
     int i;
 
-    if ( this!= NULL && pElement!=NULL )
+    if ( this != NULL && pElement != NULL )
     {
         returnAux=0;
         for ( i=0 ; i < (this->size) ; i++ )
         {
             if (  al_get(this,i) == pElement )
             {
-                returnAux=1;
+                returnAux = 1;
                 break;
             }
         }
@@ -212,8 +197,11 @@ int al_set(ArrayList* this, int index,void* pElement)
 
     if ( this!= NULL && pElement!=NULL && index >= 0 && index <= this->size )
     {
-        returnAux=0;
-        this->pElements[index]=pElement;
+        returnAux = 0;
+      /*  if ( index = this->size )
+            this->add(this, pElement);
+        else */
+            this->pElements[index] = pElement;
     }
 
     return returnAux;
@@ -509,17 +497,16 @@ void insertionSort(void** array, int size, int order,int (*pFunc)(void*,void*))
 int resizeUp(ArrayList* this)
 {
     int returnAux = -1;
-
-    //ArrayList* pListAux=NULL;
+    //void** pElementsAux;  <= podria declararlo aca pero lo declaro directamente donde lo uso
 
     if ( this != NULL )
     {
         if ( this->size == this->reservedSize )
         {
-            void** pListAux = (void**) realloc( this->pElements, sizeof(void*) * ( (this->reservedSize) + AL_INCREMENT ) );
-            if ( pListAux != NULL )
+            void** pElementsAux = (void**) realloc( this->pElements, sizeof(void*) * ( this->reservedSize + AL_INCREMENT ) );
+            if ( pElementsAux != NULL )
             {
-                this->pElements=pListAux;
+                this->pElements=pElementsAux;
                 this->reservedSize+=AL_INCREMENT;
                 returnAux = 0;
             }

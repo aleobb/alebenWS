@@ -311,3 +311,50 @@ int tomarYcomprobarExistenciaUsuarioPorId(ArrayList* listaUsuarios, char* leyend
         }
     return retorno;
 }
+
+
+/**
+ * \brief Realiza la modificacion de datos de un usuario
+ * \param listaUsuarios se le pasa como parametro
+ * \return devuelve -1 si Tamaño invalido o puntero NULL pointer o sin espacio disponible - (0) si la modificacion se pudo realizar.
+ */
+int modificarUsuarioPorId(ArrayList* listaUsuarios)
+{
+    int retorno = -1;
+    char opcion='s';
+    int indiceUsuario=-1;
+    Usuario* pUsuario = malloc(sizeof(Usuario));
+
+    if ( listaUsuarios == NULL || pUsuario == NULL )
+        printf("\n La ejecucion se detendrá! Tamaño de array invalido o puntero NULO \n");
+    else
+    {
+        if ( listaUsuarios->size == 0 )
+            printf("\n No se puede modificar un usuario porque no hay ninguno cargado! \n");
+        else
+        {
+            indiceUsuario=tomarYcomprobarExistenciaUsuarioPorId(listaUsuarios, "\n La baja del usuario ha sido cancelada! \n");
+            if ( indiceUsuario >= 0 )
+            {
+                pUsuario=listaUsuarios->get(listaUsuarios, indiceUsuario);
+                printf("\n Datos del usuario a modificar: \n");
+                printUsuario(pUsuario, ALL);
+                if ( pUsuario->flagRegistro == DELETED )
+                {
+                    printf("\n El usuario se encuentra inhabilitado. Desea continuar? (s/n): ");
+                    scanf("%c",&opcion);
+                }
+
+                if( opcion=='s' || opcion=='S' )
+                {
+                    cargaNombreUsuario(pUsuario->nombre);
+                    cargaPasswordUsuario(pUsuario->password);
+                    retorno=0;
+                }
+                else
+                    printf("\n La modificacion del usuario ha sido cancelada! \n");
+            }
+        }
+    }
+    return retorno;
+}

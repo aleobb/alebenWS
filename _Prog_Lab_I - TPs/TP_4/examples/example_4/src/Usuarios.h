@@ -30,3 +30,5 @@ int tomarYcomprobarExistenciaUsuarioPorId(ArrayList* listaUsuarios, char* leyend
 
 int bajaUsuario(ArrayList* listaUsuarios);
 
+int modificarUsuarioPorId(ArrayList* listaUsuarios);
+

@@ -24,7 +24,7 @@
 
 #include "../testing/inc/main_test.h"
 
-//#define TEST
+#define TEST
 
 #include "../inc/ArrayList.h"
 #include "../inc/Employee.h"
@@ -119,28 +119,28 @@ int printMenu(void)
                 altaUsuario(listaUsuarios);
                 break;
             case 2:
-
+                modificarUsuarioPorId(listaUsuarios);
                 break;
             case 3:
                 bajaUsuario(listaUsuarios);
                 break;
             case 4:
-
+                printf("\n Funcion no terminada aun. \n");
                 break;
             case 5:
-
+                printf("\n Funcion no terminada aun. \n");
                 break;
             case 6:
-
+                printf("\n Funcion no terminada aun. \n");
                 break;
             case 7:
-
+                printf("\n Funcion no terminada aun. \n");
                 break;
             case 8:
-
+                printf("\n Funcion no terminada aun. \n");
                 break;
             case 9:
-
+                printf("\n Funcion no terminada aun. \n");
                 break;
             case 10:
                 listarUsuarios(listaUsuarios, ALL);
