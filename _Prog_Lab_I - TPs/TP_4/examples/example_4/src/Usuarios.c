@@ -42,13 +42,15 @@ Usuario* newUsuario(int id, char nombre[], char password[], int contadorCalifica
  */
 void printUsuario(Usuario* pUsuario, int flagRegistro)
 {
-    if( flagRegistro == ALL )
-        flagRegistro = pUsuario->flagRegistro;
-    if ( pUsuario->flagRegistro == flagRegistro )
-        printf("\n Id %d - Nombre %s - Password %s - ContCalif %d - AcumCalif %d - flaReg %d\
-               ", pUsuario->id, pUsuario->nombre, pUsuario->password, pUsuario->contadorCalificaciones,
-                pUsuario->acumuladorCalificaciones, pUsuario->flagRegistro);
-    printf("\n");
+    if(pUsuario != NULL)
+    {
+        if( flagRegistro == ALL )
+            flagRegistro = pUsuario->flagRegistro;
+        if ( pUsuario->flagRegistro == flagRegistro )
+            printf("\n Id %d - Nombre %s - Password %s - ContCalif %d - AcumCalif %d - flaReg %d\
+", pUsuario->id, pUsuario->nombre, pUsuario->password, pUsuario->contadorCalificaciones,
+pUsuario->acumuladorCalificaciones, pUsuario->flagRegistro);
+    }
 }
 
 
@@ -61,9 +63,85 @@ void printUsuario(Usuario* pUsuario, int flagRegistro)
 void listarUsuarios(ArrayList* listaUsuarios, int flagRegistro)
 {
     int i;
-    for (i=0; i<listaUsuarios->size; i++)
-        printUsuario( listaUsuarios->get(listaUsuarios, i), flagRegistro);
+    if( listaUsuarios == NULL )
+        printf("\n La ejecucion se detendrá! Tamaño de array invalido o puntero NULO \n");
+    else if ( listaUsuarios->isEmpty(listaUsuarios) == 1 )
+        printf("\n No se pueden listar usuarios porque no hay ninguno cargado! \n");
+    else
+    {
+        printf("\n LISTA DE USUARIOS \n");
+        printf(" ----------------------------------------------------------------------------- ");
+        for (i=0; i<listaUsuarios->size; i++)
+            printUsuario( listaUsuarios->get(listaUsuarios, i), flagRegistro); // la funcion printUsuario se encarga de verificar si get obtiene un puntero nulo
+        printf(" ----------------------------------------------------------------------------- ");
+        printf("\n FIN LISTA DE USUARIOS \n");
+    }
 }
+
+
+/**
+ * @brief lista por pantalla la lista de usuarios activos ordenados por promedio de calificaciones
+ * @param pUsuario el puntero al usuario se pasa por parametro.
+ * @param pFunc (*pFunc) Pointer to fuction to compare elements of arrayList
+ * @param order int  [1] indicate UP - [0] indicate DOWN
+ * @return no devuelve nada.
+ */
+void listarUsuariosOrdenadosPorParametro(ArrayList* listaUsuarios, int order, int (*pFunc)(void*,void*))
+{
+    int i;
+    ArrayList* cloneListaUsuarios = listaUsuarios->clone(listaUsuarios);
+    Usuario* pUsuario = malloc(sizeof(Usuario));
+
+    if ( cloneListaUsuarios != NULL && order >= 0  &&  order <= 1  &&  pFunc != NULL )
+    {
+        if ( pFunc == compararUsuarioPorCalificacion )
+        {
+            printf("\n LISTA DE USUARIOS SIN CALIFICACIONES: \n");
+            printf(" ----------------------------------------------------------------------------- ");
+            for ( i=0 ; i<cloneListaUsuarios->size ; i++ )
+            {
+                pUsuario = cloneListaUsuarios ->get(cloneListaUsuarios, i);
+                if( pUsuario != NULL && pUsuario->acumuladorCalificaciones == 0 )
+                    printUsuario( cloneListaUsuarios->pop(cloneListaUsuarios, i) , ACTIVE );
+            }
+        }
+        cloneListaUsuarios->sort(cloneListaUsuarios, pFunc, order);
+        listarUsuarios(cloneListaUsuarios, ACTIVE);
+        al_deleteArrayList(cloneListaUsuarios);
+    }
+    else
+        printf("\n Error de memoria y/o parametros! La lista no puede ser informada. \n");
+}
+
+
+int compararUsuarioPorCalificacion(void* pUsuarioA, void* pUsuarioB)
+{
+    int retorno = 0;
+    float promedioCalifUsuarioA, promedioCalifUsuarioB;
+    if ( pUsuarioA != NULL && pUsuarioB != NULL )
+    {
+        promedioCalifUsuarioA = calcularPromedioCalificaciones(pUsuarioA);
+        promedioCalifUsuarioB = calcularPromedioCalificaciones(pUsuarioB);
+        if ( promedioCalifUsuarioA < 0 || promedioCalifUsuarioB  < 0 )
+            retorno = 0;
+        else if( promedioCalifUsuarioA  >  promedioCalifUsuarioB )
+            retorno = 1;
+        else if ( promedioCalifUsuarioA  <  promedioCalifUsuarioB )
+            retorno = -1;
+    }
+    return retorno;
+}
+
+
+float calcularPromedioCalificaciones(void* pUsuario)
+{
+    float promedioCalificaciones = 0;
+    if ( pUsuario != NULL && ((Usuario*)pUsuario)->contadorCalificaciones != 0 )
+            promedioCalificaciones = ((Usuario*)pUsuario)->acumuladorCalificaciones / ((Usuario*)pUsuario)->contadorCalificaciones;
+    return promedioCalificaciones;
+}
+
+
 
 int cargaInicialUsuarios (ArrayList* listaUsuarios)
 {
@@ -139,9 +217,9 @@ int altaUsuario(ArrayList* listaUsuarios)
             printf("\n El id del usuario sera: %d \n", pUsuario->id);
             cargaNombreUsuario(pUsuario->nombre);
             cargaPasswordUsuario(pUsuario->password);
-            pUsuario->flagRegistro=ACTIVE;
-            pUsuario->contadorCalificaciones=0;
-            pUsuario->acumuladorCalificaciones=0;
+            pUsuario->flagRegistro = ACTIVE;
+            pUsuario->contadorCalificaciones = 0;
+            pUsuario->acumuladorCalificaciones = 0;
 
             listaUsuarios->add(listaUsuarios,pUsuario);
             retorno = 0;
@@ -207,7 +285,7 @@ int calcularIdUsuario(ArrayList* listaUsuarios)
 
 
 /**
- * \brief Realiza la baja logica de un usuario o lo borra definitivamente
+ * \brief Realiza la baja logica de un usuario o el borrado definito de la memoria
  * \param listaUsuarios se le pasa como parametro
  * \return devuelve -1 si Tamaño invalido o puntero NULL pointer o sin espacio disponible - (0) si la baja se pudo realizar.
  */
@@ -248,9 +326,14 @@ int bajaUsuario(ArrayList* listaUsuarios)
                         printf("\n La baja del usuario ha sido cancelada! \n");
                         break;
                     case 2:
-                        listaUsuarios->remove(listaUsuarios, indiceUsuario);
-                        printf("\n El usuario ha sido eliminado definitivamente en forma exitosa \n");
-                        retorno=0;
+                        if ( listaUsuarios->remove(listaUsuarios, indiceUsuario) == -1)
+                            printf("\n Error de memoria!. El usuario no pudo ser eliminado. \n");
+                        else
+                        {
+                            free(pUsuario);
+                            printf("\n El usuario ha sido eliminado definitivamente en forma exitosa \n");
+                            retorno=0;
+                        }
                         break;
                     case 3:
                         pUsuario->flagRegistro = DELETED;
@@ -258,7 +341,6 @@ int bajaUsuario(ArrayList* listaUsuarios)
                         printf("\n El usuario ha sido inhabilitado exitosamente \n");
                         break;
                 }
-
             }
         }
     }
@@ -266,7 +348,26 @@ int bajaUsuario(ArrayList* listaUsuarios)
 }
 
 
+/**
+ * \brief Realiza la baja logica de un usuario o el borrado definito de la memoria
+ * \param listaUsuarios se le pasa como parametro
+ * \return devuelve -1 si Tamaño invalido o puntero NULL pointer o sin espacio disponible - (0) si la baja se pudo realizar.
+ */
+int borrarUsuarios(ArrayList* listaUsuarios)
+{
+    int retorno = -1;
 
+    if ( listaUsuarios == NULL )
+        printf("\n La ejecucion se detendrá! Tamaño de array invalido o puntero NULO \n");
+    else
+    {
+        if ( listaUsuarios->size == 0 )
+            printf("\n No se puede eliminar un usuario porque no hay ninguno cargado! \n");
+        else
+            retorno = al_clear(listaUsuarios);
+    }
+    return retorno;
+}
 
 
 /**
@@ -285,6 +386,8 @@ int tomarYcomprobarExistenciaUsuarioPorId(ArrayList* listaUsuarios, char* leyend
     if ( listaUsuarios == NULL || pUsuario == NULL )
         printf("\n La ejecucion se detendrá! Tamaño de array invalido o puntero NULO \n");
     else
+    {
+        listarUsuarios(listaUsuarios, ALL);
         while(retorno<-1)
         {
             getInt(&idUsuario, "\n Ingrese el id del usuario (0 para cancelar): ", "\n El dato ingresado es invalido!\
@@ -299,7 +402,7 @@ int tomarYcomprobarExistenciaUsuarioPorId(ArrayList* listaUsuarios, char* leyend
                 for (i=0; i<listaUsuarios->size; i++)
                 {
                     pUsuario = listaUsuarios->get(listaUsuarios, i);
-                    if ( pUsuario->id == idUsuario )
+                    if ( pUsuario != NULL && pUsuario->id == idUsuario )
                     {
                         retorno = i;
                         break;
@@ -309,6 +412,7 @@ int tomarYcomprobarExistenciaUsuarioPorId(ArrayList* listaUsuarios, char* leyend
                     printf("\n El nro. de id del usuario NO se encuentra ingresado! Reingrese \n");
             }
         }
+    }
     return retorno;
 }
 
@@ -333,10 +437,10 @@ int modificarUsuarioPorId(ArrayList* listaUsuarios)
             printf("\n No se puede modificar un usuario porque no hay ninguno cargado! \n");
         else
         {
-            indiceUsuario=tomarYcomprobarExistenciaUsuarioPorId(listaUsuarios, "\n La baja del usuario ha sido cancelada! \n");
+            indiceUsuario = tomarYcomprobarExistenciaUsuarioPorId(listaUsuarios, "\n La baja del usuario ha sido cancelada! \n");
             if ( indiceUsuario >= 0 )
             {
-                pUsuario=listaUsuarios->get(listaUsuarios, indiceUsuario);
+                pUsuario = listaUsuarios->get(listaUsuarios, indiceUsuario);
                 printf("\n Datos del usuario a modificar: \n");
                 printUsuario(pUsuario, ALL);
                 if ( pUsuario->flagRegistro == DELETED )

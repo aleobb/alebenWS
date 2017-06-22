@@ -7,7 +7,10 @@
 int resizeUp(ArrayList* pList);
 int expand(ArrayList* pList,int index);
 int contract(ArrayList* pList,int index);
-void insertionSort(void** array, int size, int order,int (*pFunc)(void*,void*));
+int insertionSort(void** array, int size, int order, int (*pFunc)(void*,void*) );
+int bubleSort2(void** array, int size, int order, int (*pFunc)(void*,void*) );
+void swapElements(void* pElement1, void* pElement2);
+int quickSort(void** array, int size, int order, int (*pFunc)(void*,void*) );
 
 #define AL_INCREMENT      10
 #define AL_INITIAL_VALUE  10
@@ -114,8 +117,8 @@ int al_deleteArrayList(ArrayList* this)
 
     if ( this!= NULL )
     {
-        free (this);
-        returnAux=0;
+        free(this);
+        returnAux = 0;
     }
 
     return returnAux;
@@ -195,7 +198,7 @@ int al_set(ArrayList* this, int index,void* pElement)
 {
     int returnAux = -1;
 
-    if ( this!= NULL && pElement!=NULL && index >= 0 && index <= this->size )
+    if ( this!= NULL && pElement!=NULL && index >= 0 && index < this->size )
     {
         returnAux = 0;
       /*  if ( index = this->size )
@@ -218,11 +221,9 @@ int al_remove(ArrayList* this, int index)
 {
     int returnAux = -1;
 
-    if ( this!= NULL && index >= 0 && index <= this->size )
-    {
-        returnAux=0;
-        contract(this, index);
-    }
+    if ( this!= NULL && index >= 0 && index < this->size )
+        if ( contract(this, index) == 0 )
+            returnAux = 0;
 
     return returnAux;
 }
@@ -240,12 +241,11 @@ int al_clear(ArrayList* this)
     //int i;
     if ( this!= NULL )
     {
-        returnAux=0;
         // NO HACE FALTA ESTO:
         //for ( i=(this->size) ; i < 0 ; i-- )
         //    contract(this, i);
-        this->size=0;
-
+        this->size = 0;
+        returnAux = 0;
     }
     return returnAux;
 }
@@ -260,18 +260,16 @@ int al_clear(ArrayList* this)
 ArrayList* al_clone(ArrayList* this)
 {
     ArrayList* returnAux = NULL;
-
     ArrayList* pListClone = al_newArrayList();
-
     int i;
 
     if ( this!= NULL && pListClone!= NULL )
     {
         for ( i=0 ; i < (this->size) ; i++ )
-            al_add( pListClone, al_get(this,i) );
-        returnAux=pListClone;
+            if( al_add( pListClone, al_get(this,i) ) == -1)
+                break;
+        returnAux = pListClone;
     }
-
     return returnAux;
 }
 
@@ -290,11 +288,11 @@ int al_push(ArrayList* this, int index, void* pElement)
     int returnAux = -1;
     if ( this!= NULL && pElement!=NULL && index >= 0 && index <= this->size )
     {
-        returnAux=0;
-        /*if ( this->size == 0)
-            al_add(this, pElement );
-  else*/if (expand(this, index) == 0 )
-            al_set( this, index, pElement );
+     // if ( this->size == 0)  No hace falta hacer esta evaluación y luego un al_add ya que expand() se encarga de eso
+     //     al_add(this, pElement );
+        if ( expand(this, index) == 0 )
+            if ( al_set( this, index, pElement ) == 0);
+                returnAux=0;
     }
     return returnAux;
 }
@@ -311,17 +309,14 @@ int al_indexOf(ArrayList* this, void* pElement)
     int returnAux = -1;
     int i;
 
-    if ( this!= NULL && pElement!=NULL )
+    if ( this != NULL && pElement != NULL )
     {
-        returnAux=0;
         for ( i=0 ; i < (this->size) ; i++ )
-        {
             if (  al_get(this,i) == pElement )
             {
-                returnAux=i;
+                returnAux = i;
                 break;
             }
-        }
     }
     return returnAux;
 }
@@ -336,11 +331,11 @@ int al_isEmpty(ArrayList* this)
 {
     int returnAux = -1;
 
-    if ( this!= NULL )
+    if ( this != NULL )
     {
-        returnAux=1;
+        returnAux = 1;
         if ( al_len(this) > 0 )
-            returnAux=0;
+            returnAux = 0;
     }
     return returnAux;
 }
@@ -361,9 +356,9 @@ void* al_pop(ArrayList* this, int index)
     if ( this!= NULL && index >= 0 && index < this->size )
     {
         returnAux = al_get(this, index);
-        contract(this,index);
-        //returnAux = *((this->pElements)+index);
-        //al_remove(this, index);
+        if ( al_remove(this, index) != 0 )
+            returnAux = NULL;
+     // contract(this, index); <= funciona también con esta línea en lugar de al_remove
     }
     return returnAux;
 }
@@ -380,21 +375,53 @@ void* al_pop(ArrayList* this, int index)
 ArrayList* al_subList(ArrayList* this, int from, int to)
 {
     ArrayList* returnAux = NULL;
-
     ArrayList* pListClone = al_newArrayList();
-
     int i;
 
-    if ( this!= NULL && pListClone!= NULL && (from<=to) && from >= 0 && to <= this->size )
+    if ( this != NULL  &&  pListClone != NULL  &&  from <= to  &&  from >= 0  &&  to <= this->size )
     {
-        for ( i=from ; i < to ; i++ )
-            al_add( pListClone, this->pElements[i] );
-        returnAux=pListClone;
+        for ( i = from ; i < to ; i++ )
+            if ( al_add( pListClone, this->pElements[i] ) == -1 )
+            {
+                free(pListClone);
+                pListClone = NULL;
+                break;
+            }
+        returnAux = pListClone;
     }
 
     return returnAux ;
 }
 
+
+/** \brief Returns a new arrayList with a portion of pList between the specified
+ *         fromIndex, inclusive, and toIndex, exclusive.
+ * \param pList ArrayList* Pointer to arrayList
+ * \param from int Initial index of the element (inclusive)
+ * \param to int Final index of the element (exclusive)
+ * \return int Return (NULL) if Error [pList is NULL pointer or invalid 'from' or invalid 'to']
+ *                  - ( pointer to new array) if Ok
+ */
+/*ArrayList* al_filter(ArrayList* this, int argument, int (*pFunc)(void*,int) )
+{
+    ArrayList* returnAux = NULL;
+    ArrayList* pListClone = al_newArrayList();
+    int i;
+
+    if ( this != NULL  &&  pListClone != NULL  &&  from <= to  &&  from >= 0  &&  to <= this->size )
+    {
+        for ( i = from ; i < to ; i++ )
+            if ( al_add( pListClone, this->pElements[i] ) == -1 )
+            {
+                free(pListClone);
+                pListClone = NULL;
+                break;
+            }
+        returnAux = pListClone;
+    }
+
+    return returnAux ;
+}*/
 
 
 
@@ -410,15 +437,15 @@ int al_containsAll(ArrayList* this, ArrayList* this2)
     int returnAux = -1;
     int i;
 
-    if ( this!= NULL && this2!= NULL )
+    if ( this != NULL && this2 != NULL )
     {
-        returnAux=0;
+        returnAux = 0;
         for ( i=0 ; i < (this2->size) ; i++ )
         {
-            returnAux=1;
+            returnAux = 1;
             if ( al_contains(this, this2->pElements[i] ) != 1 )
             {
-                returnAux=0;
+                returnAux = 0;
                 break;
             }
         }
@@ -436,55 +463,117 @@ int al_containsAll(ArrayList* this, ArrayList* this2)
 int al_sort(ArrayList* this, int (*pFunc)(void*,void*), int order)
 {
     int returnAux = -1;
-    if ( this!= NULL && (this->size)>1 &&order >= 0 && order <= 1 && pFunc!= NULL )
+    if ( this != NULL  &&  this->size > 1  &&  order >= 0  &&  order <= 1  &&  pFunc != NULL )
     {
-        returnAux=0;
-        insertionSort(this->pElements,this->size, order,pFunc);
+        if( order == 0 ) /// Esta línea es necesaria porque pFunc compara tomando como parametros -1(DOWN) o 1(UP)
+            order = -1;
+        insertionSort(this->pElements, this->size, order, pFunc);
+        //bubleSort2(this->pElements, this->size, order, pFunc);
+        //quickSort(this->pElements, this->size, order, pFunc);
+        returnAux = 0;
     }
     return returnAux;
 }
 
-/*pFunc(void* pElement1 , void* pElement2)
+/* (La función pFunc no la tengo que crear sino que ya está creada)
+pFunc(void* pElement1 , void* pElement2)
 {
     return strcmp( pElement1 , pElement2 );
-}*/
+} */
 
-void insertionSort(void** array, int size, int order,int (*pFunc)(void*,void*))
+int insertionSort(void** array, int size, int order, int (*pFunc)(void*,void*) )
 {
     int i,j;
+    int retorno = -1;
     void* auxiliar;
-    if(order==0)
-        order-=1;
-    for(i = 1; i < size; i++)
-    {
-        auxiliar = array[i];
-        j = i;
-        while(j > 0 && order==pFunc(array[j - 1],auxiliar))
-        {
-            array[j] = array[j - 1];
-            j--;
-        }
-        array[j] = auxiliar;
-    }
-    /*   int i;
-       int sort=1;
-       void* pElement = NULL;
 
-       if ( array != NULL )
+    if ( array != NULL  &&  size > 1  &&  ( order == -1  ||  order == 1 )  &&  pFunc != NULL )
+    {
+        for(i = 1; i < size; i++)
+        {
+            auxiliar = array[i];
+            j = i;
+            while(j > 0 && order == pFunc(array[j - 1], auxiliar) )
+            {
+                array[j] = array[j - 1];
+                j--;
+            }
+            array[j] = auxiliar;
+        }
+        retorno = 0;
+    }
+    return retorno;
+}
+
+
+int bubleSort2(void** array, int size, int order, int (*pFunc)(void*,void*) )
+{
+       int i;
+       int retorno = -1;
+       void* pElementAux;
+
+       if ( array != NULL  &&  size > 1  &&  ( order == -1  ||  order == 1 )  &&  pFunc != NULL )
        {
-           while(sort)
+           while(retorno)
            {
-               sort=1;
-               for ( i=1 ; i < size ; i++ )
+               retorno = 0;
+               for ( i = 1 ; i < size ; i++ )
                {
-                   compareAux = pFunc(this->pElements[i], this->pElements[i-1]);
-                   if ( compareAux == order )
-                       sort = swapElement (this->pElements[i], this->pElements[i-1]);
-                   if ( sort == -1)
-                       break;
+                    if ( pFunc(array[i-1], array[i]) == order )
+                    {
+                        pElementAux = array[i];
+                        array[i] = array[i-1];
+                        array[i-1] = pElementAux;
+                        retorno = -1;
+                    }
                }
            }
-       }*/
+       }
+    return retorno;
+}
+
+
+void swapElements(void* pElement1, void* pElement2)
+{
+    void* pElementAux = pElement1;
+    pElement1 = pElement2;
+    pElement2 = pElementAux;
+}
+
+
+int quickSort(void** array, int size, int order, int (*pFunc)(void*,void*) )
+{
+    void* pivot;
+    int i, j;
+    int retorno = -1;
+    void* pElementAux;
+
+    if ( array != NULL  &&  size > 1  &&  ( order == -1  ||  order == 1 )  &&  pFunc != NULL )
+    {
+        if (size < 2)
+            return retorno = 0;
+
+        pivot = array[size/2];
+
+        for ( (i=0, j=size-1) ;   ; (i++, j--) )
+        {
+            while ( order == pFunc(pivot, array[i]) ) //(array[i] < pivot)
+                i++;
+            while ( order == pFunc(array[j], pivot) ) //(array[j] > pivot)
+                j--;
+
+            if ( i >= j )
+                break;
+
+            pElementAux = array[i];
+            array[i] =  array[j];
+            array[j] =  pElementAux;
+        }
+
+        retorno = quickSort(array, i, order, pFunc);
+        retorno = quickSort(array + i, size - i, order, pFunc);
+    }
+    return retorno;
 }
 
 
@@ -506,8 +595,8 @@ int resizeUp(ArrayList* this)
             void** pElementsAux = (void**) realloc( this->pElements, sizeof(void*) * ( this->reservedSize + AL_INCREMENT ) );
             if ( pElementsAux != NULL )
             {
-                this->pElements=pElementsAux;
-                this->reservedSize+=AL_INCREMENT;
+                this->pElements = pElementsAux;
+                this->reservedSize += AL_INCREMENT;
                 returnAux = 0;
             }
         }
@@ -531,10 +620,11 @@ int expand(ArrayList* this, int index)
     int auxIndex;
     if ( this != NULL && index >= 0 && index <= this->size )
     {
-        al_add(this, this->pElements[ (this->size)-1 ]);
+        al_add(this, this->pElements[ (this->size)-1 ]);  /// Con esta linea me aseguro de aumentar el espacio para la lista de elementos en caso de que size = reservedSize
         returnAux=0;
-        for ( auxIndex=(this->size-1); auxIndex > index ; auxIndex-- )
-            this->pElements[auxIndex]=this->pElements[auxIndex-1];
+        for ( auxIndex=(this->size-1); auxIndex > index ; auxIndex-- )  /// Arranco desde (this->size-1) ya que uno lo hice con al_add
+            this->pElements[auxIndex] = this->pElements[auxIndex-1];
+    /// this->size++;  esta linea no hace falta ya que al_add se encargó de expandirlo.
     }
     return returnAux;
 }
@@ -548,11 +638,11 @@ int expand(ArrayList* this, int index)
 int contract(ArrayList* this, int index)
 {
     int returnAux = -1;
-    if ( this != NULL && index >= 0 && index <= this->size )
+    if ( this != NULL && index >= 0 && index < this->size )
     {
         returnAux=0;
         for ( ; index < (this->size)-1 ; index++ )
-            this->pElements[index]=this->pElements[index+1];
+            this->pElements[index] = this->pElements[index+1];
         this->size--;
     }
     return returnAux;

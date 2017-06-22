@@ -32,3 +32,11 @@ int bajaUsuario(ArrayList* listaUsuarios);
 
 int modificarUsuarioPorId(ArrayList* listaUsuarios);
 
+void listarUsuariosOrdenadosPorParametro(ArrayList* listaUsuarios, int order, int (*pFunc)(void*,void*));
+
+int compararUsuarioPorCalificacion(void* pUsuarioA, void* pUsuarioB);
+
+float calcularPromedioCalificaciones(void* pUsuario);
+
+int borrarUsuarios(ArrayList* listaUsuarios);
+

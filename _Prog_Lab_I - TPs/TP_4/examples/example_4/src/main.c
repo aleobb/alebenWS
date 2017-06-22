@@ -24,7 +24,7 @@
 
 #include "../testing/inc/main_test.h"
 
-#define TEST
+//#define TEST
 
 #include "../inc/ArrayList.h"
 #include "../inc/Employee.h"
@@ -36,6 +36,8 @@
 #define ALL 0
 #define ACTIVE 1
 #define DELETED 2
+
+#define SALIR 13
 
 void printArrayListEmployee(ArrayList* lista);
 int run2(void);
@@ -89,11 +91,11 @@ int printMenu(void)
     ArrayList* listaProductos = al_newArrayList();
 
     if ( listaUsuarios == NULL || listaProductos == NULL )
-        opcion=11;
+        opcion=SALIR;
 
-///  cargaInicialUsuarios(listaUsuarios);
+  cargaInicialUsuarios(listaUsuarios);
 
-    while(opcion!=11)
+    while(opcion!=SALIR)
     {
         listarUsuarios(listaUsuarios, ALL);
 
@@ -107,11 +109,13 @@ int printMenu(void)
         printf(" 7- Comprar Producto \n");
         printf(" 8- Listar Publicaciones de Usuario \n");
         printf(" 9- Listar Publicaciones \n");
-        printf("10- Listar Usuarios (con calificaciones)\n");
+        printf("10- Listar Usuarios \n");
+        printf("11- Listar Usuarios (ordenados por promedio de calificaciones)\n");
+        printf("12- Borrar todos los Usuarios \n");
         printf("\n");
-        printf("11- Salir \n");
+        printf("%d- Salir \n", SALIR);
 
-        getInt(&opcion,"\n Ingrese una opcion: ","\n\n La opcion ingresada es incorrecta! Debe elegir una opcion del 1 al 11. \n",1,1,1,1,11);
+        getInt(&opcion,"\n Ingrese una opcion: ","\n\n La opcion ingresada es incorrecta! Debe elegir una opcion del 1 al SALIR. \n",1,1,1,1,SALIR);
 
         switch(opcion)
         {
@@ -146,6 +150,12 @@ int printMenu(void)
                 listarUsuarios(listaUsuarios, ALL);
                 break;
             case 11:
+                listarUsuariosOrdenadosPorParametro(listaUsuarios, 0, compararUsuarioPorCalificacion);
+                break;
+            case 12:
+                borrarUsuarios(listaUsuarios);
+                break;
+            case SALIR:
                 printf("\n\n PROCESO TERMINADO. \n");
                 break;
         }
@@ -171,15 +181,17 @@ void printArrayListEmployee(ArrayList* lista)
 int run2(void)
 {
     // Genero personas para usar en el ArrayList
-    Employee* p0 = newEmployee(14, "JUAN1" ,"LOPEZ", 133.22,5);
-    Employee* p1 = newEmployee(14, "JUAN2" ,"LOPEZ", 233.22,5);
-    Employee* p2 = newEmployee(14, "JUAN3" ,"LOPEZ", 333.22,5);
-    Employee* p3 = newEmployee(14, "JUAN4" ,"LOPEZ", 433.22,5);
+    Employee* p0 = newEmployee(14, "JUAN1" ,"LOPEZ", 833.22,5);
+    Employee* p1 = newEmployee(1, "JUAN2" ,"LOPEZ", 233.22,5);
+    Employee* p2 = newEmployee(13, "JUAN3" ,"LOPEZ", 333.22,5);
+    Employee* p3 = newEmployee(8, "nabo0" ,"gil", 933.22,5);
+    Employee* p4 = newEmployee(5, "JUAN4" ,"LOPEZ", 433.22,5);
 
     printEmployee(p0);
     printEmployee(p1);
     printEmployee(p2);
     printEmployee(p3);
+    printEmployee(p4);
 
     //__________________________________________
 
@@ -190,6 +202,7 @@ int run2(void)
     lista->add(lista,p1);
     lista->add(lista,p2);
     al_add(lista,p3); // forma no orientada a objetos
+    lista->add(lista,p4);
     printArrayListEmployee(lista);
 
     printf("\r\nRemuevo index 2\r\n");
@@ -228,7 +241,7 @@ int run2(void)
 
     lista2->sort(lista2, compareEmployee,0);
     printf("Lista Clonada Ordenada por Edad (DOWN):%p\r\n",lista2);
-    printArrayListEmployee(lista);
+    printArrayListEmployee(lista2);
 
     printf("\r\nlista clonada contiene lista?:");
     if(lista->containsAll(lista,lista2))
@@ -251,7 +264,7 @@ int run2(void)
 
 
     printf("\r\nObtenemos sub-lista de 1 a 2\r\n");
-    ArrayList* subLista = lista->subList(lista,1,2);
+    ArrayList* subLista = lista->subList(lista,1,3);
     printArrayListEmployee(subLista);
 
 
@@ -273,6 +286,7 @@ int run2(void)
 
     // Test expansion/contraccion del size
     printf("\r\n\r\nTest size\r\n");
+    printf("(Cargo hasta 1100 elementos y muestro el size)\n");
     int j;
     for(j=0; j<1100; j++)
     {
