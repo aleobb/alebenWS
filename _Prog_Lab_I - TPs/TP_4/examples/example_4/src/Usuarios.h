@@ -40,3 +40,10 @@ float calcularPromedioCalificaciones(void* pUsuario);
 
 int borrarUsuarios(ArrayList* listaUsuarios);
 
+void listarUsuariosFiltrados(ArrayList* listaUsuarios, int (*pFuncCompare)(void*,void*), int filter, void* pCompare);
+
+int filtrarUsuarioPorCantidadDeCalificaciones(void* pUsuario, void* cantidadDeCalificaciones);
+
+void listarUsuariosFiltradosPorCalificacion(ArrayList* listaUsuarios);
+
+

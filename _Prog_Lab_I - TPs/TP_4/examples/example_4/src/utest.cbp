@@ -125,6 +125,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Usuarios.h" />
+		<Unit filename="funcArchivos.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="funcArchivos.h" />
 		<Unit filename="funcAux.c">
 			<Option compilerVar="CC" />
 		</Unit>

@@ -2483,7 +2483,7 @@
 	"../../inc/ArrayList.h"
 	"../../inc/Employee.h"
 
-1497488172 i:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\inc\arraylist.h
+1498154582 i:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\inc\arraylist.h
 
 1463521274 i:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\inc\employee.h
 
@@ -2670,7 +2670,7 @@
 	"../../inc/ArrayList.h"
 	"../../inc/Employee.h"
 
-1498065134 source:i:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\arraylist.c
+1498157288 source:i:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\arraylist.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -2682,7 +2682,7 @@
 	<string.h>
 	"../inc/Employee.h"
 
-1497835228 source:i:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\main.c
+1498155536 source:i:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -2711,7 +2711,7 @@
 	"../../inc/ArrayList.h"
 	"../../inc/Employee.h"
 
-1497488172 g:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\inc\arraylist.h
+1498154582 g:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\inc\arraylist.h
 
 1463521274 g:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\inc\employee.h
 
@@ -2898,7 +2898,7 @@
 	"../../inc/ArrayList.h"
 	"../../inc/Employee.h"
 
-1498079200 source:g:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\arraylist.c
+1498250984 source:g:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\arraylist.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -2910,7 +2910,7 @@
 	<string.h>
 	"../inc/Employee.h"
 
-1498080086 source:g:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\main.c
+1498164628 source:g:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -2920,6 +2920,7 @@
 	"funcAux.h"
 	"Usuarios.h"
 	"Productos.h"
+	"funcArchivos.h"
 
 1463521274 g:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\testing\inc\main_test.h
 
@@ -3188,7 +3189,7 @@
 
 1497562322 g:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\funcaux.h
 
-1497657288 g:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\usuarios.h
+1498155462 g:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\usuarios.h
 
 1497564190 g:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\productos.h
 
@@ -3199,7 +3200,7 @@
 	<string.h>
 	"Productos.h"
 
-1498046658 source:g:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\usuarios.c
+1498162204 source:g:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\usuarios.c
 	<stdio.h>
 	<stdlib.h>
 	"../inc/ArrayList.h"
@@ -3216,7 +3217,7 @@
 
 1497562322 i:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\funcaux.h
 
-1497657288 i:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\usuarios.h
+1498155462 i:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\usuarios.h
 
 1497564190 i:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\productos.h
 
@@ -3227,11 +3228,20 @@
 	<string.h>
 	"Productos.h"
 
-1498046658 source:i:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\usuarios.c
+1498156786 source:i:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\usuarios.c
 	<stdio.h>
 	<stdlib.h>
 	"../inc/ArrayList.h"
 	"funcAux.h"
 	<string.h>
 	"Usuarios.h"
+
+1498166152 source:g:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\funcarchivos.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funcAux.h"
+
+1498166072 g:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\funcarchivos.h
 

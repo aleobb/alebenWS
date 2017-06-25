@@ -69,11 +69,11 @@ void listarUsuarios(ArrayList* listaUsuarios, int flagRegistro)
         printf("\n No se pueden listar usuarios porque no hay ninguno cargado! \n");
     else
     {
-        printf("\n LISTA DE USUARIOS \n");
+        ///printf("\n LISTA DE USUARIOS \n");
         printf(" ----------------------------------------------------------------------------- ");
         for (i=0; i<listaUsuarios->size; i++)
             printUsuario( listaUsuarios->get(listaUsuarios, i), flagRegistro); // la funcion printUsuario se encarga de verificar si get obtiene un puntero nulo
-        printf(" ----------------------------------------------------------------------------- ");
+        printf("\n ----------------------------------------------------------------------------- ");
         printf("\n FIN LISTA DE USUARIOS \n");
     }
 }
@@ -114,6 +114,60 @@ void listarUsuariosOrdenadosPorParametro(ArrayList* listaUsuarios, int order, in
 }
 
 
+void listarUsuariosFiltradosPorCalificacion(ArrayList* listaUsuarios)
+{
+    int opcion, cantidadCalificaciones;
+    if ( listaUsuarios == NULL )
+        printf("\n Error de memoria y/o parametros! La lista no puede ser informada. \n");
+    else if ( listaUsuarios->size == 0 )
+        printf("\n No se pueden listar usuarios porque no hay ninguno cargado! \n");
+    else
+    {
+        getInt(&cantidadCalificaciones,"\n Ingrese una cantidad (de calificaciones): ","\n\n La opcion ingresada es incorrecta! Debe elegir una opcion entre 1 y 31999",1,1,1,1,31999);
+        printf("\n");
+        printf(" 1- Igual \n");
+        printf(" 2- Distinto \n");
+        printf(" 3- Mayor \n");
+        printf(" 4- Menor \n");
+        printf(" 5- Mayor o igual \n");
+        printf(" 6- Menor o igual \n");
+        getInt(&opcion,"\n Ingrese una opcion: ","\n\n La opcion ingresada es incorrecta! Debe elegir una opcion de la lista. \n",1,1,1,1,6);
+        listarUsuariosFiltrados(listaUsuarios, filtrarUsuarioPorCantidadDeCalificaciones, opcion, &cantidadCalificaciones);
+    }
+}
+
+
+/**
+ * @brief lista por pantalla la lista de usuarios activos ordenados por promedio de calificaciones
+ * @param pUsuario el puntero al usuario se pasa por parametro.
+ * @param pFunc (*pFunc) Pointer to fuction to compare elements of arrayList
+ * @param order int  [1] indicate UP - [0] indicate DOWN
+ * @return no devuelve nada.
+ */
+void listarUsuariosFiltrados(ArrayList* listaUsuarios, int (*pFuncCompare)(void*,void*), int filter, void* pCompare)
+{
+    int flag = 0;
+    ArrayList* cloneListaUsuarios = NULL;
+
+    if ( listaUsuarios != NULL  &&  pFuncCompare != NULL  &&  filter > 0  &&  filter < 7 )
+    {
+     // cloneListaUsuarios = listaUsuarios->filter(listaUsuarios, pFuncCompare, filter, pCompare);
+        cloneListaUsuarios = (ArrayList*)al_filter(listaUsuarios, pFuncCompare, filter, pCompare);
+        if ( cloneListaUsuarios != NULL )
+        {
+            printf("\n LISTA DE USUARIOS FILTRADOS: \n");
+            printf(" ----------------------------------------------------------------------------- ");
+            listarUsuarios(cloneListaUsuarios, ACTIVE);
+            al_deleteArrayList(cloneListaUsuarios);
+            flag = 1;
+        }
+    }
+    if (flag == 0)
+        printf("\n Error de memoria y/o parametros! La lista no puede ser informada. \n");
+}
+
+
+
 int compararUsuarioPorCalificacion(void* pUsuarioA, void* pUsuarioB)
 {
     int retorno = 0;
@@ -143,12 +197,24 @@ float calcularPromedioCalificaciones(void* pUsuario)
 
 
 
+int filtrarUsuarioPorCantidadDeCalificaciones(void* pUsuario, void* cantidadDeCalificaciones)
+{
+    int retorno;
+
+    if ( pUsuario != NULL && cantidadDeCalificaciones != NULL )
+        retorno = ((Usuario*)pUsuario)->contadorCalificaciones - *( (int*)cantidadDeCalificaciones ) ;
+    return retorno;
+}
+
+
 int cargaInicialUsuarios (ArrayList* listaUsuarios)
 {
     Usuario* pAux1 = malloc(sizeof(Usuario));
     Usuario* pAux2 = malloc(sizeof(Usuario));
     Usuario* pAux3 = malloc(sizeof(Usuario));
     Usuario* pAux4 = malloc(sizeof(Usuario));
+    Usuario* pAux5 = malloc(sizeof(Usuario));
+    Usuario* pAux6 = malloc(sizeof(Usuario));
 
     pAux1 = newUsuario(1, "BBB" ,"fuckyou", 1, 5, ACTIVE);
     if ( pAux1 !=NULL )
@@ -165,6 +231,14 @@ int cargaInicialUsuarios (ArrayList* listaUsuarios)
     pAux4 = newUsuario(4, "ALE1" ,"fuTttttfsd", 0, 0, ACTIVE);
     if ( pAux4 !=NULL )
         listaUsuarios->add(listaUsuarios,pAux4);
+
+    pAux5 = newUsuario(5, "acosta" ,"fuTt12131tttfsd", 8, 65, ACTIVE);
+    if ( pAux5 !=NULL )
+        listaUsuarios->add(listaUsuarios,pAux5);
+
+    pAux6 = newUsuario(6, "forro" ,"fuTttfrsDDDDsd", 5, 22, ACTIVE);
+    if ( pAux6 !=NULL )
+        listaUsuarios->add(listaUsuarios,pAux6);
 
     return 0;
 }

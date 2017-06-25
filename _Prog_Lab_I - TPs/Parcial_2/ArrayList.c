@@ -1,19 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../inc/ArrayList.h"
+#include "ArrayList.h"
+#include "funcAux.h"
+#include "Destinatarios.h"
 
 // funciones privadas
-int resizeUp(ArrayList* pList);
-int expand(ArrayList* pList,int index);
-int contract(ArrayList* pList,int index);
+//int resizeUp(ArrayList* pList);
+//int expand(ArrayList* pList,int index);
+//int contract(ArrayList* pList,int index);
 int insertionSort(void** array, int size, int order, int (*pFunc)(void*,void*) );
 int bubleSort2(void** array, int size, int order, int (*pFunc)(void*,void*) );
 void swapElements(void* pElement1, void* pElement2);
 int quickSort(void** array, int size, int order, int (*pFunc)(void*,void*) );
-int isComparisonTrue ( int compareResult, int comparisonType );
 
-ArrayList* al_filter(ArrayList* this, int (*pFuncCompare)(void*,void*), int comparisonType, void* pCompare);
 
 #define AL_INCREMENT      10
 #define AL_INITIAL_VALUE  10
@@ -52,12 +52,12 @@ ArrayList* al_newArrayList(void)
             pList->indexOf=al_indexOf;
             pList->isEmpty=al_isEmpty;
             pList->pop=al_pop;
-            pList->subList=al_subList;
+            pList->subListByIndexRange=al_subListByIndexRange;
+            pList->subListByElementCompare=al_subListByElementCompare;  /// Funcion agregada a la estructura original
+            pList->subListByListCompare=al_subListByListCompare;  /// Funcion agregada a la estructura original
             pList->containsAll=al_containsAll;
             pList->deleteArrayList = al_deleteArrayList;
             pList->sort = al_sort;
-
-           // pList->filter=al_filter;  /// Funcion agregada a la estructura original
 
             returnAux = pList;
         }
@@ -378,7 +378,7 @@ void* al_pop(ArrayList* this, int index)
  * \return int Return (NULL) if Error [pList is NULL pointer or invalid 'from' or invalid 'to']
  *                  - ( pointer to new array) if Ok
  */
-ArrayList* al_subList(ArrayList* this, int from, int to)
+ArrayList* al_subListByIndexRange(ArrayList* this, int from, int to)
 {
     ArrayList* returnAux = NULL;
     ArrayList* pListClone = al_newArrayList();
@@ -403,11 +403,11 @@ ArrayList* al_subList(ArrayList* this, int from, int to)
 /** \brief Returns a new arrayList with a portion of pList that meets the condition.
  * \param pFunc (*pFunc) Pointer to fuction to compare elements of arrayList
  * \param void* pCompare Pointer to Element to compare with
- * \param int comparisonType [1] indicates EQUAL - [2] indicates DIFFERENT - [3] indicates HIGHER - [4] indicates LOWER -
+ * \param int filter  [0] indicates EQUAL - [1] indicates HIGHER - [-1] indicates LOWER - [2] indicates DIFFERENT
  * \return int Return (NULL) if Error [pList or pFunc are NULL pointer or invalid filter]
  *                  - ( pointer to new array) if Ok
  */
-ArrayList* al_filter(ArrayList* this, int (*pFuncCompare)(void*,void*), int comparisonType, void* pCompare)
+ArrayList* al_subListByElementCompare(ArrayList* this, int (*pFuncCompare)(void*,void*), int comparisonType, void* pCompare)
 {
     ArrayList* pListClone = al_newArrayList();
     int i;
@@ -428,6 +428,57 @@ ArrayList* al_filter(ArrayList* this, int (*pFuncCompare)(void*,void*), int comp
     else
         pListClone = NULL;
     return pListClone ;
+}
+
+
+/** \brief Returns a new arrayList with a portion of pList that meets the condition.
+ * \param pFunc (*pFunc) Pointer to fuction to compare elements of arrayList
+ * \param void* pCompare Pointer to Element to compare with
+ * \param int filter  [0] indicates EQUAL - [1] indicates HIGHER - [-1] indicates LOWER - [2] indicates DIFFERENT
+ * \return int Return (NULL) if Error [pList or pFunc are NULL pointer or invalid filter]
+ *                  - ( pointer to new array) if Ok
+ */
+ArrayList* al_subListByListCompare(ArrayList* this, int (*pFuncCompare)(void*,void*), int comparisonType, ArrayList* this2 )
+{
+    ArrayList* returnAux = NULL;
+    ArrayList* pListClone = al_newArrayList();
+    int i;
+    int j;
+    int compareResult;
+    int flag = 0;
+
+    if ( this != NULL  &&  pListClone != NULL  &&  pFuncCompare != NULL  &&  this2 != NULL )
+    {
+        for ( i = 0 ; i < this->size ; i++ )
+        {
+            for( j = 0 ; j < this2->size ; j++ )
+            {
+                //printf ("Destinatario %s \n", ( (Destinatario*)this->get(this,i) )->email );
+                //printf ("Destinatario %s \n", ( (Destinatario*)this2->get(this2,j) )->email );
+                compareResult = stricmp( ( (Destinatario*)this->get(this,i) )->email, ( (Destinatario*)this2->get(this2, j) )->email );
+                //printf("\n compare result : %d", compareResult );
+                if ( compareResult == filter )
+                {
+                    //printf ("Destinatario %s \n", ( (Destinatario*)this->get(this,i) )->email );
+                    //printf ("Destinatario %s \n", ( (Destinatario*)this2->get(this2,j) )->email );
+                    flag = 1;
+
+                    break;
+                }
+            }
+            if ( flag == 0 )
+            {
+                //printf("\n flag %d", flag);
+                al_add( pListClone, this->get(this,i) );
+            }
+
+
+            flag = 0;
+        }
+
+        returnAux = pListClone;
+    }
+    return returnAux ;
 }
 
 
@@ -469,8 +520,6 @@ int isComparisonTrue ( int compareResult, int comparisonType )
     }
     return retorno;
 }
-
-
 
 
 /** \brief Returns true if pList list contains all of the elements of pList2
@@ -521,12 +570,9 @@ int al_sort(ArrayList* this, int (*pFunc)(void*,void*), int order)
     }
     return returnAux;
 }
+/* (La función pFunc no la tengo que crear acá sino que es una funcion especifica para la entidad
+    con la que la voy a usar y se crea en el archivo de dicha entidad */
 
-/* (La función pFunc no la tengo que crear sino que ya está creada)
-pFunc(void* pElement1 , void* pElement2)
-{
-    return strcmp( pElement1 , pElement2 );
-} */
 
 int insertionSort(void** array, int size, int order, int (*pFunc)(void*,void*) )
 {
@@ -694,3 +740,4 @@ int contract(ArrayList* this, int index)
     }
     return returnAux;
 }
+

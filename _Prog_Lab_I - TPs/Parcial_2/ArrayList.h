@@ -16,8 +16,6 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef __ARRAYLIST
-#define __ARRAYLIST
 struct ArrayList{
     void** pElements; /// array de punteros pero dinamico. Hacemos crecer dinamicamente este array de punteros
     int size; /// cantidad utilizada
@@ -40,13 +38,14 @@ struct ArrayList{
     int     (*containsAll)();
     int     (*sort)();
     struct ArrayList* (* clone)();
-    struct ArrayList* (*subList)();
+    struct ArrayList* (*subListByIndexRange)();
+    struct ArrayList* (*subListByElementCompare)();  /// Funcion agregada a la estructura original
+    struct ArrayList* (*subListByListCompare)();  /// Funcion agregada a la estructura original
     int     (*deleteArrayList)();
 
-   // struct ArrayList* (*filter)();  /// Funcion agregada a la estructura original
+
 
 }typedef ArrayList;
-#endif
 
 
 /** \brief Allocate a new arrayList with AL_INITIAL_VALUE elements.
@@ -186,7 +185,15 @@ void* al_pop(ArrayList* pList,int index);
  * \return int Return (NULL) if Error [pList is NULL pointer or invalid 'from' or invalid 'to']
  *                  - ( pointer to new array) if Ok
  */
-ArrayList* al_subList(ArrayList* pList,int from,int to);
+ArrayList* al_subListByIndexRange(ArrayList* this, int from, int to);
+
+
+/** \brief Returns if the comparison is true to the type looked for.
+ * \param compareResult the value resulted of the comparison
+ * \param type of comparison
+ * \return int Return (-1) if no true and (0) if it is.
+ */
+int isComparisonTrue ( int compareResult, int comparisonType )
 
 
 
@@ -243,14 +250,19 @@ int contract(ArrayList* pList,int index);
  * \return int Return (NULL) if Error [pList or pFunc are NULL pointer or invalid filter]
  *                  - ( pointer to new array) if Ok
  */
-/// ArrayList* al_filter(ArrayList* this, int (*pFuncCompare)(void*,void*), int filter, void* pCompare)   /// Funcion agregada a la estructura original
+ArrayList* al_subListByElementCompare(ArrayList* this, int (*pFuncCompare)(void*,void*), int comparisonType, void* pCompare);
 
 
-// Private function
-int resizeUp(ArrayList* pList);
-int expand(ArrayList* pList,int index);
-int contract(ArrayList* pList,int index);
-//___________________
+/** \brief Returns a new arrayList with a portion of pList that meets the condition.
+ * \param pFunc (*pFunc) Pointer to fuction to compare elements of arrayList
+ * \param void* pCompare Pointer to Element to compare with
+ * \param int filter  [0] indicates EQUAL - [1] indicates HIGHER - [-1] indicates LOWER - [2] indicates DIFFERENT
+ * \return int Return (NULL) if Error [pList or pFunc are NULL pointer or invalid filter]
+ *                  - ( pointer to new array) if Ok
+ */
+ArrayList* al_subListByListCompare(ArrayList* this, int (*pFuncCompare)(void*,void*), int comparisonType, ArrayList* this2 );
+
+
 
 
 

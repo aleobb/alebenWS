@@ -32,12 +32,13 @@
 #include "funcAux.h"
 #include "Usuarios.h"
 #include "Productos.h"
+#include "funcArchivos.h"
 
 #define ALL 0
 #define ACTIVE 1
 #define DELETED 2
 
-#define SALIR 13
+#define SALIR 15
 
 void printArrayListEmployee(ArrayList* lista);
 int run2(void);
@@ -85,6 +86,8 @@ int run(void)
 
 int printMenu(void)
 {
+    char paramArch[]="Peliculas.bin";
+
     int opcion=0;
 
     ArrayList* listaUsuarios = al_newArrayList();
@@ -111,7 +114,9 @@ int printMenu(void)
         printf(" 9- Listar Publicaciones \n");
         printf("10- Listar Usuarios \n");
         printf("11- Listar Usuarios (ordenados por promedio de calificaciones)\n");
-        printf("12- Borrar todos los Usuarios \n");
+        printf("12- Listar Usuarios con cantidad de calificaciones segun filtro \n");
+        printf("13- Borrar todos los Usuarios \n");
+        printf("14- Archivos \n");
         printf("\n");
         printf("%d- Salir \n", SALIR);
 
@@ -153,7 +158,13 @@ int printMenu(void)
                 listarUsuariosOrdenadosPorParametro(listaUsuarios, 0, compararUsuarioPorCalificacion);
                 break;
             case 12:
+                listarUsuariosFiltradosPorCalificacion(listaUsuarios);
+                break;
+            case 13:
                 borrarUsuarios(listaUsuarios);
+                break;
+            case 14:
+                ///printf(" \n comparac %d ", stricmp(paramArch,"Peliculas.bin") );
                 break;
             case SALIR:
                 printf("\n\n PROCESO TERMINADO. \n");
