@@ -1,46 +1,12 @@
-#define LEDSQTY 10
+
+/// Cantidad total de luces led:
+#define LEDSQTY 5
+/// Cantidad total de estados de los semaforos:
+#define STATUSQTY 5
+
 
 struct {
-    int time;
-    int ledState[LEDSQTY];
-}typedef S_SemaforoState;//Status;
+    int ledPin[LEDSQTY];
+    int ledStateArray[STATUSQTY][LEDSQTY];
+}typedef S_Semaforo;//Status;
 
-
-/*
-    struct {
-        int ledPin[LEDSQTY];
-        int ledState[LEDSQTY];
-    }typedef S_Leds;
-
-
-    struct {
-        int time;
-        int semaforosStatusNumber;
-        int nextStatusNumber;
-    }typedef Secuencia;
-
-    struct {
-        int time;
-        //int semaforosStatusNumber;
-        int nextStatusNumber;
-    }typedef SemaforoStatus;
-
-
-    typedef struct
-    {
-        PinStruct pin[5];
-        int rojo;
-        int amarillo;
-        int verde;
-        int rojoPeatonal;
-        int verdePeatonal;
-
-    }SemaforoStruct;
-
-    typedef struct
-    {
-        int pin
-        int state
-    }S_Pin;
-
-*/

@@ -26,94 +26,150 @@
 #define VP2 3
 
 /// Boton de demanda de cruce peatonal:
-#define BOTON 0
+#define BOTON1 0   // Semaforo Secundario
+#define BOTON2 13  // Semaforo Principal
 /// Sensor de vehiculo en calle secundaria:
 #define SENSOR 1
 
+/// Cantidad total de semaforos:
+#define SEMAFOROSQTY 2
 /// Cantidad total de luces led:
-#define LEDSQTY 10
+#define LEDSQTY 5
 /// Cantidad total de estados de los semaforos:
-#define STATUSQTY 10
+#define STATUSQTY 5
+/// Cantidad de secuencias dentro de un Ciclo:
+#define CICLESECUENCEQTY 24
+
 
 /// Prototipos de funciones a utilizar:
+void cargarEstados(int sNumber);
+void cargarArray(int sNumber, int stateNumber, int rojo, int amarillo, int verde, int rojoPeat, int verdePeat);
+void cargarCicloEstados();
+void cargarSecNumber (int secNumber, int semaforo1StateNumber, int semaforo2StateNumber);
+void setStatus(int secNumber);
 
 
 /// Se define arrayEstructura de uso global con los estados de los leds de los semaforos
-static S_SemaforoState semaforos[STATUSQTY];
-static int pinesLeds[LEDSQTY] = {R1,A1,V1,RP1,VP1,R2,A2,V2,RP2,VP2};
-//static S_Leds leds;
+static S_Semaforo semaforo[SEMAFOROSQTY];
+static int secuencia[CICLESECUENCEQTY][SEMAFOROSQTY];
+
+
+long millisBoton = 0;
+int iniciarSecuencia = 0;
+int secuenceNumber = 1;
+
 
 void semaforo_setup()
 {
-    /// Se inicializan los PINES correspondientes a boton y sensor como entrada digital:
-    pinMode(BOTON, INPUT);
-    pinMode(SENSOR, INPUT);
+    int i,j,k;
+    /// Creo un array provisorio con los numeros de pines de los leds
+    int pinesLeds[LEDSQTY*SEMAFOROSQTY] = {R1,A1,V1,RP1,VP1,R2,A2,V2,RP2,VP2};
 
     /// Se inicializan los PINES correspondientes a todos los leds definidos en el array de pinesLeds como salida digital:
-    for (int i = 0; i < LEDSQTY; i++)
-        pinMode(pinesLeds[i], OUTPUT);
+    for (j=0,k=0; j < SEMAFOROSQTY; j++)
+        for (i=0; i < LEDSQTY ; i++,k++)
+            (semaforo+j)->ledPin[i] = pinesLeds[k]; /// Cargo los valores de los pines en el arrayEstrucutra de cada semaforo
+
+    cargarEstados(0); /// Cargo los diferentes posibles estados del semaforo 1
+    cargarEstados(1); /// Cargo los diferentes posibles estados del semaforo 2
+    cargarCicloEstados(); /// Cargo los datos del ciclo de estados de los semaforos
+
+    /// Se inicializan los PINES correspondientes a los botones y sensor como entrada digital:
+    pinMode(BOTON1, INPUT);
+    pinMode(BOTON2, INPUT);
+    pinMode(SENSOR, INPUT);
+
+    setStatus(0); /// Establezco el estado de los leds de los semaforos a su estado por defecto
 
 }
 
 void semaforo_loop()
 {
-
-
-    if ( digitalRead(BOTON) == 0)
+    if ( iniciarSecuencia == 1 )
     {
-
+        if ( secuenceNumber == CICLESECUENCEQTY )
+        {
+            secuenceNumber = 0;
+            iniciarSecuencia = 0;
+        }
+        else if ( ( millis() - millisBoton ) > 1000 )
+        {
+            secuenceNumber++;
+            millisBoton = millis();
+        }
     }
+    else if ( digitalRead(BOTON2) == 0 || digitalRead(SENSOR) == 0  )
+    {
+        millisBoton = millis();
+        iniciarSecuencia = 1;
+        setStatus(secuenceNumber);
+    }
+
 }
 
 
-void cargarEstados()
+
+void cargarEstados(int sNumber) /// sNumber es el numero del semaforo
 {
-/// stateNumber,time,R1,A1,V1,RP1,VP1,R2,A2,V2,RP2,VP2
-    cargarArray(0, 5, 0, 0, 1,  1,  0, 1, 0, 0,  0,  1);
-    cargarArray(1, 1, 0, 0, 0,  1,  0, 1, 0, 0,  0,  1);
-    cargarArray(2, 1, 0, 0, 0,  1,  0, 1, 0, 0,  0,  0);
-    cargarArray(3, 1, 0, 1, 0,  1,  0, 1, 0, 0,  0,  0);
-    cargarArray(4, 1, 0, 1, 0,  1,  0, 1, 0, 0,  0,  1);
-    cargarArray(5, 5, 1, 0, 0,  0,  1, 0, 0, 1,  1,  0);
-    cargarArray(6, 1, 1, 0, 0,  0,  1, 0, 0, 0,  1,  0);
-    cargarArray(7, 1, 1, 0, 0,  0,  0, 0, 0, 0,  1,  0);
-    cargarArray(8, 1, 1, 0, 0,  0,  0, 0, 1, 0,  1,  0);
-    cargarArray(9, 1, 1, 0, 0,  0,  1, 0, 1, 0,  1,  0);
+///   sNumber, stateNumber, R, A, V, RP, VP
+    cargarArray(sNumber, 0, 0, 0, 1,  1,  0);  /// ledState[0]
+    cargarArray(sNumber, 1, 0, 0, 0,  1,  0);  /// ledState[1]
+    cargarArray(sNumber, 2, 0, 1, 0,  1,  0);  /// ledState[2]
+    cargarArray(sNumber, 3, 1, 0, 0,  0,  1);  /// ledState[3]
+    cargarArray(sNumber, 4, 1, 0, 0,  0,  0);  /// ledState[4]
 }
 
-void cargarArray(int stateNumber, int time, int r1, int a1, int v1, int rP1, int vP1, int r2, int a2, int v2, int rP2, int vP2 )
+void cargarArray(int sNumber, int stateNumber, int rojo, int amarillo, int verde, int rojoPeat, int verdePeat)
 {
-    (semaforos+stateNumber)->time = time;
-
-    (semaforos+stateNumber)->ledState[0] = r1;
-    (semaforos+stateNumber)->ledState[1] = a1;
-    (semaforos+stateNumber)->ledState[2] = v1;
-    (semaforos+stateNumber)->ledState[3] = rP1;
-    (semaforos+stateNumber)->ledState[4] = vP1;
-
-    (semaforos+stateNumber)->ledState[5] = r2;
-    (semaforos+stateNumber)->ledState[6] = a2;
-    (semaforos+stateNumber)->ledState[7] = v2;
-    (semaforos+stateNumber)->ledState[8] = rP2;
-    (semaforos+stateNumber)->ledState[9] = vP2;
+    (semaforo+sNumber)->ledStateArray[stateNumber][0] = rojo;
+    (semaforo+sNumber)->ledStateArray[stateNumber][1] = amarillo;
+    (semaforo+sNumber)->ledStateArray[stateNumber][2] = verde;
+    (semaforo+sNumber)->ledStateArray[stateNumber][3] = rojoPeat;
+    (semaforo+sNumber)->ledStateArray[stateNumber][4] = verdePeat;
 }
 
-
-// int setStatus(int nextStatus,int newNextStatus)
-void setStatus(int activeState,int nextState)
+void cargarCicloEstados()
 {
-    secuenciaStatusSemaforo[]={0,1,0,2,0,3,4,3}///,5,6,5,7,5,8,9,8} /// Numero de secuencia del estado del semaforo
-
-    for (int i = 0; i < LEDSQTY; i++)
-        if ( (semaforos+activeState)->ledState[i] == (semaforos+nextState)->ledState[i] )
-            digitalWrite( semaforos->ledPin[i], (semaforos+nextState)->ledState[i] );
-    /*if ( nextStatus == STATUSQTY )
-        nextStatus = 0;
-    else
-        nenextStatus++;
-    return nextStatus*/
-
+    cargarSecNumber ( 0, 0, 3);
+    cargarSecNumber ( 1, 0, 3);
+    cargarSecNumber ( 2, 0, 3);
+    cargarSecNumber ( 3, 0, 3);
+    cargarSecNumber ( 4, 0, 3);
+    cargarSecNumber ( 5, 1, 3);
+    cargarSecNumber ( 6, 0, 3);
+    cargarSecNumber ( 7, 1, 4);
+    cargarSecNumber ( 8, 0, 3);
+    cargarSecNumber ( 9, 2, 4);
+    cargarSecNumber (10, 2, 3);
+    cargarSecNumber (11, 2, 4);
+    cargarSecNumber (12, 3, 0);
+    cargarSecNumber (13, 3, 0);
+    cargarSecNumber (14, 3, 0);
+    cargarSecNumber (15, 3, 0);
+    cargarSecNumber (16, 3, 0);
+    cargarSecNumber (17, 3, 1);
+    cargarSecNumber (18, 3, 0);
+    cargarSecNumber (19, 4, 1);
+    cargarSecNumber (20, 3, 0);
+    cargarSecNumber (21, 4, 2);
+    cargarSecNumber (22, 3, 2);
+    cargarSecNumber (23, 4, 2);
 }
 
+void cargarSecNumber (int secNumber, int semaforo1StateNumber, int semaforo2StateNumber)
+{
+    secuencia[secNumber][0] = semaforo1StateNumber;
+    secuencia[secNumber][1] = semaforo2StateNumber;
+}
+
+
+
+void setStatus(int secNumber)
+{
+    int i, j;
+    for (j = 0; j < SEMAFOROSQTY ; j++)
+        for (i = 0; i < LEDSQTY ; i++);
+            digitalWrite( (semaforo+j)->ledPin[i], (semaforo+j)->ledStateArray[ secuencia[secNumber][j] ][i] ) ;
+}
 
 

@@ -6,8 +6,8 @@
 static S_timerData timersArray[TIMERS_QTY];
 static int anterior = 0;
 
-
 /** \brief  Si el timer no esta corriendo setea el contador del timer caso contrario evalua si finalizo
+ *          
  * \param void
  * \return Retorna 1 si finalizo la cuenta
  */
@@ -19,10 +19,9 @@ int timer_loop()
         anterior=actual;
         timer_tick();
     }
-}
-
-
+} 
 /** \brief  Si el timer no esta corriendo setea el contador del timer caso contrario evalua si finalizo
+ *          
  * \param void
  * \return Retorna 1 si finalizo la cuenta
  */
@@ -39,13 +38,13 @@ int timer_waitMs(int delayNumber,int delayMs)
 		{
 			timersArray[delayNumber].running=0;
 			return 1;
-		}
+		}	
 	}
 	return 0;
 }
 
-
 /** \brief  Baja el flag running
+ *          
  * \param void
  * \return void
  */
@@ -55,26 +54,27 @@ void timer_resetWait(int delayNumber)
 }
 
 /** \brief  Inicializa el array de timers
+ *          
  * \param void
  * \return void
  */
 void timer_setup()
 {
-  int i;
+  int i;  
   for(i=0;i<TIMERS_QTY;i++) // inicializo array de timers
         timersArray[i].running=0;
 
 }
 
 /** \brief  Decrementa los contadores de los timers
- *
+ *          
  * \param void
  * \return void
  */
 void timer_tick()
 {
-  int i;
-  for(i=0;i<TIMERS_QTY;i++)
+  int i;  
+  for(i=0;i<TIMERS_QTY;i++) 
         if(timersArray[i].running && timersArray[i].delayValue > 0)
-            timersArray[i].delayValue--;
+            timersArray[i].delayValue--;   
 }
