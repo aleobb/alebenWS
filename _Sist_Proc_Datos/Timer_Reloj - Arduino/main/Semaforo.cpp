@@ -1,7 +1,13 @@
 #include <Arduino.h>
 //#include <LiquidCrystal.h>
-#include "reloj.h"
+//#include "reloj.h"
 #include "timer.h"
+
+#define TIMER 0
+#define MILLIS 200
+
+#define FALSE 0
+#define TRUE 1
 
 
 /// Aclaraciones respecto de los define de las luces leds:
@@ -54,7 +60,6 @@ static S_Semaforo semaforo[SEMAFOROSQTY];
 static int secuencia[CICLESECUENCEQTY][SEMAFOROSQTY];
 
 
-long millisBoton = 0;
 int iniciarSecuencia = 0;
 int secuenceNumber = 1;
 
@@ -85,26 +90,26 @@ void semaforo_setup()
 
 void semaforo_loop()
 {
-    if ( iniciarSecuencia == 1 )
+    if ( iniciarSecuencia == TRUE )
     {
-        if ( secuenceNumber == CICLESECUENCEQTY )
+        if ( secuenceNumber == CICLESECUENCEQTY )  /// si ya se cumplió un ciclo entero reinicio el contador de secuencia y el estado a iniciarSecuencia=FALSE
         {
             secuenceNumber = 0;
-            iniciarSecuencia = 0;
+            iniciarSecuencia = FALSE;
         }
-        else if ( ( millis() - millisBoton ) > 1000 )
+        else if ( timer_waitMs(TIMER, MILLIS) ) /// Si el reloj llegó a cero entra, incrementa el contador de secuencia y reinicia el reloj
         {
             secuenceNumber++;
-            millisBoton = millis();
+            timer_waitMs(TIMER, MILLIS);
         }
+        setStatus(secuenceNumber);
     }
     else if ( digitalRead(BOTON2) == 0 || digitalRead(SENSOR) == 0  )
     {
-        millisBoton = millis();
-        iniciarSecuencia = 1;
-        setStatus(secuenceNumber);
+        timer_waitMs(TIMER, MILLIS); /// Inicio el Timer
+        iniciarSecuencia = TRUE; /// Inicio la secuencia
+        secuenceNumber++; /// Incremento el nro de la secuencia de estados del Semaforo
     }
-
 }
 
 

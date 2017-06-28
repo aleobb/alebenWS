@@ -1,19 +1,16 @@
 /******************************************************************
-* Programa: Ejemplo de uso del LCD Keypad Shield
+* Programa: TP Semaforos
 *
 * Objetivo:
-*   Mostrar los aspectos básicos de funcionamiento del LCD Keypad Shield
-*   Manejar una entrada analógica
+*   Mostrar los aspectos básicos de funcionamiento de un cruce con
+*   Semaforos para autos y peatones
 *
-* Aspectos a destacar:
-*   -Lectura de la entrada analogica
 *
-* Versión: 0.6 del 19 de Junio de 2017
-* Autor: Mauricio Dávila
-* Revisión: -
+* Versión: 1.0 del 26 de Junio de 2017
+* Autor: Alejandro Ben
 *
 * *******************************************************************/
-#include "reloj.h"
+#include "Semaforo.h"
 #include "timer.h"
 
 
@@ -25,21 +22,17 @@
  */
 void setup(void)
 {
-
-    timer_setup();
-    reloj_setup(); // inicializo el reloj
-
+    timer_setup(); // inicializo el reloj
+    semaforo_setup();
 }
 
 
 /** \brief  Contiene el programa que se ejecutará cíclicamente
- *
  * \param void
  * \return void
  */
 void loop(void)
 {
     timer_loop();
-    reloj_loop();
-
+    semaforo_loop();
 }
