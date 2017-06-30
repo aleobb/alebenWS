@@ -45,6 +45,8 @@
 #define STATUSQTY 5
 /// Cantidad de secuencias dentro de un Ciclo:
 #define CICLESECUENCEQTY 24
+/// Cantidad total de secuencias por ciclo:
+#define SECUENCEQTY 8
 
 
 /// Prototipos de funciones a utilizar:
@@ -58,10 +60,11 @@ void setStatus(int secNumber);
 /// Se define arrayEstructura de uso global con los estados de los leds de los semaforos
 static S_Semaforo semaforo[SEMAFOROSQTY];
 static int secuencia[CICLESECUENCEQTY][SEMAFOROSQTY];
+static S_StateSecuence stateSecuence;
 
 
-int iniciarSecuencia = 0;
-int secuenceNumber = 1;
+int iniciarSecuencia = FALSE;
+int secuenceNumber = TRUE;
 
 
 void semaforo_setup()
@@ -113,9 +116,11 @@ void semaforo_loop()
 }
 
 
-
+     setearEstados
 void cargarEstados(int sNumber) /// sNumber es el numero del semaforo
 {
+
+
 ///   sNumber, stateNumber, R, A, V, RP, VP
     cargarArray(sNumber, 0, 0, 0, 1,  1,  0);  /// ledState[0]
     cargarArray(sNumber, 1, 0, 0, 0,  1,  0);  /// ledState[1]
@@ -135,46 +140,90 @@ void cargarArray(int sNumber, int stateNumber, int rojo, int amarillo, int verde
 
 void cargarCicloEstados()
 {
-    cargarSecNumber ( 0, 0, 3);
-    cargarSecNumber ( 1, 0, 3);
-    cargarSecNumber ( 2, 0, 3);
-    cargarSecNumber ( 3, 0, 3);
-    cargarSecNumber ( 4, 0, 3);
-    cargarSecNumber ( 5, 1, 3);
-    cargarSecNumber ( 6, 0, 3);
-    cargarSecNumber ( 7, 1, 4);
-    cargarSecNumber ( 8, 0, 3);
-    cargarSecNumber ( 9, 2, 4);
-    cargarSecNumber (10, 2, 3);
-    cargarSecNumber (11, 2, 4);
-    cargarSecNumber (12, 3, 0);
-    cargarSecNumber (13, 3, 0);
-    cargarSecNumber (14, 3, 0);
-    cargarSecNumber (15, 3, 0);
-    cargarSecNumber (16, 3, 0);
-    cargarSecNumber (17, 3, 1);
-    cargarSecNumber (18, 3, 0);
-    cargarSecNumber (19, 4, 1);
-    cargarSecNumber (20, 3, 0);
-    cargarSecNumber (21, 4, 2);
-    cargarSecNumber (22, 3, 2);
-    cargarSecNumber (23, 4, 2);
+    int stateTime[SECUENCEQTY] =                   {5,1,1,1,1,1,1,1};
+    int stateNumber[SEMAFOROSQTY][SECUENCEQTY] = { {0,1,0,1,0,2,2,2} , {3,3,3,4,3,4,3,4} }; /// {1er secuencia de estados para el semaforo 1 (2da para el 2)} {2da secuencia de estados para el semaforo 1 (1era para el 2)}
+
+/// Podría no cargar nada de los siguiente y manejarme directamente con los arrays declarados globalmente:
+    int i, j;
+    for (i = 0; i < SECUENCEQTY ; i++)
+        stateSecuence.time[i] = stateTime[i];
+    for (j = 0; j < SEMAFOROSQTY ; j++)
+        for (i = 0; i < SECUENCEQTY ; i++)
+            stateSecuence.number[j][i] = stateNumber[j][i];
+
 }
 
-void cargarSecNumber (int secNumber, int semaforo1StateNumber, int semaforo2StateNumber)
+void secuencias()
 {
+    int states[STATUSQTY][LEDSQTY] = { {0,0,1,1,0} , {0,0,0,1,0} , {0,1,0,1,0} , {1,0,0,0,1} , {1,0,0,0,0} };
+    int stateTime[SECUENCEQTY] = {5,1,1,1,1,1,1,1};
+    int stateIndex[SEMAFOROSQTY][SECUENCEQTY] = { {0,1,0,1,0,2,2,2} , {3,3,3,4,3,4,3,4} }; /// {1er secuencia de estados para el semaforo 1 (2da para el 2)} {2da secuencia de estados para el semaforo 1 (1era para el 2)}
+
+    int i, j, k;
+    for (k = 0; k < SECUENCEQTY ; k++)
+    {
+        (secuence+k)->time = stateTime[k];
+        for (j = 0; j < SEMAFOROSQTY ; j++)
+            for (i = 0; i < LEDSQTY ; i++)
+                (secuence+k)->state[j][i] = states[ stateIndex[j][k] ][i];
+    }
+}
+
+
+
+
+   /*       cargarLedStateSecuence(i, secTime[i], secNumber[j][i])
+
+    int i=-1;
+    cargarSecNumber (i++, 5, 0, 3);
+    cargarSecNumber (i++, 1, 1, 3);
+    cargarSecNumber (i++, 1, 0, 3);
+    cargarSecNumber (i++, 1, 1, 4);
+    cargarSecNumber (i++, 1, 0, 3);
+    cargarSecNumber (i++, 1, 2, 4);
+    cargarSecNumber (i++, 1, 2, 3);
+    cargarSecNumber (i++, 1, 2, 4);
+    cargarSecNumber (i++, 5, 3, 0);
+    cargarSecNumber (i++, 1, 3, 1);
+    cargarSecNumber (i++, 1, 3, 0);
+    cargarSecNumber (i++, 1, 4, 1);
+    cargarSecNumber (i++, 1, 3, 0);
+    cargarSecNumber (i++, 1, 4, 2);
+    cargarSecNumber (i++, 1, 3, 2);
+    cargarSecNumber (i++, 1, 4, 2);*/
+
+
+/* void setSecuence (int secNumber, int secTime, int semaforo1StateNumber, int semaforo2StateNumber)
+{
+    int i;
+    int semStates[SEMAFOROSQTY] = {semaforo1StateNumber, semaforo2StateNumber};
+
+    (secuencia+secNumber)->time = secTime;
+    for (i=0; i < SEMAFOROSQTY ; i++)
+        (secuencia+secNumber)->semaforoState[i] = semStates[i];
+
+
     secuencia[secNumber][0] = semaforo1StateNumber;
     secuencia[secNumber][1] = semaforo2StateNumber;
-}
+}*/
 
 
 
 void setStatus(int secNumber)
 {
-    int i, j;
+    int i, j, state;
     for (j = 0; j < SEMAFOROSQTY ; j++)
-        for (i = 0; i < LEDSQTY ; i++);
-            digitalWrite( (semaforo+j)->ledPin[i], (semaforo+j)->ledStateArray[ secuencia[secNumber][j] ][i] ) ;
+    {
+        state = stateSecuence.number[j][secNumber];
+        for (i = 0; i < LEDSQTY ; i++)
+            digitalWrite( (semaforo+j)->ledPin[i], (semaforo+j)->ledState[state][i] ) ;
+    }
+
+
+    for (j = 0; j < SEMAFOROSQTY ; j++)
+        for (i = 0; i < LEDSQTY ; i++)
+            digitalWrite( pinLedSemaforo[j] , (secuence+secNumber)->state[j][i] ); /// <=
+        /// digitalWrite( (semaforo+j)->ledPin[i], (semaforo+j)->*(ledState+stateSecuence)->Number[j][i])[i] ) ; ???
 }
 
 
