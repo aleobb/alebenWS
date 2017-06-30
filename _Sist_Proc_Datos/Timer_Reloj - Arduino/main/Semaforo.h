@@ -1,10 +1,8 @@
-
-/// Cantidad total de luces led:
-#define LEDSQTY 5
-/// Cantidad total de estados de los semaforos:
-#define STATUSQTY 5
-/// Cantidad total de secuencias:
-#define SECUENCEQTY 8
+#define SEMAFOROSQTY 2  /// Cantidad total de semaforos
+#define LEDSQTY 5       /// Cantidad total de luces led por semaforo
+#define STATUSQTY 5     /// Cantidad total de diferentes estados para cada semaforo
+#define SECUENCEQTY 8   /// Cantidad total de secuencias por ciclo de estados
+#define SECUENCEPARTS 2 /// Cantidad de partes de la secuencia
 
 
 struct {
