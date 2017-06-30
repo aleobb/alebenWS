@@ -72,6 +72,7 @@ void semaforo_setup()
     int i,j,k;
     /// Creo un array provisorio con los numeros de pines de los leds
     int pinesLeds[LEDSQTY*SEMAFOROSQTY] = {R1,A1,V1,RP1,VP1,R2,A2,V2,RP2,VP2};
+    int pinLedSemaforo[SEMAFOROSQTY][LEDSQTY] = { {R1,A1,V1,RP1,VP1} , {R2,A2,V2,RP2,VP2} };
 
     /// Se inicializan los PINES correspondientes a todos los leds definidos en el array de pinesLeds como salida digital:
     for (j=0,k=0; j < SEMAFOROSQTY; j++)
@@ -95,7 +96,8 @@ void semaforo_loop()
 {
     if ( iniciarSecuencia == TRUE )
     {
-        if ( secuenceNumber == CICLESECUENCEQTY )  /// si ya se cumplió un ciclo entero reinicio el contador de secuencia y el estado a iniciarSecuencia=FALSE
+        if ( secuenceNumber == SECUENCEQTY*SECUENCEPARTS )
+        //if ( secuenceNumber == CICLESECUENCEQTY )  /// si ya se cumplió un ciclo entero reinicio el contador de secuencia y el estado a iniciarSecuencia=FALSE
         {
             secuenceNumber = 0;
             iniciarSecuencia = FALSE;
@@ -209,8 +211,22 @@ void secuencias()
 
 
 
-void setStatus(int secNumber)
+void setStatus(int secNumber) /// Debería controlar que no pase de
 {
+    int i, j, k;
+    for (j=0, k=SEMAFOROSQTY-1; j < SEMAFOROSQTY ; j++,k--)
+    {
+        for (i = 0; i < LEDSQTY ; i++)
+        {
+            if ( secNumber < SECUENCEQTY )
+                digitalWrite( pinLedSemaforo[j][i] , (secuence+secNumber)->state[j][i] );
+            else
+                digitalWrite( pinLedSemaforo[j][i] , (secuence+secNumber-SECUENCEQTY)->state[k][i] );
+        }
+    }
+        /// ¿¿¿ digitalWrite( (semaforo+j)->ledPin[i], (semaforo+j)->*(ledState+stateSecuence)->Number[j][i])[i] ); ???
+}
+    /*
     int i, j, state;
     for (j = 0; j < SEMAFOROSQTY ; j++)
     {
@@ -218,12 +234,6 @@ void setStatus(int secNumber)
         for (i = 0; i < LEDSQTY ; i++)
             digitalWrite( (semaforo+j)->ledPin[i], (semaforo+j)->ledState[state][i] ) ;
     }
-
-
-    for (j = 0; j < SEMAFOROSQTY ; j++)
-        for (i = 0; i < LEDSQTY ; i++)
-            digitalWrite( pinLedSemaforo[j] , (secuence+secNumber)->state[j][i] ); /// <=
-        /// digitalWrite( (semaforo+j)->ledPin[i], (semaforo+j)->*(ledState+stateSecuence)->Number[j][i])[i] ) ; ???
-}
+    */
 
 

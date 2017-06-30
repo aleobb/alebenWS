@@ -72,15 +72,13 @@ void printSemaforo()
 
 void printSemaforo2()
 {
-    int i, j, k;
-    int l = SEMAFOROSQTY;
+    int i, j, k, l;
     printf("\n\n Segunda Parte del Ciclo: ");
     for (k = 0; k < SECUENCEQTY ; k++)
     {
         //for (j = SEMAFOROSQTY-1; j >= 0 ; j--)
-        for (j = 0; j < SEMAFOROSQTY ; j++)
+        for (j=0, l=SEMAFOROSQTY-1; j < SEMAFOROSQTY ; j++,l--)
         {
-            l--;
             printf("\n   %d  \t    %d \t     %d \t\t",k,(secuence+k)->time,j);
             for (i = 0; i < LEDSQTY ; i++)
                 printf("%d ",(secuence+k)->state[l][i]);
