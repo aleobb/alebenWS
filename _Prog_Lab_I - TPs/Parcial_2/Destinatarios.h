@@ -18,6 +18,10 @@ void printDestinatarios(ArrayList* listaDestinatarios);
 
 void cargarDestinatariosEnArray(ArrayList* listaDestinatarios);
 
+void cargarListaNegraEnArray(ArrayList* listaDestinatarios);
+
 int compararDestinatario(char* pDestinatarioA, char* pDestinatarioB);
 
 void tomarNombreArchivo(char* nombreArchivo);
+
+void listarDestinatariosFiltrados(ArrayList* listaDestinatarios, ArrayList* listaNegra, int (*pFuncCompare)(char*,char*) );

@@ -1,0 +1,121 @@
+# depslib dependency file v1.0
+1499383764 source:g:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\progorientadaobj3\administrativo.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Object.h"
+	"Administrativo.h"
+
+1499386366 g:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\progorientadaobj3\object.h
+	<stdio.h>
+	<stdlib.h>
+
+1499385114 g:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\progorientadaobj3\administrativo.h
+
+1499300174 source:g:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\progorientadaobj3\archivos.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funcAux.h"
+
+1499298626 g:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\progorientadaobj3\funcaux.h
+
+1499300032 source:g:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\progorientadaobj3\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"funcAux.h"
+
+1499299692 g:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\progorientadaobj3\arraylist.h
+
+1499300100 source:g:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\progorientadaobj3\funcaux.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funcAux.h"
+
+1499385132 source:g:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\progorientadaobj3\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Object.h"
+	"Programador.h"
+	"Administrativo.h"
+	"ArrayList.h"
+	"funcAux.h"
+
+1499385114 g:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\progorientadaobj3\programador.h
+
+1499386718 source:g:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\progorientadaobj3\object.c
+
+1499385176 source:g:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\progorientadaobj3\programador.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Object.h"
+	"Programador.h"
+
+1499450468 source:i:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\progorientadaobj3\administrativo.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Object.h"
+	"Administrativo.h"
+
+1499386366 i:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\progorientadaobj3\object.h
+	<stdio.h>
+	<stdlib.h>
+
+1499448864 i:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\progorientadaobj3\administrativo.h
+
+1499300174 source:i:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\progorientadaobj3\archivos.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funcAux.h"
+
+1499298626 i:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\progorientadaobj3\funcaux.h
+
+1499300032 source:i:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\progorientadaobj3\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"funcAux.h"
+
+1499299692 i:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\progorientadaobj3\arraylist.h
+
+1499300100 source:i:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\progorientadaobj3\funcaux.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funcAux.h"
+
+1499449482 source:i:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\progorientadaobj3\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Object.h"
+	"Programador.h"
+	"Administrativo.h"
+	"ArrayList.h"
+	"funcAux.h"
+
+1499448864 i:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\progorientadaobj3\programador.h
+
+1499450850 source:i:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\progorientadaobj3\object.c
+	<string.h>
+	"Object.h"
+
+1499450468 source:i:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\progorientadaobj3\programador.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Object.h"
+	"Programador.h"
+

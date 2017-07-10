@@ -12,6 +12,7 @@
 * *******************************************************************/
 #include "Semaforo.h"
 #include "timer.h"
+#include "lcd.h"
 
 
 /** \brief  Se invoca una sola vez cuando el programa empieza.
@@ -24,6 +25,7 @@ void setup(void)
 {
     timer_setup(); // inicializo el reloj
     semaforo_setup();
+    lcd_setup();
 }
 
 
@@ -35,4 +37,5 @@ void loop(void)
 {
     timer_loop();
     semaforo_loop();
+    lcd_loop();
 }

@@ -1,17 +1,16 @@
 
-#define RELOJ_TIMER_0 0
-#define RELOJ_TIMER_1 1
-
 typedef struct
 {
     unsigned long delayValue;
     char running;
 }S_timerData;
 
-
-int timer_waitMs(int delayNumber,int delayMs);
-void timer_resetWait(int delayNumber);
+/// Prototipos de las funciones del reloj a utilizar:
 void timer_setup();
-void timer_tick();
 int timer_loop();
+void timer_resetWait(int delayNumber);
+void timer_tick();
+int timer_waitMs(int delayNumber,int delayMs);
+int timer_avoidRebound(int delayNumber);
+
 

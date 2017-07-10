@@ -15,7 +15,10 @@
 	<stdlib.h>
 	<stdlib.h>
 
-1491820274 source:g:\alebenws\_codigo_de_prueba\func_de_prueba.c
+1498869408 source:g:\alebenws\_codigo_de_prueba\func_de_prueba.c
+	<stdio.h>
+	<stdlib.h>
+	<stdlib.h>
 
 1491820274 source:e:\alebenws\_codigo_de_prueba\func_de_prueba.c
 
@@ -27,6 +30,11 @@
 1491820274 source:i:\alebenws\_codigo_de_prueba\func_de_prueba.c
 
 1498833446 source:i:\alebenws\_codigo_de_prueba\main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdlib.h>
+
+1498867840 source:g:\alebenws\_codigo_de_prueba\main.c
 	<stdio.h>
 	<stdlib.h>
 	<stdlib.h>

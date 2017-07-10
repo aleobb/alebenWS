@@ -36,10 +36,11 @@ ArrayList* al_newArrayList(void)
         pElements = malloc(sizeof(void *)*AL_INITIAL_VALUE );
         if(pElements != NULL)
         {
-            ///todas estas son las llamadas a los punteros de las funciones que se van cargando en el pList
-            pList->size=0;
             pList->pElements=pElements;
+            pList->size=0;
             pList->reservedSize=AL_INITIAL_VALUE;
+
+        /// Todas estas son las llamadas a los punteros de las funciones que se van cargando en el pList:
             pList->add=al_add;
             pList->len=al_len;
             pList->set=al_set;
@@ -444,7 +445,7 @@ ArrayList* al_subListByListCompare(ArrayList* this, int (*pFuncCompare)(void*,vo
     ArrayList* pListClone = al_newArrayList();
     int i;
     int j;
-    int compareResult;
+    int compareResult, filter;
     int flag = 0;
 
     if ( this != NULL  &&  pListClone != NULL  &&  pFuncCompare != NULL  &&  this2 != NULL )
@@ -519,6 +520,57 @@ int isComparisonTrue ( int compareResult, int comparisonType )
             break;
     }
     return retorno;
+}
+
+
+/** \brief Returns a new arrayList with a portion of pList that meets the condition.
+ * \param pFunc (*pFunc) Pointer to fuction to compare elements of arrayList
+ * \param void* pCompare Pointer to Element to compare with
+ * \param int filter  [0] indicates EQUAL - [1] indicates HIGHER - [-1] indicates LOWER - [2] indicates DIFFERENT
+ * \return int Return (NULL) if Error [pList or pFunc are NULL pointer or invalid filter]
+ *                  - ( pointer to new array) if Ok
+ */
+ArrayList* al_filter(ArrayList* this, ArrayList* this2, int (*pFuncCompare)(char*,char*), int filter )
+{
+    ArrayList* returnAux = NULL;
+    ArrayList* pListClone = al_newArrayList();
+    int i;
+    int j;
+    int compareResult;
+    int flag = 0;
+
+    if ( this != NULL  &&  pListClone != NULL  &&  pFuncCompare != NULL  )
+    {
+        for ( i = 0 ; i < this->size ; i++ )
+        {
+            for( j = 0 ; j < this2->size ; j++ )
+            {
+                //printf ("Destinatario %s \n", ( (Destinatario*)this->get(this,i) )->email );
+                //printf ("Destinatario %s \n", ( (Destinatario*)this2->get(this2,j) )->email );
+                compareResult = stricmp( ( (Destinatario*)this->get(this,i) )->email, ( (Destinatario*)this2->get(this2, j) )->email );
+                //printf("\n compare result : %d", compareResult );
+                if ( compareResult == filter )
+                {
+                    //printf ("Destinatario %s \n", ( (Destinatario*)this->get(this,i) )->email );
+                    //printf ("Destinatario %s \n", ( (Destinatario*)this2->get(this2,j) )->email );
+                    flag = 1;
+
+                    break;
+                }
+            }
+            if ( flag == 0 )
+            {
+                //printf("\n flag %d", flag);
+                al_add( pListClone, this->get(this,i) );
+            }
+
+
+            flag = 0;
+        }
+
+        returnAux = pListClone;
+    }
+    return returnAux ;
 }
 
 

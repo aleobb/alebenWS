@@ -2898,7 +2898,7 @@
 	"../../inc/ArrayList.h"
 	"../../inc/Employee.h"
 
-1498250984 source:g:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\arraylist.c
+1498251800 source:g:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\arraylist.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -3200,7 +3200,7 @@
 	<string.h>
 	"Productos.h"
 
-1498162204 source:g:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\usuarios.c
+1498251800 source:g:\alebenws\_prog_lab_i - tps\tp_4\examples\example_4\src\usuarios.c
 	<stdio.h>
 	<stdlib.h>
 	"../inc/ArrayList.h"

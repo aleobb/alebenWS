@@ -2,55 +2,63 @@
 #include <stdlib.h>
 #include <stdlib.h>
 
-/// Cantidad total de semaforos:
-#define SEMAFOROSQTY 2
-/// Cantidad total de luces led por semaforo:
-#define LEDSQTY 5
-/// Cantidad total de diferentes estados para cada semaforo:
-#define STATUSQTY 5
-/// Cantidad total de secuencias por ciclo de estados:
-#define SECUENCEQTY 8
+
+/// Luces Semaforo Principal:
+#define R1 10
+#define A1 11
+#define V1 12
+/// Luces Semaforo Peatonal Principal:
+#define RP1 8
+#define VP1 9
+
+/// Luces Semaforo Secundario:
+#define R2 4
+#define A2 5
+#define V2 6
+/// Luces Semaforo Peatonal Secundario:
+#define RP2 2
+#define VP2 3
+
+
+#define SEMAFOROSQTY 2  /// Cantidad total de semaforos
+#define LEDSQTY 5       /// Cantidad total de luces led por semaforo
+#define STATUSQTY 5     /// Cantidad total de diferentes estados para cada semaforo
+#define SECUENCEQTY 8   /// Cantidad total de secuencias por ciclo de estados
+#define SECUENCEPARTS 2 /// Cantidad de partes de la secuencia
 
 struct {
     int time;
     int state[SEMAFOROSQTY][LEDSQTY];
 }typedef S_Secuencia;
 
+/// Prototipos de funciones a utilizar:
+void printSemaforo();
+void printSemaforo2();
+
+/// Se define arrayEstructura de uso global con los estados de los leds de los semaforos
+int pinLedSemaforo[SEMAFOROSQTY][LEDSQTY] = { {R1,A1,V1,RP1,VP1} , {R2,A2,V2,RP2,VP2} };
+S_Secuencia secuence[SECUENCEQTY];
+
 int main()
 {
+    int i,j;
+    /// Se inicializan los PINES correspondientes a todos los leds como salida digital:
+    for (j = 0; j < SEMAFOROSQTY ; j++)
+        for (i = 0; i < LEDSQTY ; i++)
+            printf("\n Pin %d",pinLedSemaforo[j][i]);
+
+    printf("\n\n ");
     printSemaforo();
-    /*
-    int i;
-    int array[4]={1,2,3,4};
-
-    for (i=0; i<4; i++)
-        printf("\n Valor array 0: %d ",array[i] );
-
-    printf("\n ");
-
-    //array[]={5,6,7,8};
-
-
-    const int TABLA_SECUENCIA[2][3]= { {1,2,3}, {4,5,6} };
-
-    for (i=0; i<3; i++)
-    {
-         printf("\n Valor array 0: %d ",TABLA_SECUENCIA[0][i] );
-         printf("\n Valor array 1: %d ",TABLA_SECUENCIA[1][i] );
-    }
-
 
     return 0;
-*/
 }
 
-    S_Secuencia secuence[SECUENCEQTY];
-    int states[STATUSQTY][LEDSQTY] = { {0,0,1,1,0} , {0,0,0,1,0} , {0,1,0,1,0} , {1,0,0,0,1} , {1,0,0,0,0} };
-    int stateTime[SECUENCEQTY] = {5,1,1,1,1,1,1,1};
-    int stateIndex[SEMAFOROSQTY][SECUENCEQTY] = { {0,1,0,1,0,2,2,2} , {3,3,3,4,3,4,3,4} }; /// {1er secuencia de estados para el semaforo 1 (2da para el 2)} {2da secuencia de estados para el semaforo 1 (1era para el 2)}
 
 void printSemaforo()
 {
+    int states[STATUSQTY][LEDSQTY] = { {0,0,1,1,0} , {0,0,0,1,0} , {0,1,0,1,0} , {1,0,0,0,1} , {1,0,0,0,0} };
+    int stateTime[SECUENCEQTY] = {5,1,1,1,1,1,1,1};
+    int stateIndex[SEMAFOROSQTY][SECUENCEQTY] = { {0,1,0,1,0,2,2,2} , {3,3,3,4,3,4,3,4} }; /// {1er secuencia de estados para el semaforo 1 (2da para el 2)} {2da secuencia de estados para el semaforo 1 (1era para el 2)}
 
     int i, j, k;
     printf("Sec Nro - Tiempo - Sem Nro - Leds States");
@@ -84,5 +92,4 @@ void printSemaforo2()
                 printf("%d ",(secuence+k)->state[l][i]);
         }
     }
-
 }

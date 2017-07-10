@@ -39,8 +39,8 @@ struct ArrayList{
     int     (*sort)();
     struct ArrayList* (* clone)();
     struct ArrayList* (*subListByIndexRange)();
-    struct ArrayList* (*subListByElementCompare)();  /// Funcion agregada a la estructura original
-    struct ArrayList* (*subListByListCompare)();  /// Funcion agregada a la estructura original
+    //struct ArrayList* (*subListByElementCompare)();  /// Funcion agregada a la estructura original
+    //struct ArrayList* (*subListByListCompare)();  /// Funcion agregada a la estructura original
     int     (*deleteArrayList)();
 
 
@@ -196,6 +196,15 @@ ArrayList* al_subListByIndexRange(ArrayList* this, int from, int to);
 int isComparisonTrue ( int compareResult, int comparisonType )
 
 
+/** \brief Returns a new arrayList with a portion of pList that meets the condition.
+ * \param pFunc (*pFunc) Pointer to fuction to compare elements of arrayList
+ * \param void* pCompare Pointer to Element to compare with
+ * \param int filter  [0] indicates EQUAL - [1] indicates HIGHER - [-1] indicates LOWER - [2] indicates DIFFERENT
+ * \return int Return (NULL) if Error [pList or pFunc are NULL pointer or invalid filter]
+ *                  - ( pointer to new array) if Ok
+ */
+ArrayList* al_filter(ArrayList* this, ArrayList* this2, int (*pFuncCompare)(char*,char*), int filter );
+
 
 /** \brief Returns true if pList list contains all of the elements of pList2
  * \param pList ArrayList* Pointer to arrayList
@@ -250,7 +259,7 @@ int contract(ArrayList* pList,int index);
  * \return int Return (NULL) if Error [pList or pFunc are NULL pointer or invalid filter]
  *                  - ( pointer to new array) if Ok
  */
-ArrayList* al_subListByElementCompare(ArrayList* this, int (*pFuncCompare)(void*,void*), int comparisonType, void* pCompare);
+//ArrayList* al_subListByElementCompare(ArrayList* this, int (*pFuncCompare)(void*,void*), int comparisonType, void* pCompare);
 
 
 /** \brief Returns a new arrayList with a portion of pList that meets the condition.
@@ -260,7 +269,7 @@ ArrayList* al_subListByElementCompare(ArrayList* this, int (*pFuncCompare)(void*
  * \return int Return (NULL) if Error [pList or pFunc are NULL pointer or invalid filter]
  *                  - ( pointer to new array) if Ok
  */
-ArrayList* al_subListByListCompare(ArrayList* this, int (*pFuncCompare)(void*,void*), int comparisonType, ArrayList* this2 );
+//ArrayList* al_subListByListCompare(ArrayList* this, int (*pFuncCompare)(void*,void*), int comparisonType, ArrayList* this2 );
 
 
 

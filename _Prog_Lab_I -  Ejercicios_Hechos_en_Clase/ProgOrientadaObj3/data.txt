@@ -1,0 +1,10 @@
+id,type,name,data,
+1,1,juan,JAVA,
+2,2,pepe,0,
+3,1,jose,C,
+4,1,carlos,PYTHON,
+5,2,chiqui,1,
+6,2,maria,0,
+7,1,antonieta,RUBY,
+8,2,daniel,1
+9,1,ernesto,JAVASCRIPT

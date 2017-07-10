@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1499552666 source:g:\alebenws\_codigo_de_prueba\tests\destinos-viajeros.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1499552520 source:g:\alebenws\_codigo_de_prueba\tests\main.c
+	<stdio.h>
+	<stdlib.h>
+

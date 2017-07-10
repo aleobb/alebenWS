@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include "timer.h"
-#define TIMERS_QTY 1
+#define TIMERS_QTY 2
 
 
 static S_timerData timersArray[TIMERS_QTY];
@@ -44,7 +44,7 @@ void timer_tick()
     int i;
     for( i=0 ; i<TIMERS_QTY ; i++ )
         if(timersArray[i].running && timersArray[i].delayValue > 0)
-            timersArray[i].delayValue--;
+            timersArray[i].delayValue--; /// con esto se decrementa el valor de millis de todos los relojes
 }
 
 
@@ -80,5 +80,17 @@ void timer_resetWait(int delayNumber)
 }
 
 
+
+/** \brief Evitar repeticion de lectura positiva del accionamiento de un boton
+ * \param void
+ * \return Retorna 1 no fue accionado el boton o se llegó al tiempo transcurrido
+ */
+int timer_avoidRebound(int delayNumber) /// delayNumber es la posicion (Timer Nro.) del array de relojes
+{
+    int retorno = 0;
+    if ( timersArray[delayNumber].running == 0 || timersArray[delayNumber].delayValue == 0 ) /// Aca entra si el reloj no está corriendo o si llegó a cero
+        retorno = 1;
+    return retorno;
+}
 
 

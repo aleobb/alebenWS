@@ -125,6 +125,7 @@ int al_deleteArrayList(ArrayList* this)
     if ( this!= NULL )
     {
         free (this);
+    //  this = NULL;
         returnAux=0;
     }
 
@@ -159,7 +160,7 @@ void* al_get(ArrayList* this, int index)
 {
     void* returnAux = NULL;
 
-    if ( this != NULL && index >= 0 && index <= this->size)
+    if ( this != NULL && index >= 0 && index < this->size)
     {
         returnAux=this->pElements[index];
 
@@ -187,7 +188,7 @@ int al_contains(ArrayList* this, void* pElement)
         returnAux=0;
         for ( i=0 ; i < (this->size) ; i++ )
         {
-            if (  al_get(this,i) == pElement )
+            if (  this->get(this,i) == pElement )
             {
                 returnAux=1;
                 break;
@@ -210,7 +211,7 @@ int al_set(ArrayList* this, int index,void* pElement)
 {
     int returnAux = -1;
 
-    if ( this!= NULL && pElement!=NULL && index >= 0 && index <= this->size )
+    if ( this!= NULL && pElement!=NULL && index >= 0 && index < this->size )
     {
         returnAux=0;
         this->pElements[index]=pElement;
@@ -566,6 +567,7 @@ int contract(ArrayList* this, int index)
         returnAux=0;
         for ( ; index < (this->size)-1 ; index++ )
             this->pElements[index]=this->pElements[index+1];
+        //  this->set(this, index, this->get(this,index+1) );
         this->size--;
     }
     return returnAux;

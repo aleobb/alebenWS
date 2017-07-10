@@ -1,0 +1,100 @@
+# depslib dependency file v1.0
+1499303557 source:/home/alumno/Herencia/Administrativo.c
+	<stdio.h>
+	<stdlib.h>
+	"Object.h"
+	"Administrativo.h"
+
+1499301973 /home/alumno/Herencia/Object.h
+
+1499303557 /home/alumno/Herencia/Administrativo.h
+
+1499300174 source:/home/alumno/Herencia/Archivos.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funcAux.h"
+
+1499298627 /home/alumno/Herencia/funcAux.h
+
+1499300033 source:/home/alumno/Herencia/ArrayList.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"funcAux.h"
+
+1499299693 /home/alumno/Herencia/ArrayList.h
+
+1499300100 source:/home/alumno/Herencia/funcAux.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funcAux.h"
+
+1499383764 source:g:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\progorientadaobj2\herencia\administrativo.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Object.h"
+	"Administrativo.h"
+
+1499301972 g:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\progorientadaobj2\herencia\object.h
+
+1499303556 g:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\progorientadaobj2\herencia\administrativo.h
+
+1499300174 source:g:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\progorientadaobj2\herencia\archivos.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funcAux.h"
+
+1499298626 g:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\progorientadaobj2\herencia\funcaux.h
+
+1499300032 source:g:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\progorientadaobj2\herencia\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"funcAux.h"
+
+1499299692 g:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\progorientadaobj2\herencia\arraylist.h
+
+1499300100 source:g:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\progorientadaobj2\herencia\funcaux.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funcAux.h"
+
+1499383764 source:g:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\progorientadaobj2\herencia\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Object.h"
+	"Programador.h"
+	"Administrativo.h"
+	"ArrayList.h"
+	"funcAux.h"
+
+1499303556 g:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\progorientadaobj2\herencia\programador.h
+
+1499383764 source:g:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\progorientadaobj2\herencia\object.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Object.h"
+	"ArrayList.h"
+	"Programador.h"
+	"Administrativo.h"
+
+1499383764 source:g:\alebenws\_prog_lab_i -  ejercicios_hechos_en_clase\progorientadaobj2\herencia\programador.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Object.h"
+	"Programador.h"
+

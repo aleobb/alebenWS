@@ -62,7 +62,7 @@ int main(void)
                 //printDestinatarios(listaDestinatarios);
                 //printDestinatarios(listaNegra);
 
-                listarDestinatariosFiltrados(listaDestinatarios, listaNegra, compararDestinatario );
+               // listarDestinatariosFiltrados(listaDestinatarios, listaNegra, compararDestinatario );
                 break;
             case SALIR:
                 printf("\n\n PROCESO TERMINADO. \n");
