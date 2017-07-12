@@ -128,7 +128,7 @@
 	"Productos.h"
 	"Informes.h"
 
-1495054796 source:g:\alebenws\_prog_lab_i - tps\parcial_1\usuarios.c
+1496174468 source:g:\alebenws\_prog_lab_i - tps\parcial_1\usuarios.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -197,6 +197,74 @@
 1493936246 e:\alebenws\_prog_lab_i - tps\parcial_1\publicaciones.h
 
 1495066222 source:e:\alebenws\_prog_lab_i - tps\parcial_1\usuarios.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funcionesAuxiliares.h"
+	"Usuarios.h"
+	"Productos.h"
+	"Informes.h"
+
+1495053618 source:i:\alebenws\_prog_lab_i - tps\parcial_1\funcionesauxiliares.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funcionesAuxiliares.h"
+
+1495141136 i:\alebenws\_prog_lab_i - tps\parcial_1\funcionesauxiliares.h
+
+1495142126 source:i:\alebenws\_prog_lab_i - tps\parcial_1\informes.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funcionesAuxiliares.h"
+	"Usuarios.h"
+	"Productos.h"
+	"Informes.h"
+
+1495142794 i:\alebenws\_prog_lab_i - tps\parcial_1\usuarios.h
+
+1495141986 i:\alebenws\_prog_lab_i - tps\parcial_1\productos.h
+
+1495141414 i:\alebenws\_prog_lab_i - tps\parcial_1\informes.h
+
+1495142078 source:i:\alebenws\_prog_lab_i - tps\parcial_1\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funcionesAuxiliares.h"
+	"Usuarios.h"
+	"Productos.h"
+	"Informes.h"
+
+1495141412 source:i:\alebenws\_prog_lab_i - tps\parcial_1\productos.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funcionesAuxiliares.h"
+	"Usuarios.h"
+	"Productos.h"
+	"Informes.h"
+
+1493936010 source:i:\alebenws\_prog_lab_i - tps\parcial_1\publicaciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funcionesAuxiliares.h"
+	"Usuarios.h"
+	"Publicaciones.h"
+	"Productos.h"
+	"Informes.h"
+
+1493936246 i:\alebenws\_prog_lab_i - tps\parcial_1\publicaciones.h
+
+1496174468 source:i:\alebenws\_prog_lab_i - tps\parcial_1\usuarios.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

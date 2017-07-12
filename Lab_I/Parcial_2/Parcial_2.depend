@@ -1,0 +1,112 @@
+# depslib dependency file v1.0
+1499480310 source:c:\parcial_2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"funcAux.h"
+	"Destinatarios.h"
+
+1498167448 c:\parcial_2\funcaux.h
+
+1499568632 c:\parcial_2\arraylist.h
+
+1499481933 c:\parcial_2\destinatarios.h
+
+1499568632 source:c:\parcial_2\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"funcAux.h"
+	"Destinatarios.h"
+
+1499484058 source:c:\parcial_2\destinatarios.c
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	"ArrayList.h"
+	"funcAux.h"
+	"Destinatarios.h"
+
+1498167448 source:c:\parcial_2\funcaux.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funcAux.h"
+
+1499568634 source:g:\alebenws\_prog_lab_i - tps\parcial_2\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"funcAux.h"
+	"Destinatarios.h"
+
+1499568634 g:\alebenws\_prog_lab_i - tps\parcial_2\arraylist.h
+
+1498167448 g:\alebenws\_prog_lab_i - tps\parcial_2\funcaux.h
+
+1499481934 g:\alebenws\_prog_lab_i - tps\parcial_2\destinatarios.h
+
+1499569084 source:g:\alebenws\_prog_lab_i - tps\parcial_2\destinatarios.c
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	"ArrayList.h"
+	"funcAux.h"
+	"Destinatarios.h"
+
+1498167448 source:g:\alebenws\_prog_lab_i - tps\parcial_2\funcaux.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funcAux.h"
+
+1499480312 source:g:\alebenws\_prog_lab_i - tps\parcial_2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"funcAux.h"
+	"Destinatarios.h"
+
+1499568634 source:i:\alebenws\_prog_lab_i - tps\parcial_2\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"funcAux.h"
+	"Destinatarios.h"
+
+1499568634 i:\alebenws\_prog_lab_i - tps\parcial_2\arraylist.h
+
+1498167448 i:\alebenws\_prog_lab_i - tps\parcial_2\funcaux.h
+
+1499481934 i:\alebenws\_prog_lab_i - tps\parcial_2\destinatarios.h
+
+1499569084 source:i:\alebenws\_prog_lab_i - tps\parcial_2\destinatarios.c
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	"ArrayList.h"
+	"funcAux.h"
+	"Destinatarios.h"
+
+1498167448 source:i:\alebenws\_prog_lab_i - tps\parcial_2\funcaux.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funcAux.h"
+
+1499480312 source:i:\alebenws\_prog_lab_i - tps\parcial_2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"funcAux.h"
+	"Destinatarios.h"
+

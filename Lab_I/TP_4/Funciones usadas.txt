@@ -1,0 +1,35 @@
+al_get
+al_add
+al_remove
+al_pop
+al_sort
+al_clone
+al_al_clear
+al_
+al_
+al_
+al_
+al_
+al_
+al_
+al_
+al_
+al_
+al_
+al_
+al_
+al_
+al_
+al_
+al_
+al_
+al_
+al_
+al_
+al_
+
+
+al_len la salteo
+
+
+printf("\n No se puede eliminar un usuario porque no hay ninguno cargado! \n");

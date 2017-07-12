@@ -1,0 +1,36 @@
+# depslib dependency file v1.0
+1499817552 source:i:\alebenws\_prog_lab_i - tps\final-modelo\archivos.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1499858730 source:i:\alebenws\_prog_lab_i - tps\final-modelo\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"funcAux.h"
+
+1499819698 i:\alebenws\_prog_lab_i - tps\final-modelo\arraylist.h
+
+1499819698 i:\alebenws\_prog_lab_i - tps\final-modelo\funcaux.h
+
+1499819698 source:i:\alebenws\_prog_lab_i - tps\final-modelo\funcaux.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funcAux.h"
+
+1499821818 source:i:\alebenws\_prog_lab_i - tps\final-modelo\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"funcAux.h"
+	"Archivos.h"
+
+1499817552 i:\alebenws\_prog_lab_i - tps\final-modelo\archivos.h
+
+1499818348 source:i:\alebenws\_prog_lab_i - tps\final-modelo\temas.c
+
