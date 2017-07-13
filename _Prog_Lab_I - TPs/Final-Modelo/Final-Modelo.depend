@@ -1,4 +1,50 @@
 # depslib dependency file v1.0
+1499817552 source:g:\alebenws\_prog_lab_i - tps\final-modelo\archivos.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1499858730 source:g:\alebenws\_prog_lab_i - tps\final-modelo\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"funcAux.h"
+
+1499819698 g:\alebenws\_prog_lab_i - tps\final-modelo\arraylist.h
+
+1499902256 g:\alebenws\_prog_lab_i - tps\final-modelo\funcaux.h
+
+1499902418 source:g:\alebenws\_prog_lab_i - tps\final-modelo\funcaux.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funcAux.h"
+
+1499906778 source:g:\alebenws\_prog_lab_i - tps\final-modelo\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"funcAux.h"
+	"Archivos.h"
+	"Usuarios.h"
+
+1499817552 g:\alebenws\_prog_lab_i - tps\final-modelo\archivos.h
+
+1499818348 source:g:\alebenws\_prog_lab_i - tps\final-modelo\temas.c
+
+1499906722 source:g:\alebenws\_prog_lab_i - tps\final-modelo\usuarios.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"funcAux.h"
+	"Usuarios.h"
+
+1499905346 g:\alebenws\_prog_lab_i - tps\final-modelo\usuarios.h
+
 1499817552 source:i:\alebenws\_prog_lab_i - tps\final-modelo\archivos.c
 	<stdio.h>
 	<stdlib.h>
@@ -13,24 +59,55 @@
 
 1499819698 i:\alebenws\_prog_lab_i - tps\final-modelo\arraylist.h
 
-1499819698 i:\alebenws\_prog_lab_i - tps\final-modelo\funcaux.h
+1499902256 i:\alebenws\_prog_lab_i - tps\final-modelo\funcaux.h
 
-1499819698 source:i:\alebenws\_prog_lab_i - tps\final-modelo\funcaux.c
+1499902418 source:i:\alebenws\_prog_lab_i - tps\final-modelo\funcaux.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<ctype.h>
 	"funcAux.h"
 
-1499821818 source:i:\alebenws\_prog_lab_i - tps\final-modelo\main.c
+1499943454 source:i:\alebenws\_prog_lab_i - tps\final-modelo\temas.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"funcAux.h"
+	"temas.h"
+
+1499944672 source:i:\alebenws\_prog_lab_i - tps\final-modelo\usuarios.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"funcAux.h"
+	"Usuarios.h"
+
+1499905346 i:\alebenws\_prog_lab_i - tps\final-modelo\usuarios.h
+
+1499962912 source:i:\alebenws\_prog_lab_i - tps\final-modelo\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"ArrayList.h"
 	"funcAux.h"
 	"Archivos.h"
+	"Usuarios.h"
+	"Estadisticas.h"
 
 1499817552 i:\alebenws\_prog_lab_i - tps\final-modelo\archivos.h
 
-1499818348 source:i:\alebenws\_prog_lab_i - tps\final-modelo\temas.c
+1499943494 i:\alebenws\_prog_lab_i - tps\final-modelo\temas.h
+
+1499961532 source:i:\alebenws\_prog_lab_i - tps\final-modelo\estadisticas.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"funcAux.h"
+	"Estadisticas.h"
+	"Usuarios.h"
+
+1499948238 i:\alebenws\_prog_lab_i - tps\final-modelo\estadisticas.h
 

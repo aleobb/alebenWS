@@ -35,6 +35,9 @@ int getType(char mensajeIngreso[], char mensajeError[], int bucle, int type, cha
             case 2:
                 validacion=esCadenaAlfanumerica(buffer, arrayCharsAdmitidos);
                 break;
+            case 3:
+                validacion=esEmail(buffer, arrayCharsAdmitidos);
+                break;
         }
         if(validacion==EL_DATO_NO_ES_VALIDO || strlen(buffer)>maxExtensionArray)
         {
@@ -260,3 +263,82 @@ int esCadenaAlfanumerica (char vector[], char arrayCharsAdmitidos[])
 
 
 
+/**
+ * \brief Verifica si el valor recibido contiene solo números, + y -
+ * \param str Array con la cadena a ser analizada
+ * \return 1 si contiene solo numeros, espacios y un guion.
+ *
+ */
+int esTelefono(char str[])
+{
+   int i=0;
+   int contadorGuiones=0;
+   while(str[i] != '\0')
+   {
+       if((str[i] != ' ') && (str[i] != '-') && (str[i] < '0' || str[i] > '9'))
+           return 0;
+       if(str[i] == '-')
+            contadorGuiones++;
+       i++;
+   }
+   if(contadorGuiones==1) // debe tener un guion
+        return 1;
+
+    return 0;
+}
+
+
+/**
+ * \brief Verifica que una array esté compuesto es un email valido.
+ * \param vector es el array a evaluar
+ * \param arrayCharsAdmitidos es el array que contiene los caracteres que tambien van a resultar validos.
+ * \return Si el array es un email valido devuelve [1] sino devuelve [0].
+ */
+int esEmail (char vector[], char arrayCharsAdmitidos[])
+{
+    int i, j;
+    int flag=0;
+    int arroba=0;
+    int punto=0;
+
+    for (i=0 ; vector[i]!='\0'; i++)
+    {
+        if ( (vector[i]<'a' || vector[i]>'z') && (vector[i]<'A' || vector[i]>'Z') && (vector[i]<'0' || vector[i]>'9') )
+        {
+            if (vector[i]=='@')
+            {
+                if (i>2 && arroba==0)
+                    arroba++;
+                else
+                    return EL_DATO_NO_ES_VALIDO;
+            }
+            else if (vector[i]=='.')
+            {
+                if (i>6 && punto==0 && arroba==1 && vector[i-1]!='@' && strlen(vector)>i+2 )
+                    punto++;
+                else
+                    return EL_DATO_NO_ES_VALIDO;
+            }
+
+            for(j=0 ; arrayCharsAdmitidos[j]!='\0' && flag==0 ; j++)
+            {
+                if (vector[i]==arrayCharsAdmitidos[j])
+                    flag=1;
+            }
+            if (flag!=1)
+                return EL_DATO_NO_ES_VALIDO;
+        }
+    }
+    return EL_DATO_ES_VALIDO;
+}
+
+
+
+char* getEmail()
+{
+    char* email = (char*)malloc(sizeof(char*)*50);
+    char* arrayCharsAdmitidos="@.-_";
+    getType("\n Ingrese el email del usuario: ", "\n El mail ingresado es invalido!\
+        \n Solo se adminten letras, numeros, el caracter '@._-' y que no exceda los 49 caracteres \n",1,3,arrayCharsAdmitidos,49,email);
+    return email;
+}

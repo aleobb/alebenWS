@@ -5,6 +5,8 @@
 #include "ArrayList.h"
 #include "funcAux.h"
 #include "Archivos.h"
+#include "Usuarios.h"
+#include "Estadisticas.h"
 
 #define ALL 0
 #define ACTIVE 1
@@ -14,6 +16,51 @@
 
 int main()
 {
+    //printf("Email: %s", getEmail());
+
+   // fileToArray();
+
+   // fileToArrayTemas();
+/*
+
+    ArrayList* uList = al_newArrayList();
+    if ( uList != NULL)
+        parserDataInFile("usuarios.dat", uList);
+
+    ArrayList* tList = al_newArrayList();
+    if ( tList != NULL)
+        parseDataInFile("temas.dat", tList);
+
+    tomarYcomprobarExistenciaUsuarioPorId(uList, "cancela?");
+    */
+    fileToArrayEstadisticas();
+
+
+
+   FILE * fp;
+   fp = fopen ("file.txt", "a");
+//   fprintf(fp, "%s %s %s %d\n", "We", "are", "in", 2012);
+   //fclose(fp);
+
+   char str[80];
+   sprintf(str, "Value of Pi = %f\n", 3.1416);
+ //  puts(str);
+
+   //fputs("This is c programming.", fp);
+   fputs(str, fp);
+
+    fclose(fp);
+
+
+
+
+/*
+
+
+    //printByName(uList);
+
+    printByNacionalidadyNombre(uList);
+/*
     int opcion=0;
 
     ArrayList* listaUsuarios = al_newArrayList();
@@ -97,6 +144,6 @@ int main()
                 break;
         }
     }
-
+*/
     return 0;
 }

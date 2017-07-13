@@ -82,4 +82,22 @@ int esCadenaAlfanumerica (char vector[], char arrayCharsAdmitidos[]);
 
 
 
+/**
+ * \brief Verifica si el valor recibido contiene solo números, + y -
+ * \param str Array con la cadena a ser analizada
+ * \return 1 si contiene solo numeros, espacios y un guion.
+ *
+ */
+int esTelefono(char str[]);
 
+
+/**
+ * \brief Verifica que una array esté compuesto es un email valido.
+ * \param vector es el array a evaluar
+ * \param arrayCharsAdmitidos es el array que contiene los caracteres que tambien van a resultar validos.
+ * \return Si el array es un email valido devuelve [1] sino devuelve [0].
+ */
+int esEmail (char vector[], char arrayCharsAdmitidos[]);
+
+
+char* getEmail();

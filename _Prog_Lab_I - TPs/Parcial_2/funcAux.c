@@ -242,6 +242,7 @@ int esCadenaAlfanumerica (char vector[], char arrayCharsAdmitidos[])
 {
     int i, j;
     int flag=0;
+
     for (i=0 ; vector[i]!='\0'; i++)
     {
         if ( (vector[i]<'a' || vector[i]>'z') && (vector[i]<'A' || vector[i]>'Z') && (vector[i]<'0' || vector[i]>'9') )

@@ -39,18 +39,22 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="ArrayList.h" />
+		<Unit filename="Estadisticas.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Estadisticas.h" />
+		<Unit filename="FUNCAUX.C">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="FUNCAUX.H" />
 		<Unit filename="Temas.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Temas.h" />
-		<Unit filename="Usuarios.c">
+		<Unit filename="USUARIOS.C">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="Usuarios.h" />
-		<Unit filename="funcAux.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="funcAux.h" />
+		<Unit filename="USUARIOS.H" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

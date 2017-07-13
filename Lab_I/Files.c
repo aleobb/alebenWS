@@ -27,37 +27,20 @@ FILE* openFile(char* mode)
 }
 
 
-
-int parserDataInFileSTRTOK(FILE* pFile)
+int printf_Func()
 {
-    char* pString;
-    const char* delim=",";
-    char* token;
-    char line[BUFFER];
+   FILE * fp;
+   fp = fopen ("file.txt", "w+");
+   fprintf(fp, "%s %s %s %d\n", "We", "are", "in", 2012);
+   fclose(fp);
 
-    int id;
-    Object object;
-    char name[100];
-    char data[100];
+   char str[80];
+   sprintf(str, "Value of Pi = %f\n", 3.1416);
+//   puts(str);
 
-    fgets(line,BUFFER,pFile); /// Salteo primer linea (si es que no es dato sino el titulo del contenido de ese archivo)
+   fputs(str, fp);
 
-    while(1)
-    {
-        pString = fgets(line,BUFFER,pFile); /// leo 1 linea de una cantidad BUFFER de caracteres y lo guardo en un puntero a char
-        if(pString==NULL)
-            break;
-    //  printf("%s",line);
-
-        token = strtok(line,delim); /// obtengo partes y las cargo
-        id = atoi(token);
-        object.type = atoi(strtok(NULL,delim));
-        strcpy(name,strtok(NULL,delim));
-        strcpy(data,strtok(NULL,delim));
-
-        printf("%d %d %s %s\r\n",id,object.type,name,data);
-    }
-    return 0;
+   return(0);
 }
 
 
@@ -88,6 +71,41 @@ void parseFile()
     return 0;
 }
 
+
+
+int estadisticaToFile(char* nombreArchivo, ArrayList* eList)
+{
+    char lineOfData[BUFFER];
+    Estadistica* pAux;
+    int elements = 0;
+    int i;
+
+    FILE* pFile = fopen(nombreArchivo,"a");
+
+    if ( pFile == NULL || eList == NULL )
+        printf("El archivo no se pudo abrir o puntero a memoria de la lista es Null ! \n");
+    else
+    {
+        for(i=0; i<eList->size; i++ )
+        {
+            pAux = (Estadistica*)eList->get(eList, i);
+            sprintf(lineOfData,"%d,%d%\n",pAux->idUsuario, pAux->idTema);//
+            printf("%s",lineOfData);
+            fputs(lineOfData,pFile); //!= NULL //,sizeof(lineOfData)-1
+
+            //printf("Id: %d \t Object: %d \t Nombre: %s \t\t Data: %s \r\n", id, object.type, name, data);
+
+            if ( pAux != NULL )
+            {
+
+                elements++;
+            //  imprimirObject((Object*)pAux);
+            }
+        }
+    }
+    printf("\n Cantidad de elementos cargados en la lista: %d \n", elements);
+    return elements;
+}
 
 
 /**
@@ -152,3 +170,42 @@ int contarPeliculasEnArchivo()
     //printf("\n cant pelis: %d", retorno);
     return retorno;
 }
+
+
+
+
+
+int parserDataInFileSTRTOK(FILE* pFile)
+{
+    char* pString;
+    const char* delim=",";
+    char* token;
+    char line[BUFFER];
+
+    int id;
+    Object object;
+    char name[100];
+    char data[100];
+
+    fgets(line,BUFFER,pFile); /// Salteo primer linea (si es que no es dato sino el titulo del contenido de ese archivo)
+
+    while(1)
+    {
+        pString = fgets(line,BUFFER,pFile); /// leo 1 linea de una cantidad BUFFER de caracteres y lo guardo en un puntero a char
+        if(pString==NULL)
+            break;
+    //  printf("%s",line);
+
+        token = strtok(line,delim); /// obtengo partes y las cargo
+        id = atoi(token);
+        object.type = atoi(strtok(NULL,delim));
+        strcpy(name,strtok(NULL,delim));
+        strcpy(data,strtok(NULL,delim));
+
+        printf("%d %d %s %s\r\n",id,object.type,name,data);
+    }
+    return 0;
+}
+
+
+
